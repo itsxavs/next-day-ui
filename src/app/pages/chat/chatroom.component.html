@@ -1,0 +1,12 @@
+<div class="chatroom__page">
+  <div class="chatroom__container">
+    <div class="chatroom__users">
+      <app-user-chat
+        *ngFor="let user of users"
+        [user]="user"
+        [noRead]="true"
+      ></app-user-chat>
+    </div>
+    <app-chat class="chatroom__chat" [messages]="messages"></app-chat>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+.user-chat {
+  &__container {
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    width: 280px;
+    height: 40px;
+    margin-bottom: 4px;
+  }
+  &__profile {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-left: 12px;
+    background-image: url("../../../../../assets/img/profile.jpg");
+    background-size: cover;
+  }
+  &__name {
+    margin-left: 8px;
+    &__noRead {
+      font-weight: bold;
+    }
+  }
+}

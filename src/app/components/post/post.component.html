@@ -1,0 +1,17 @@
+<div class="post__container">
+  <div class="post__info">
+    <div class="post__info__profile"></div>
+    <div class="post__info__name">
+      <span>{{ post.teacher.name }}</span>
+      <span>({{ post.subject }})</span>
+    </div>
+    <div class="post__info__createAt">
+      {{ post.createAt | date: "fullDate" }}
+    </div>
+  </div>
+  <div class="post__description">
+    <div class="post__description__title">{{ post.title }}</div>
+    <div>{{ post.message }}</div>
+  </div>
+  <div class="post__button">{{ post.status }}</div>
+</div>

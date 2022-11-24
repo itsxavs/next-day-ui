@@ -1,0 +1,47 @@
+.chat {
+  &__page {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 520px;
+    border: 1px solid red;
+    height: 100%;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+    &__right {
+      align-items: flex-end;
+    }
+  }
+  &__message {
+    display: flex;
+    padding: 4px;
+    border: 1px solid black;
+    width: fit-content;
+    border-radius: 12px;
+    &__right {
+      background-color: aqua;
+    }
+    &__left {
+      background-color: chartreuse;
+    }
+  }
+  &__input {
+    height: 40px;
+    margin: 4px;
+    border-radius: 12px;
+
+    &__text {
+      font-size: 20px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      width: 100%;
+    }
+  }
+  &__send {
+    display: flex;
+    align-items: center;
+  }
+}

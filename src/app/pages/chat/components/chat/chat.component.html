@@ -1,0 +1,22 @@
+<div class="chat__page">
+  <div class="">
+    <div
+      class="chat__container"
+      *ngFor="let message of messages"
+      [ngClass]="{ chat__container__right: message.right }"
+    >
+      <div
+        class="chat__message"
+        [ngClass]="
+          message.right ? 'chat__message__right' : 'chat__message__left'
+        "
+      >
+        {{ message.message }}
+      </div>
+    </div>
+  </div>
+  <div class="chat__send">
+    <input class="chat__input chat__input__text" type="text" name="" id="" />
+    <button class="chat__input">SEND</button>
+  </div>
+</div>

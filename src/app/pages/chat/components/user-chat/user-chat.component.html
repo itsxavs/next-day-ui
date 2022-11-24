@@ -1,0 +1,9 @@
+<div class="user-chat__container">
+  <div class="user-chat__profile"></div>
+  <div
+    [ngClass]="{ 'user-chat__name__noRead': noRead }"
+    class="user-chat__name"
+  >
+    {{ user.fullName }}
+  </div>
+</div>

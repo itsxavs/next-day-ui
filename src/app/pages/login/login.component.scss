@@ -1,0 +1,45 @@
+.login {
+  &__container {
+    width: 100%;
+    min-height: 84vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__items {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: aqua;
+    padding: 16px;
+    position: relative;
+    border-radius: 12px 12px 0 0;
+  }
+
+  &__input {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0px;
+  }
+
+  &__button {
+
+  }
+
+  &__header {
+    height: 40px;
+    font-size: 24px;
+    background-color: white;
+    color: black;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &a:hover {
+    color: red
+  }
+}
