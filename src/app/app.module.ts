@@ -15,6 +15,7 @@ import { HomeModule } from "./pages/home/home.module";
 import { MatDialogModule } from "@angular/material/dialog";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { WorksModule } from "./pages/works/works.module";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,9 +28,10 @@ import { WorksModule } from "./pages/works/works.module";
     MatDialogModule,
     ChatRoomModule,
     ComponentsModule,
+    MatIconModule,
     RouterModule.forRoot(
       [
-        { path: "", redirectTo: "login", pathMatch: "full" },
+        { path: "", redirectTo: "home", pathMatch: "full" },
         { path: "login", component: LoginComponent },
         { path: "home", component: HomeComponent },
         { path: "works", component: WorksComponent },
