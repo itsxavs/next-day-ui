@@ -5,7 +5,6 @@ import { Classroom } from "./../interface/utils";
 import { Student } from "../interface/user";
 
 const classroomMock: Classroom = {
-  _id: "123",
   letter: "A",
   number: 1,
 };

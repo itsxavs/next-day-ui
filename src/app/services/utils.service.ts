@@ -1,5 +1,6 @@
+import { classroomsMock } from "./../mocks/classrooms";
 import { Classroom } from "./../interface/utils";
-import { map, tap } from "rxjs/operators";
+import { map, mapTo, tap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
@@ -16,12 +17,12 @@ export class UtilsService {
       map((classrooms: any) => {
         return classrooms.map((classroom: Classroom) => {
           return {
-            _id: classroom._id,
             letter: classroom.letter,
             number: classroom.number,
           } as Classroom;
         });
-      })
+      }),
+      mapTo(classroomsMock)
     );
   }
 }

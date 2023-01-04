@@ -1,3 +1,5 @@
+import { PostsMock_1_2 } from "./../mocks/post";
+import { mapTo } from "rxjs/operators";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Post } from "../interface/post";
@@ -11,7 +13,9 @@ export class PostService {
   constructor(private http: HttpClient) {}
 
   getPostsByUser(id: string) {
-    this.http.get(URI, { params: this.mek.append("_id", id) }).subscribe();
+    this.http
+      .get(URI, { params: this.mek.append("_id", id) })
+      .pipe(mapTo(PostsMock_1_2));
   }
   createPost(post: Post) {
     this.http

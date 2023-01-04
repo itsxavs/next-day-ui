@@ -1,17 +1,33 @@
-<div class="post__container">
-  <div class="post__info">
+<div class="accordion-header" id="headingOne">
+  <button
+    class="accordion-button"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#collapseOne"
+    aria-expanded="true"
+    aria-controls="collapseOne"
+  >
     <div class="post__info__profile"></div>
     <div class="post__info__name">
       <span>{{ post.teacher.name }}</span>
       <span>({{ post.subject }})</span>
     </div>
     <div class="post__info__createAt">
-      {{ post.createAt | date: "fullDate" }}
+      {{ post.createAt | date : "fullDate" }}
     </div>
+  </button>
+</div>
+<div
+  id="collapseOne"
+  class="accordion-collapse collapse show"
+  aria-labelledby="headingOne"
+  data-bs-parent="#accordionExample"
+>
+  <div class="accordion-body">
+    <div class="post__description">
+      <div class="post__description__title">{{ post.title }}</div>
+      <div>{{ post.message }}</div>
+    </div>
+    <div class="post__button">{{ post.status }}</div>
   </div>
-  <div class="post__description">
-    <div class="post__description__title">{{ post.title }}</div>
-    <div>{{ post.message }}</div>
-  </div>
-  <div class="post__button">{{ post.status }}</div>
 </div>

@@ -1,5 +1,7 @@
+import { studentsMock } from "./../mocks/students";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { mapTo } from "rxjs/operators";
 
 const URI = "http://localhost:5000/";
 @Injectable({
@@ -7,7 +9,6 @@ const URI = "http://localhost:5000/";
 })
 export class UserService {
   private httpParams: HttpParams = new HttpParams();
-  private student$;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -16,12 +17,10 @@ export class UserService {
       .get(URI + "students/getStudentsByTeacher", {
         params: this.httpParams.append("teacherId", teacherId),
       })
-      .subscribe((students) => {
-        return students;
-      });
+      .pipe(mapTo(studentsMock));
   }
 
   getStudents() {
-    this.httpClient.get(URI + "students");
+    this.httpClient.get(URI + "students").pipe(mapTo(studentsMock));
   }
 }
