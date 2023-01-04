@@ -17,24 +17,5 @@ export class HomeComponent implements OnInit {
 
   constructor(private authService: AuthService, public dialog: MatDialog) {}
 
-  ngOnInit() {
-    /* this.authService.userSelection$.subscribe((user) => {
-      user.type === "Teacher"
-        ? (this.isTeacher = true)
-        : (this.isTeacher = false);
-    }); */
-  }
-  /* openDialog(): void {
-    const dialogRef = this.dialog.open(CreatePostModalComponent, {
-      width: "400px",
-      data: this.newPost,
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      debugger;
-      console.log(result);
-      console.log("The dialog was closed");
-      /*   this.animal = result; 
-    });
-  } */
+  ngOnInit() {}
 }

@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, mapTo, tap } from "rxjs/operators";
 import { Teacher } from "../interface/user";
+import { of } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -30,5 +31,9 @@ export class StudentService {
       }),
       mapTo(studentsMock)
     );
+  }
+
+  getStudentsByTeacher() {
+    return of(studentsMock);
   }
 }

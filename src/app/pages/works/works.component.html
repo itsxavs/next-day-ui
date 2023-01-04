@@ -1,1 +1,28 @@
+<div
+  class="container d-flex justify-content-center works__container border"
+  [ngClass]="true ? 'border-primary' : 'border-success'"
+>
+  <div class="row container">
+    <div class="col">
+      <ul
+        class="nav container d-flex justify-content-center border my-2"
+        [ngClass]="true ? 'border-primary' : 'border-success'"
+        *ngFor="let tag of tags"
+      >
+        <li class="nav-item">
+          <a class="nav-link" (click)="goTab(tag)">{{ tag }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div
+    *ngIf="!isCreate; else createPost"
+    class="container d-flex align-items-end flex-column"
+  >
+    <app-post *ngFor="let post of posts | async" [post]="post"> post </app-post>
+  </div>
 
+  <ng-template #createPost>
+    <app-create-post></app-create-post>
+  </ng-template>
+</div>
