@@ -1,4 +1,4 @@
-import { UserChat } from "./../../../../interface/user";
+import { UserChat } from "../../../../core/models/user.interface";
 import { Component, OnInit, Input } from "@angular/core";
 
 @Component({

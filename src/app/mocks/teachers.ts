@@ -1,6 +1,6 @@
 import { studentsMock } from "./students";
 import { classroomsMock } from "./classrooms";
-import { Teacher } from "./../interface/user";
+import { Teacher } from "../core/models/user.interface";
 
 export const teacherMock: Teacher = {
   _id: "1",

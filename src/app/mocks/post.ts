@@ -1,4 +1,4 @@
-import { Post, statusPost } from "../interface/post";
+import { Post, statusPost } from "../core/models/post.interface";
 import { studentsMock } from "./students";
 import { teacherMock } from "./teachers";
 

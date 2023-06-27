@@ -1,8 +1,8 @@
-import { statusPost } from "./../../interface/post";
+import { statusPost } from "../../core/models/post.interface";
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { AuthService } from "src/app/services/auth.service";
-import { Post } from "src/app/interface/post";
+import { Post } from "src/app/core/models/post.interface";
 import { noticesMock } from "src/app/mocks/mix";
 
 @Component({

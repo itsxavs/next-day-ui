@@ -3,7 +3,7 @@ import { PostsMockDO, PostsMockReview, PostsMock_1_2 } from "./../mocks/post";
 import { mapTo, catchError } from "rxjs/operators";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Post, statusPost } from "../interface/post";
+import { Post, statusPost } from "../core/models/post.interface";
 
 const URI = "http://localhost:5000/posts";
 @Injectable({

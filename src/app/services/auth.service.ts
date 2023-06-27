@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
-import { Student, Teacher } from "../interface/user";
+import { Student, Teacher } from "../core/models/user.interface";
 
 @Injectable({
   providedIn: "root",
