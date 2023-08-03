@@ -6,7 +6,8 @@ import { SearchFilter } from "./fieldFilters/search-filter";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { Filter } from "./baseFilter/filter.interface";
 import { Classroom, statusPost } from "src/app/core/models";
-import { BehaviorSubject, Observable, merge } from "rxjs";
+import { BehaviorSubject, Observable, combineLatest, merge } from "rxjs";
+import { filter, distinctUntilChanged } from "rxjs/operators";
 
 @Component({
   selector: "app-filters",
@@ -14,7 +15,6 @@ import { BehaviorSubject, Observable, merge } from "rxjs";
   styleUrls: ["./filters.component.scss"],
 })
 export class FiltersComponent implements OnInit {
-  filterForm: FormGroup;
   classroom$: Observable<Filter<Classroom>[]>;
   status$: Observable<Filter<statusPost>[]>;
   Filters$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
@@ -39,29 +39,36 @@ export class FiltersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.filterForm.valueChanges.subscribe((state) => {
-    //   debugger;
-    //   console.log(state);
-    // });
-    // this.filterForm.get("statusForm").valueChanges.subscribe((state) => {
+    // this.classroomForm.valueChanges.subscribe(() => {
     //   debugger;
     // });
+    // combineLatest([
+    //   this.classroomForm.valueChanges,
+    //   this.datePicker.valueChanges,
+    //   this.statusForm.valueChanges,
+    //   this.searchForm.valueChanges.pipe(
+    //     distinctUntilChanged(),
+    //     filter((word: string) => word.length > 3)
+    //   ),
+    // ]).subscribe(([classroom, datePicker, statusForm, searchForm]) => {
+    //   debugger;
+    // });
+    this.datePicker.valueChanges.subscribe((state) => {
+      debugger;
+    });
+    // TODO
+    // El merge no es asincrono del todo se raya si se emite muchos valores a las vez
+    // Los valores no respetan quien los emite
     merge(
       this.classroomForm.valueChanges,
       this.datePicker.valueChanges,
       this.statusForm.valueChanges,
-      this.searchForm.valueChanges
+      this.searchForm.valueChanges.pipe(
+        distinctUntilChanged(),
+        filter((word: string) => word.length > 3)
+      )
     ).subscribe(([classroom, datePicker, statusForm, searchForm]) => {
       debugger;
     });
   }
-
-  // private buildForm(): FormGroup {
-  //   return this.fb.group({
-  //     datePicker: this.fb.control([]),
-  //     statusForm: this.fb.control([]),
-  //     classroomForm: this.fb.control([]),
-  //     searchForm: this.fb.control(""),
-  //   });
-  // }
 }
