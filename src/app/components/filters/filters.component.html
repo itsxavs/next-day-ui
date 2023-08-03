@@ -1,0 +1,41 @@
+<!-- <form [formGroup]="filterForm"> -->
+<mat-form-field appearance="fill">
+  <mat-label>Enter a date range</mat-label>
+  <mat-date-range-input [rangePicker]="picker" [FormGroup]="datePicker">
+    <input matStartDate placeholder="Start date" />
+    <input matEndDate placeholder="End date" />
+  </mat-date-range-input>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Status</mat-label>
+  <mat-select [formControl]="statusForm" multiple>
+    <mat-option *ngFor="let status of status$ | async" [value]="status.value">{{
+      status.value
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Classroom</mat-label>
+  <mat-select [formControl]="classroomForm" multiple>
+    <mat-option
+      *ngFor="let classroom of classroom$ | async"
+      [value]="classroom.value"
+      >{{ classroom.value.number }} {{ classroom.value.letter }}</mat-option
+    >
+  </mat-select>
+</mat-form-field>
+<!-- <mat-form-field
+  [formControl]="searchForm"
+  class="example-full-width"
+  appearance="fill"
+>
+  <div>
+    <mat-icon>search</mat-icon>
+    <mat-label>Search</mat-label>
+  </div>
+  <input [formControl]="searchForm" matInput placeholder="Introduce" />
+</mat-form-field> -->
+<input [formControl]="searchForm" placeholder="Introduce" />
+<!-- </form> -->
