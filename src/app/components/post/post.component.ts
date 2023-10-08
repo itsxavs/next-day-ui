@@ -9,9 +9,13 @@ import { Component, OnInit, Input } from "@angular/core";
 export class PostComponent implements OnInit {
   @Input() post: Post;
   statusPost: String;
+  isExpanded: boolean = false;
   constructor() {}
 
   ngOnInit(): void {
     console.log(this.post.status);
+  }
+  toggleExpanded() {
+    this.isExpanded = !this.isExpanded;
   }
 }
