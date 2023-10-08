@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 import { FormControl } from "@angular/forms";
 import { FormGroup } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
-import { Student } from "src/app/interface/user";
+import { Student } from "src/app/core/models/user.interface";
 
 @Component({
   selector: "app-create-post",

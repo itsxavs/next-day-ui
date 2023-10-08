@@ -10,11 +10,14 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatNativeDateModule } from "@angular/material/core";
+import { FiltersModule } from "./filters/filters.module";
+import { FiltersComponent } from "./filters/filters.component";
 
 @NgModule({
   declarations: [PostComponent, NavbarComponent, CreatePostComponent],
   imports: [
     CommonModule,
+    FiltersModule,
     MatButtonModule,
     MatExpansionModule,
     MatIconModule,
@@ -23,6 +26,11 @@ import { MatNativeDateModule } from "@angular/material/core";
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  exports: [PostComponent, NavbarComponent, CreatePostComponent],
+  exports: [
+    PostComponent,
+    NavbarComponent,
+    CreatePostComponent,
+    FiltersComponent,
+  ],
 })
 export class ComponentsModule {}

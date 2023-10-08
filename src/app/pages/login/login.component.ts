@@ -1,9 +1,9 @@
-import { Classroom } from "./../../interface/utils";
+import { Classroom } from "../../core/models/classroom.interface";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
-import { Teacher, User } from "src/app/interface/user";
+import { Teacher, User } from "src/app/core/models/user.interface";
 import { TeacherService } from "src/app/services/teacher.service";
 import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "../../services/auth.service";

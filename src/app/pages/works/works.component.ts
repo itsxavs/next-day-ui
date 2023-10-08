@@ -1,9 +1,9 @@
 import { Observable } from "rxjs";
 import { PostService } from "./../../services/post.service";
-import { Post } from "./../../interface/post";
+import { Post } from "../../core/models/post.interface";
 import { noticesMock } from "src/app/mocks/mix";
 import { Component, OnInit } from "@angular/core";
-import { tabs } from "src/app/interface/tabs.enum";
+import { tabs } from "src/app/core/models/tabs.constant";
 
 const tags = [tabs.do, tabs.correct, tabs.create, tabs.review];
 

@@ -3,7 +3,7 @@ import { teacherMock } from "./../mocks/teachers";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, mapTo, tap } from "rxjs/operators";
-import { Teacher } from "../interface/user";
+import { Teacher } from "../core/models/user.interface";
 import { of } from "rxjs";
 
 @Injectable({

@@ -1,5 +1,5 @@
-import { MessageChat } from "./../../interface/message";
-import { UserChat } from "./../../interface/user";
+import { MessageChat } from "../../core/models/message.interface";
+import { UserChat } from "../../core/models/user.interface";
 import { Component, OnInit } from "@angular/core";
 import { messageChatMock, userChatMock } from "src/app/mocks/mix";
 

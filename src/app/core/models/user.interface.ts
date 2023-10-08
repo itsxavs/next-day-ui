@@ -1,4 +1,4 @@
-import { Classroom } from "./utils";
+import { Classroom } from "./classroom.interface";
 export interface User {
   readonly _id: String;
   email: String;

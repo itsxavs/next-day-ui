@@ -1,5 +1,5 @@
 import { classroomsMock } from "./../mocks/classrooms";
-import { Classroom } from "./../interface/utils";
+import { Classroom } from "../core/models/classroom.interface";
 import { map, mapTo, tap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";

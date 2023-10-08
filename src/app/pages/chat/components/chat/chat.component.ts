@@ -1,4 +1,4 @@
-import { MessageChat } from "./../../../../interface/message";
+import { MessageChat } from "../../../../core/models/message.interface";
 import { Component, OnInit, Input } from "@angular/core";
 
 @Component({

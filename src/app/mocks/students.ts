@@ -1,5 +1,5 @@
 import { classroomsMock } from "./classrooms";
-import { Student } from "./../interface/user";
+import { Student } from "../core/models/user.interface";
 import { teacherMock } from "./teachers";
 
 export const studentsMock: Student[] = [

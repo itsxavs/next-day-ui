@@ -1,4 +1,4 @@
-import { Student, Teacher } from "./user";
+import { Student, Teacher } from "./user.interface";
 
 export enum statusPost {
   Do = "DO",

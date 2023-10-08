@@ -1,4 +1,4 @@
-import { Message } from "../interface/message";
+import { Message } from "../core/models/message.interface";
 
 export const message: Message[] = [
   {
