@@ -1,14 +1,39 @@
-<ul class="nav justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" (click)="goHome()">HOME</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" (click)="goWork()">WORK</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" (click)="goChat()">CHAT</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" (click)="goSettings()">SETTINGS</a>
-  </li>
-</ul>
+<div *ngIf="!disabled">
+  <ng-container #studentPage *ngIf="role === 'ROLE_STUDENT'; else teacherPage">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" (click)="goHome()"
+          >HOME</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="goProfile()">PROFILE</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="goChat()">CHAT</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="logOut()">LOGOUT</a>
+      </li>
+    </ul>
+  </ng-container>
+
+  <ng-template #teacherPage>
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" (click)="goHome()"
+          >HOME</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="goManage()">MANAGE</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="goChat()">CHAT</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="logOut()">LOGOUT</a>
+      </li>
+    </ul>
+  </ng-template>
+</div>

@@ -1,3 +1,4 @@
+import { TokenStorageService } from "./../../services/token-storage.service";
 import { statusPost } from "../../core/models/post.interface";
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
@@ -14,8 +15,14 @@ export class HomeComponent implements OnInit {
   isTeacher: boolean;
   newPost: Post;
   notices: Post[] = noticesMock;
+  role = "ROLE_TEACHER";
 
-  constructor(private authService: AuthService, public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private tokeStorageService: TokenStorageService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.role = this.tokeStorageService.getUser().roles;
+  }
 }

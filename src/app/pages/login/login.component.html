@@ -1,4 +1,16 @@
-<div class="login__container">
+<form [formGroup]="form">
+  <div>
+    <label>Username: </label>
+    <input [formControl]="form.get('username')" />
+  </div>
+  <div>
+    <label>Password: </label>
+    <input [formControl]="form.get('password')" />
+  </div>
+  <button (click)="onSubmit()">Login</button>
+</form>
+
+<!-- <div class="login__container">
   <form [formGroup]="form" class="login__items">
     <div class="login__header">{{ header }}</div>
 
@@ -89,4 +101,4 @@
       </div>
     </ng-template>
   </form>
-</div>
+</div> -->

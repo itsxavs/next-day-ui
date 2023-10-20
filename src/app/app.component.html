@@ -1,4 +1,7 @@
 <div class="app">
-  <app-navbar [disabled]="false"></app-navbar>
+  <app-navbar
+    [disabled]="!(isLogged$ | async)"
+    [role]="role$ | async"
+  ></app-navbar>
   <router-outlet></router-outlet>
 </div>

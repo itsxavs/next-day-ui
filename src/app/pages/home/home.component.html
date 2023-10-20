@@ -1,4 +1,19 @@
+<!-- <div class="home__container">
+  <app-filters [role]="role"></app-filters>
+  <app-post [role]="role" *ngFor="let post of notices" [post]="post"></app-post>
+</div> -->
+
 <div class="home__container">
-  <app-filters></app-filters>
-  <app-post *ngFor="let post of notices" [post]="post"></app-post>
+  <app-post [role]="role" *ngFor="let post of notices" [post]="post"></app-post>
+</div>
+<!-- Esta bien pero los post deberia de meterla alguna medida concreta -->
+<div class="container">
+  <app-filters [role]="role"></app-filters>
+  <div style="max-height: 400px; overflow-y: auto">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let post of notices">
+        <app-post [role]="role" [post]="post"></app-post>
+      </li>
+    </ul>
+  </div>
 </div>

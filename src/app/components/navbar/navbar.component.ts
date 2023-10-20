@@ -9,23 +9,30 @@ import { Router } from "@angular/router";
 })
 export class NavbarComponent implements OnInit {
   @Input() disabled: boolean;
+  @Input() role: string;
 
-  constructor(private router: Router, private AuthService: AuthService) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
   goHome() {
     this.router.navigate(["home"]);
   }
-  goWork() {
-    this.router.navigate(["works"]);
+  goProfile() {
+    this.router.navigate(["profile"]);
   }
-
+  goManage() {
+    this.router.navigate(["manage"]);
+  }
   goSettings() {
     this.router.navigate(["settings"]);
   }
   goChat() {
     this.router.navigate(["chat"]);
+  }
+
+  logOut() {
+    this.router.navigate(["login"]);
   }
 
   /* 

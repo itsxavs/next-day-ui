@@ -1,9 +1,6 @@
 import { ComponentsModule } from "./components/components.module";
 import { ChatRoomModule } from "./pages/chat/chat.module";
 import { ChatRoomComponent } from "./pages/chat/chatroom.component";
-import { SettingsComponent } from "./pages/settings/settings.component";
-import { SettingsModule } from "./pages/settings/settings.module";
-import { WorksComponent } from "./pages/works/works.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
@@ -14,8 +11,10 @@ import { LoginComponent } from "./pages/login/login.component";
 import { HomeModule } from "./pages/home/home.module";
 import { MatDialogModule } from "@angular/material/dialog";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { WorksModule } from "./pages/works/works.module";
+import { ProfileModule } from "./pages/profile/profile.module";
 import { MatIconModule } from "@angular/material/icon";
+import { ProfileComponent } from "./pages/profile/profile.component";
+import { ManageModule } from "./pages/manage/manage.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,19 +22,18 @@ import { MatIconModule } from "@angular/material/icon";
     BrowserModule,
     LoginModule,
     HomeModule,
-    WorksModule,
-    SettingsModule,
+    ManageModule,
+    ProfileModule,
     MatDialogModule,
     ChatRoomModule,
     ComponentsModule,
     MatIconModule,
     RouterModule.forRoot(
       [
-        { path: "", redirectTo: "home", pathMatch: "full" },
+        { path: "", redirectTo: "login", pathMatch: "full" },
         { path: "login", component: LoginComponent },
         { path: "home", component: HomeComponent },
-        { path: "works", component: WorksComponent },
-        { path: "settings", component: SettingsComponent },
+        { path: "profile", component: ProfileComponent },
         { path: "chat", component: ChatRoomComponent },
       ],
       { relativeLinkResolution: "legacy" }

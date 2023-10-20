@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { ClassroomFilter } from "./fieldFilters/classroom-filter";
 import { StatusFilter } from "./fieldFilters/status-filter";
 import { DateFilter } from "./fieldFilters/date-filter";
@@ -15,6 +15,8 @@ import { filter, distinctUntilChanged } from "rxjs/operators";
   styleUrls: ["./filters.component.scss"],
 })
 export class FiltersComponent implements OnInit {
+  @Input() role: string;
+
   classroom$: Observable<Filter<Classroom>[]>;
   status$: Observable<Filter<statusPost>[]>;
   Filters$: BehaviorSubject<any> = new BehaviorSubject<any>(null);

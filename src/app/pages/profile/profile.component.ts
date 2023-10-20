@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { PostService } from "./../../services/post.service";
+import { PostService } from "../../services/post.service";
 import { Post } from "../../core/models/post.interface";
 import { noticesMock } from "src/app/mocks/mix";
 import { Component, OnInit } from "@angular/core";
@@ -8,11 +8,11 @@ import { tabs } from "src/app/core/models/tabs.constant";
 const tags = [tabs.do, tabs.correct, tabs.create, tabs.review];
 
 @Component({
-  selector: "app-works",
-  templateUrl: "./works.component.html",
-  styleUrls: ["./works.component.scss"],
+  selector: "profile",
+  templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.scss"],
 })
-export class WorksComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   notices: Post[] = noticesMock;
   tags = tags;
   posts: Observable<Post[]>;

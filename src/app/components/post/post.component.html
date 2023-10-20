@@ -19,45 +19,100 @@
   (click)="toggleExpanded()"
 ></div> -->
 
-<mat-accordion class="example-headers-align" multi>
-  <mat-expansion-panel>
-    <!-- header es lo que se va mostrar sin expandir -->
-    <mat-expansion-panel-header>
-      <!-- <mat-panel-title> Personal data </mat-panel-title>
-      <mat-panel-description>
-        Type your name and age
-        <mat-icon>account_circle</mat-icon>
-      </mat-panel-description> -->
-      <div class="card d-flex flex-row justify-content-center post__container">
-        <img
-          src="../../../assets/img/profile.jpg"
-          class="card-img-top post__profile"
-          [alt]="post.teacher.name"
-        />
+<!-- Student  -->
 
-        <div class="card-body">
-          <h5 class="card-title">{{ post.title }} - {{ post.subject }}</h5>
-          <p class="card-text">
-            {{ post.message }}
-          </p>
+<ng-container *ngIf="role === 'ROLE_STUDENT'; else teacherPost">
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel>
+      <!-- header es lo que se va mostrar sin expandir -->
+      <mat-expansion-panel-header>
+        <!-- <mat-panel-title> Personal data </mat-panel-title>
+        <mat-panel-description>
+          Type your name and age
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description> -->
+        <div
+          class="card d-flex flex-row justify-content-center post__container"
+        >
+          <img
+            src="../../../assets/img/profile.jpg"
+            class="card-img-top post__profile"
+            [alt]="post.teacher.name"
+          />
+
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }} - {{ post.subject }}</h5>
+            <p class="card-text">
+              {{ post.message }}
+            </p>
+          </div>
+
+          <a href="#" class="btn btn-primary">{{ post.status }}</a>
         </div>
+        <div
+          [ngClass]="{ post__expanded: isExpanded }"
+          (click)="toggleExpanded()"
+        ></div>
+      </mat-expansion-panel-header>
 
-        <a href="#" class="btn btn-primary">{{ post.status }}</a>
-      </div>
-      <div
-        [ngClass]="{ post__expanded: isExpanded }"
-        (click)="toggleExpanded()"
-      ></div>
-    </mat-expansion-panel-header>
+      <mat-form-field>
+        <mat-label>First name</mat-label>
+        <input matInput />
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>First name</mat-label>
-      <input matInput />
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input matInput type="number" min="1" />
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-container>
 
-    <mat-form-field>
-      <mat-label>Age</mat-label>
-      <input matInput type="number" min="1" />
-    </mat-form-field>
-  </mat-expansion-panel>
-</mat-accordion>
+<!-- Teacher  -->
+
+<ng-template #teacherPost>
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel>
+      <!-- header es lo que se va mostrar sin expandir -->
+      <mat-expansion-panel-header>
+        <!-- <mat-panel-title> Personal data </mat-panel-title>
+        <mat-panel-description>
+          Type your name and age
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description> -->
+        <div
+          class="card d-flex flex-row justify-content-center post__container"
+        >
+          <img
+            src="../../../assets/img/profile.jpg"
+            class="card-img-top post__profile"
+            [alt]="post.teacher.name"
+          />
+
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }} - {{ post.subject }}</h5>
+            <p class="card-text">
+              {{ post.message }}
+            </p>
+          </div>
+
+          <a href="#" class="btn btn-primary">{{ post.status }}</a>
+        </div>
+        <div
+          [ngClass]="{ post__expanded: isExpanded }"
+          (click)="toggleExpanded()"
+        ></div>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>First name</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input matInput type="number" min="1" />
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-template>

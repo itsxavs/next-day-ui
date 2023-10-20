@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class PostComponent implements OnInit {
   @Input() post: Post;
+  @Input() role: string;
   statusPost: String;
   isExpanded: boolean = false;
   constructor() {}
