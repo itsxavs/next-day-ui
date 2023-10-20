@@ -1,22 +1,23 @@
 import { Post } from "src/app/core/models/post.interface";
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
   selector: "app-post",
   templateUrl: "./post.component.html",
   styleUrls: ["./post.component.scss"],
 })
-export class PostComponent implements OnInit {
+export class PostComponent {
   @Input() post: Post;
   @Input() role: string;
-  statusPost: String;
-  isExpanded: boolean = false;
+  workStudentFile: File;
+  workTeacherFile: File;
+
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.post.status);
+  onTeacherFileSelected(event) {
+    this.workTeacherFile = event.target.files[0];
   }
-  toggleExpanded() {
-    this.isExpanded = !this.isExpanded;
+  onStudentFileSelected(event) {
+    this.workStudentFile = event.target.files[0];
   }
 }

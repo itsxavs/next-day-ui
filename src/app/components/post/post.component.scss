@@ -1,30 +1,38 @@
 .post {
-  &__container {
-    width: 800px;
-    height: 120px;
-    margin: 8px 0;
-  }
-  &__profile {
-    width: 100px;
-  }
+  // &__container {
+  //   width: 800px;
+  //   height: 120px;
+  //   margin: 8px 0;
+  // }
 
-  &__expanded {
-    height: 200px; /* Define la altura deseada cuando el div esté expandido */
-    width: 200px; /* Define el ancho deseado cuando el div esté expandido */
-    background-color: lightblue; /* Cambia el color de fondo a tu elección */
-    transition: all 0.3s ease; /* Agrega una transición suave para la animación */
-    cursor: pointer;
-  }
+  // &__expanded {
+  //   height: 200px; /* Define la altura deseada cuando el div esté expandido */
+  //   width: 200px; /* Define el ancho deseado cuando el div esté expandido */
+  //   background-color: lightblue; /* Cambia el color de fondo a tu elección */
+  //   transition: all 0.3s ease; /* Agrega una transición suave para la animación */
+  //   cursor: pointer;
+  // }
 }
-.example-action-buttons {
-  padding-bottom: 20px;
+// .example-action-buttons {
+//   padding-bottom: 20px;
+// }
+
+// .example-headers-align .mat-expansion-panel-header-description {
+//   justify-content: space-between;
+//   align-items: center;
+// }
+
+// .example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+//   margin-left: 8px;
+// }
+
+.mat-expansion-panel-header {
+  height: 140px;
+  width: 100%;
+  padding: 0px !important;
+  display: flex;
 }
 
-.example-headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
-  margin-left: 8px;
+.img {
+  width: 100px;
 }

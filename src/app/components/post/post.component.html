@@ -1,69 +1,51 @@
-<!-- <div class="card d-flex flex-row justify-content-center post__container">
-  <img
-    src="../../../assets/img/profile.jpg"
-    class="card-img-top post__profile"
-    [alt]="post.teacher.name"
-  />
-
-  <div class="card-body">
-    <h5 class="card-title">{{ post.title }} - {{ post.subject }}</h5>
-    <p class="card-text">
-      {{ post.message }}
-    </p>
-  </div>
-
-  <a href="#" class="btn btn-primary">{{ post.status }}</a>
-</div>
-<div
-  [ngClass]="{ post__expanded: isExpanded }"
-  (click)="toggleExpanded()"
-></div> -->
-
 <!-- Student  -->
 
 <ng-container *ngIf="role === 'ROLE_STUDENT'; else teacherPost">
   <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
-      <!-- header es lo que se va mostrar sin expandir -->
-      <mat-expansion-panel-header>
-        <!-- <mat-panel-title> Personal data </mat-panel-title>
-        <mat-panel-description>
-          Type your name and age
-          <mat-icon>account_circle</mat-icon>
-        </mat-panel-description> -->
-        <div
-          class="card d-flex flex-row justify-content-center post__container"
-        >
+    <mat-expansion-panel class="post">
+      <mat-expansion-panel-header class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between w-100 p-4">
           <img
             src="../../../assets/img/profile.jpg"
-            class="card-img-top post__profile"
+            class="img"
             [alt]="post.teacher.name"
           />
 
-          <div class="card-body">
-            <h5 class="card-title">{{ post.title }} - {{ post.subject }}</h5>
-            <p class="card-text">
+          <div class="col-9 pt-1">
+            <h5 class="text-primary text-uppercase">
+              {{ post.title }} - {{ post.subject }}
+            </h5>
+            <p class="text-truncate">
               {{ post.message }}
             </p>
           </div>
 
-          <a href="#" class="btn btn-primary">{{ post.status }}</a>
+          <button class="btn btn-primary">
+            {{ post.status }}
+          </button>
         </div>
-        <div
-          [ngClass]="{ post__expanded: isExpanded }"
-          (click)="toggleExpanded()"
-        ></div>
       </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <mat-label>First name</mat-label>
-        <input matInput />
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Age</mat-label>
-        <input matInput type="number" min="1" />
-      </mat-form-field>
+      <div class="container bg-light w-100 text-black">
+        <div class="bg-success bg-opacity-50">
+          <label class="p-2">Homework:</label>
+          <input
+            #fileStudent
+            type="file"
+            class="text-success"
+            (change)="onStudentFileSelected($event)"
+          />
+        </div>
+        <div class="p-2 bg-danger bg-opacity-50">
+          <label class="p-2">Corretion:</label>
+          <input
+            #fileTeacher
+            type="file"
+            class="text-danger"
+            (change)="onTeacherFileSelected($event)"
+          />
+        </div>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 </ng-container>
@@ -72,47 +54,40 @@
 
 <ng-template #teacherPost>
   <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
-      <!-- header es lo que se va mostrar sin expandir -->
-      <mat-expansion-panel-header>
-        <!-- <mat-panel-title> Personal data </mat-panel-title>
-        <mat-panel-description>
-          Type your name and age
-          <mat-icon>account_circle</mat-icon>
-        </mat-panel-description> -->
-        <div
-          class="card d-flex flex-row justify-content-center post__container"
-        >
+    <mat-expansion-panel class="post">
+      <mat-expansion-panel-header class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between w-100 p-4">
           <img
             src="../../../assets/img/profile.jpg"
-            class="card-img-top post__profile"
+            class="img"
             [alt]="post.teacher.name"
           />
 
-          <div class="card-body">
-            <h5 class="card-title">{{ post.title }} - {{ post.subject }}</h5>
-            <p class="card-text">
+          <div class="col-9 pt-1">
+            <h5 class="text-primary text-uppercase">
+              {{ post.title }} - {{ post.subject }}
+            </h5>
+            <p class="text-truncate">
               {{ post.message }}
             </p>
           </div>
 
-          <a href="#" class="btn btn-primary">{{ post.status }}</a>
+          <button class="btn btn-primary">
+            {{ post.status }}
+          </button>
         </div>
-        <div
-          [ngClass]="{ post__expanded: isExpanded }"
-          (click)="toggleExpanded()"
-        ></div>
       </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <mat-label>First name</mat-label>
-        <input matInput />
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Age</mat-label>
-        <input matInput type="number" min="1" />
-      </mat-form-field>
+      <div class="container bg-light w-100 text-black">
+        <div class="bg-success bg-opacity-50">
+          <label class="p-2">Homework:</label>
+          <input type="file" class="text-success" />
+        </div>
+        <div class="p-2 bg-danger bg-opacity-50">
+          <label class="p-2">Corretion:</label>
+          <input type="file" class="text-danger" />
+        </div>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 </ng-template>

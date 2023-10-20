@@ -76,6 +76,33 @@ const noticesMock: Post[] = [
     createAt: new Date(),
     status: statusPost.Correct,
   } as Post,
+  {
+    title: "five",
+    subject: "plactic",
+    message: "pues es",
+    teacher: teacherMock1,
+    student: studentMock,
+    createAt: new Date(),
+    status: statusPost.Correct,
+  } as Post,
+  {
+    title: "five",
+    subject: "plactic",
+    message: "pues es",
+    teacher: teacherMock1,
+    student: studentMock,
+    createAt: new Date(),
+    status: statusPost.Correct,
+  } as Post,
+  {
+    title: "five",
+    subject: "plactic",
+    message: "pues es",
+    teacher: teacherMock1,
+    student: studentMock,
+    createAt: new Date(),
+    status: statusPost.Correct,
+  } as Post,
 ];
 const userChatMock: UserChat[] = [
   {
