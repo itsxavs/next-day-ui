@@ -17,6 +17,7 @@ import { SearchFilter } from "./fieldFilters/search-filter";
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { ReactiveFormsModule } from "@angular/forms";
+import { SubjectFilter } from "./fieldFilters/subject.filter";
 
 @NgModule({
   declarations: [FiltersComponent],
@@ -35,6 +36,12 @@ import { ReactiveFormsModule } from "@angular/forms";
   ],
   exports: [FiltersComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  providers: [ClassroomFilter, StatusFilter, DateFilter, SearchFilter],
+  providers: [
+    ClassroomFilter,
+    StatusFilter,
+    DateFilter,
+    SearchFilter,
+    SubjectFilter,
+  ],
 })
 export class FiltersModule {}

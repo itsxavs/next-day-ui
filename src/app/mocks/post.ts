@@ -11,6 +11,7 @@ export const PostsMock_1_2: Post[] = [
     student: studentsMock[0],
     createAt: new Date(),
     status: statusPost.Correct,
+    classroom: { letter: "A", number: 1 },
   },
   {
     title: "two",
@@ -20,6 +21,7 @@ export const PostsMock_1_2: Post[] = [
     student: studentsMock[0],
     createAt: new Date(),
     status: statusPost.Correct,
+    classroom: { letter: "A", number: 1 },
   },
   {
     title: "three",
@@ -30,6 +32,7 @@ export const PostsMock_1_2: Post[] = [
     student: studentsMock[0],
     createAt: new Date(),
     status: statusPost.Correct,
+    classroom: { letter: "A", number: 1 },
   },
   {
     title: "four",
@@ -39,6 +42,7 @@ export const PostsMock_1_2: Post[] = [
     student: studentsMock[0],
     createAt: new Date(),
     status: statusPost.Correct,
+    classroom: { letter: "A", number: 1 },
   },
   {
     title: "five",
@@ -48,6 +52,7 @@ export const PostsMock_1_2: Post[] = [
     student: studentsMock[0],
     createAt: new Date(),
     status: statusPost.Correct,
+    classroom: { letter: "A", number: 1 },
   },
 ];
 export const PostsMockDO: Post[] = [
@@ -59,6 +64,7 @@ export const PostsMockDO: Post[] = [
     student: studentsMock[0],
     createAt: new Date(),
     status: statusPost.Do,
+    classroom: { letter: "A", number: 1 },
   },
   {
     title: "two",
@@ -68,6 +74,7 @@ export const PostsMockDO: Post[] = [
     student: studentsMock[0],
     createAt: new Date(),
     status: statusPost.Do,
+    classroom: { letter: "A", number: 1 },
   },
   {
     title: "three",
@@ -78,6 +85,7 @@ export const PostsMockDO: Post[] = [
     student: studentsMock[0],
     createAt: new Date(),
     status: statusPost.Do,
+    classroom: { letter: "A", number: 1 },
   },
   {
     title: "four",
@@ -87,6 +95,7 @@ export const PostsMockDO: Post[] = [
     student: studentsMock[0],
     createAt: new Date(),
     status: statusPost.Do,
+    classroom: { letter: "A", number: 1 },
   },
   {
     title: "five",
@@ -96,6 +105,7 @@ export const PostsMockDO: Post[] = [
     student: studentsMock[0],
     createAt: new Date(),
     status: statusPost.Do,
+    classroom: { letter: "A", number: 1 },
   },
 ];
 export const PostsMockReview: Post[] = [

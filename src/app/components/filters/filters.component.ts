@@ -5,9 +5,10 @@ import { DateFilter } from "./fieldFilters/date-filter";
 import { SearchFilter } from "./fieldFilters/search-filter";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { Filter } from "./baseFilter/filter.interface";
-import { Classroom, statusPost } from "src/app/core/models";
+import { Classroom, statusPost, subject } from "src/app/core/models";
 import { BehaviorSubject, Observable, combineLatest, merge } from "rxjs";
 import { filter, distinctUntilChanged } from "rxjs/operators";
+import { FilterFacade } from "./filters.facade";
 
 @Component({
   selector: "app-filters",
@@ -17,30 +18,21 @@ import { filter, distinctUntilChanged } from "rxjs/operators";
 export class FiltersComponent implements OnInit {
   @Input() role: string;
 
-  classroom$: Observable<Filter<Classroom>[]>;
-  status$: Observable<Filter<statusPost>[]>;
-  Filters$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  statusForm: FormControl = new FormControl("");
-  classroomForm: FormControl = new FormControl("");
-  datePicker: FormGroup = new FormGroup({
-    start: new FormControl(""),
-    end: new FormControl(""),
-  });
-  searchForm: FormControl = new FormControl("");
+  // Load content filters
+  classroom$: Observable<Filter<Classroom>[]> = this.facade.classroomContent$;
+  status$: Observable<Filter<statusPost>[]> = this.facade.statusContent$;
+  subject$: Observable<Filter<subject>[]> = this.facade.subjectContent$;
+  // -----------------------------
 
-  constructor(
-    private readonly classroom: ClassroomFilter,
-    private readonly status: StatusFilter,
-    private readonly date: DateFilter,
-    private readonly search: SearchFilter,
-    private fb: FormBuilder
-  ) {
-    this.classroom$ = this.classroom.classrooms$;
-    this.status$ = this.status.status$;
-    // this.filterForm = this.buildForm();
-  }
+  private _filters$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  filters$ = this._filters$.asObservable();
+
+  formFilters: FormGroup;
+
+  constructor(private facade: FilterFacade) {}
 
   ngOnInit(): void {
+    this.formFilters = this.facade.formFilters;
     // this.classroomForm.valueChanges.subscribe(() => {
     //   debugger;
     // });
@@ -55,22 +47,22 @@ export class FiltersComponent implements OnInit {
     // ]).subscribe(([classroom, datePicker, statusForm, searchForm]) => {
     //   debugger;
     // });
-    this.datePicker.valueChanges.subscribe((state) => {
-      debugger;
-    });
-    // TODO
-    // El merge no es asincrono del todo se raya si se emite muchos valores a las vez
-    // Los valores no respetan quien los emite
-    merge(
-      this.classroomForm.valueChanges,
-      this.datePicker.valueChanges,
-      this.statusForm.valueChanges,
-      this.searchForm.valueChanges.pipe(
-        distinctUntilChanged(),
-        filter((word: string) => word.length > 3)
-      )
-    ).subscribe(([classroom, datePicker, statusForm, searchForm]) => {
-      debugger;
-    });
+    // this.datePicker.valueChanges.subscribe((state) => {
+    //   debugger;
+    // });
+    // // TODO
+    // // El merge no es asincrono del todo se raya si se emite muchos valores a las vez
+    // // Los valores no respetan quien los emite
+    // merge(
+    //   this.classroomForm.valueChanges,
+    //   this.datePicker.valueChanges,
+    //   this.statusForm.valueChanges,
+    //   this.searchForm.valueChanges.pipe(
+    //     distinctUntilChanged(),
+    //     filter((word: string) => word.length > 3)
+    //   )
+    // ).subscribe(([classroom, datePicker, statusForm, searchForm]) => {
+    //   debugger;
+    // });
   }
 }

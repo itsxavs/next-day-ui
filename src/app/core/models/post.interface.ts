@@ -1,9 +1,17 @@
+import { Classroom } from "./classroom.interface";
 import { Student, Teacher } from "./user.interface";
 
 export enum statusPost {
   Do = "DO",
   Correct = "CORRECT",
   Review = "REVIEW",
+}
+
+export enum subject {
+  Mathematics = "Mathematics",
+  Science = "SCIENCE",
+  Language = "LANGUAGE",
+  Geography = "GEOGRAPHY",
 }
 
 export interface Post {
@@ -13,5 +21,6 @@ export interface Post {
   message: String;
   createAt: Date;
   status: statusPost;
-  subject: String;
+  subject: subject | string;
+  classroom?: Classroom;
 }
