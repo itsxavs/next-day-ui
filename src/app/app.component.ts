@@ -12,7 +12,7 @@ import { Component } from "@angular/core";
 export class AppComponent {
   title = "next-day";
   isLogged$: Observable<boolean> = this.tokenStorageService.loggedIn$;
-  role$: Observable<string> = this.tokenStorageService.getRole();
+  role$: Observable<string> = this.tokenStorageService.role$;
 
   constructor(
     private tokenStorageService: TokenStorageService,
@@ -20,7 +20,7 @@ export class AppComponent {
   ) {
     this.isLogged$.subscribe((isLogged) => {
       isLogged
-        ? this.router.navigate(["home"])
+        ? this.router.navigate(["profile"])
         : this.router.navigate(["login"]);
     });
   }

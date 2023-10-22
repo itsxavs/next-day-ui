@@ -1,4 +1,4 @@
-import { BehaviorSubject, Subject } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { Injectable } from "@angular/core";
 
 const TOKEN_KEY = "auth-token";
@@ -8,9 +8,10 @@ const USER_KEY = "auth-user";
   providedIn: "root",
 })
 export class TokenStorageService {
-  private _role$: Subject<string> = new Subject();
+  private _role$: BehaviorSubject<string> = new BehaviorSubject(null);
   private _loggedIn$ = new BehaviorSubject<boolean>(false);
   loggedIn$ = this._loggedIn$.asObservable();
+  role$: Observable<string> = this._role$.asObservable();
   constructor() {
     this._role$.next(this.getUser().roles);
     this._loggedIn$.next(!!this.getUser());
@@ -43,9 +44,5 @@ export class TokenStorageService {
     }
 
     return "";
-  }
-
-  getRole() {
-    return this._role$.asObservable();
   }
 }

@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   notices: Post[] = noticesMock;
   tags = tags;
   posts: Observable<Post[]>;
-  isCreate = true;
+  roleStudent = true;
 
   constructor(private readonly postService: PostService) {}
 
@@ -24,10 +24,11 @@ export class ProfileComponent implements OnInit {
     this.posts = this.postService.getPostsByUser("mek");
   }
 
+  // Esto no lo borro porque en el manage como tiene dos tab puede que lo use
   goTab(name: string) {
     switch (name) {
       case tabs.create: {
-        this.isCreate = true;
+        this.roleStudent = true;
 
         break;
       }

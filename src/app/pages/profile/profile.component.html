@@ -3,7 +3,7 @@
   [ngClass]="true ? 'border-primary' : 'border-success'"
 >
   <div class="row container">
-    <div class="col">
+    <!-- <div class="col">
       <ul
         class="nav container d-flex justify-content-center border my-2"
         [ngClass]="true ? 'border-primary' : 'border-success'"
@@ -13,16 +13,16 @@
           <a class="nav-link" (click)="goTab(tag)">{{ tag }}</a>
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
   <div
-    *ngIf="!isCreate; else createPost"
+    *ngIf="roleStudent; else manage"
     class="container d-flex align-items-end flex-column"
   >
-    <app-post *ngFor="let post of posts | async" [post]="post"> post </app-post>
+    <app-profile-form></app-profile-form>
   </div>
 
-  <ng-template #createPost>
+  <ng-template #manage>
     <app-create-post></app-create-post>
   </ng-template>
 </div>

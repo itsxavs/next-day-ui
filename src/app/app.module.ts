@@ -1,3 +1,4 @@
+import { ManageComponent } from "./pages/manage/manage.component";
 import { ComponentsModule } from "./components/components.module";
 import { ChatRoomModule } from "./pages/chat/chat.module";
 import { ChatRoomComponent } from "./pages/chat/chatroom.component";
@@ -35,6 +36,7 @@ import { ManageModule } from "./pages/manage/manage.module";
         { path: "home", component: HomeComponent },
         { path: "profile", component: ProfileComponent },
         { path: "chat", component: ChatRoomComponent },
+        { path: "manage", component: ManageComponent },
       ],
       { relativeLinkResolution: "legacy" }
     ),

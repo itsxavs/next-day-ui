@@ -12,9 +12,15 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatNativeDateModule } from "@angular/material/core";
 import { FiltersModule } from "./filters/filters.module";
 import { FiltersComponent } from "./filters/filters.component";
+import { ProfileFormComponent } from "./profile-form/profile-form.component";
 
 @NgModule({
-  declarations: [PostComponent, NavbarComponent, CreatePostComponent],
+  declarations: [
+    PostComponent,
+    NavbarComponent,
+    CreatePostComponent,
+    ProfileFormComponent,
+  ],
   imports: [
     CommonModule,
     FiltersModule,
@@ -31,6 +37,7 @@ import { FiltersComponent } from "./filters/filters.component";
     NavbarComponent,
     CreatePostComponent,
     FiltersComponent,
+    ProfileFormComponent,
   ],
 })
 export class ComponentsModule {}
