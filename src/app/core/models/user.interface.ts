@@ -18,9 +18,24 @@ export interface Student extends User {
   teacher: Teacher;
   words: Map<String, Number>;
   subject?: subject[];
+  details?: DetailsStudent;
 }
 
 export interface UserChat {
   fullName: String;
   image?: String;
+}
+
+export interface DetailsStudent {
+  pronouns: string;
+  nameParents: string;
+  surnameParents: string;
+  emailParents: string;
+  pronounsParents: string;
+  address: string;
+  province: string;
+  city: string;
+  zip: string;
+  phone: string;
+  additionalInformation: string;
 }

@@ -11,7 +11,7 @@ import { Student } from "src/app/core/models/user.interface";
   styleUrls: ["./create-post.component.scss"],
 })
 export class CreatePostComponent implements OnInit {
-  formGroup: FormGroup = new FormGroup({
+  form: FormGroup = new FormGroup({
     title: new FormControl(),
     autor: new FormControl(),
     students: new FormControl(),

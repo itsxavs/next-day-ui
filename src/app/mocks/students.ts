@@ -1,7 +1,21 @@
 import { classroomsMock } from "./classrooms";
-import { Student } from "../core/models/user.interface";
+import { DetailsStudent, Student } from "../core/models/user.interface";
 import { teacherMock } from "./teachers";
+import { subject } from "../core/models";
 
+export const detailsStudent: DetailsStudent = {
+  pronouns: "he/him",
+  nameParents: "Juan",
+  surnameParents: "Romero Lozano",
+  emailParents: "juanrl@gmail.com",
+  pronounsParents: "he/him",
+  address: "calle Luis Dominguez n12",
+  province: "Malaga",
+  city: "Malaga",
+  zip: "29722",
+  phone: "632458234",
+  additionalInformation: "Es intolerante a la lactosa",
+};
 export const studentsMock: Student[] = [
   {
     _id: "2",
@@ -12,6 +26,13 @@ export const studentsMock: Student[] = [
     classroom: classroomsMock[0],
     teacher: teacherMock,
     words: new Map<String, Number>(),
+    subject: [
+      subject.Geography,
+      subject.Mathematics,
+      subject.Language,
+      subject.Science,
+    ],
+    details: detailsStudent,
   },
   {
     _id: "3",
@@ -22,6 +43,13 @@ export const studentsMock: Student[] = [
     classroom: classroomsMock[0],
     teacher: teacherMock,
     words: new Map<String, Number>(),
+    subject: [
+      subject.Geography,
+      subject.Mathematics,
+      subject.Language,
+      subject.Science,
+    ],
+    details: detailsStudent,
   },
   {
     _id: "4",
@@ -32,6 +60,13 @@ export const studentsMock: Student[] = [
     classroom: classroomsMock[0],
     teacher: teacherMock,
     words: new Map<String, Number>(),
+    subject: [
+      subject.Geography,
+      subject.Mathematics,
+      subject.Language,
+      subject.Science,
+    ],
+    details: detailsStudent,
   },
   {
     _id: "5",
@@ -42,5 +77,12 @@ export const studentsMock: Student[] = [
     classroom: classroomsMock[0],
     teacher: teacherMock,
     words: new Map<String, Number>(),
+    subject: [
+      subject.Geography,
+      subject.Mathematics,
+      subject.Language,
+      subject.Science,
+    ],
+    details: detailsStudent,
   },
 ];

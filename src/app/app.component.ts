@@ -1,7 +1,6 @@
 import { Router } from "@angular/router";
 import { TokenStorageService } from "./services/token-storage.service";
 import { Observable } from "rxjs";
-import { AuthService } from "src/app/services/auth.service";
 import { Component } from "@angular/core";
 
 @Component({
@@ -19,9 +18,9 @@ export class AppComponent {
     private router: Router
   ) {
     this.isLogged$.subscribe((isLogged) => {
-      isLogged
-        ? this.router.navigate(["profile"])
-        : this.router.navigate(["login"]);
+      // isLogged
+      //   ? this.router.navigate(["manage"])
+      //   : this.router.navigate(["login"]);
     });
   }
 }

@@ -13,6 +13,7 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { FiltersModule } from "./filters/filters.module";
 import { FiltersComponent } from "./filters/filters.component";
 import { ProfileFormComponent } from "./profile-form/profile-form.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,8 @@ import { ProfileFormComponent } from "./profile-form/profile-form.component";
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     PostComponent,
