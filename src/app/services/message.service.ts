@@ -4,7 +4,7 @@ import { teacherMock } from "./../mocks/teachers";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, mapTo, tap } from "rxjs/operators";
-import { Student, Teacher } from "../core/models/user.interface";
+import { Student, Teacher } from "../models/user.interface";
 
 @Injectable({
   providedIn: "root",
@@ -16,7 +16,7 @@ export class MessageService {
 
   getMessages(teacher: Teacher, student: Student) {
     return this.httpClient
-      .get("http://localhost:5000/messages")
+      .get("http://localhost:3000/messages")
       .pipe(mapTo(messageChatMock));
   }
 }

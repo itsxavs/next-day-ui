@@ -1,9 +1,9 @@
-import { Classroom } from "../../core/models/classroom.interface";
+import { Classroom } from "../../models/classroom.interface";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
-import { Teacher, User } from "src/app/core/models/user.interface";
+import { tap, finalize, catchError } from "rxjs/operators";
+import { Teacher, User } from "src/app/models/user.interface";
 import { TeacherService } from "src/app/services/teacher.service";
 import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "../../services/auth.service";
@@ -37,38 +37,28 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.utilsService
-    //   .getClassroom()
-    //   .subscribe((classrooms) => (this.classroomList = classrooms));
-    // this.teacherService
-    //   .getTeachers()
-    //   .subscribe((teachers) => (this.teacherList = teachers));
+    if (!!this.tokenStorage.getUser()) this.goToHome();
   }
 
   onSubmit(): void {
     this.authService
       .login(this.form.get("username").value, this.form.get("password").value)
-      .subscribe(
-        (data) => {
-          if (typeof data === "string") {
-            this.form.reset();
-          } else {
-            this.tokenStorage.saveToken(data.accessToken);
-            this.tokenStorage.saveUser(data);
-
-            this.roles = this.tokenStorage.getUser().roles;
-            this.reloadPage();
-          }
-        },
-        (err) => {
-          this.errorMessage = err.error.message;
-        }
-      );
+      .pipe(
+        tap(({ user, token }) => {
+          this.tokenStorage.saveToken(token);
+          this.tokenStorage.saveUser(user);
+        }),
+        finalize(() => this.goToHome()),
+        catchError((err) => {
+          this.form.reset();
+          return err;
+        })
+      )
+      .subscribe();
   }
-  reloadPage(): void {
+  goToHome(): void {
     this.router.navigate(["home"]);
   }
-
   // register() {
   //   if (!this.isLogin && this.isTeacher) {
   //     this.authService.register(

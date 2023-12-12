@@ -23,4 +23,5 @@ export interface Post {
   status: statusPost;
   subject: subject | string;
   classroom?: Classroom;
+  file?: File;
 }

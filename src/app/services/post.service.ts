@@ -3,9 +3,9 @@ import { PostsMockDO, PostsMockReview, PostsMock_1_2 } from "./../mocks/post";
 import { mapTo, catchError } from "rxjs/operators";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Post, statusPost } from "../core/models/post.interface";
+import { Post, statusPost } from "../models/post.interface";
 
-const URI = "http://localhost:5000/posts";
+const URI = "http://localhost:3000/post";
 @Injectable({
   providedIn: "root",
 })
@@ -14,19 +14,19 @@ export class PostService {
   constructor(private http: HttpClient) {}
 
   getPostsByUser(id: string) {
-    return this.http.get(URI, { params: this.mek.append("_id", id) }).pipe(
+    return this.http.get(`${URI}`, { params: this.mek.append("_id", id) }).pipe(
       mapTo(PostsMock_1_2),
       catchError((err) => of(PostsMock_1_2))
     );
   }
-  createPost(post: Post) {
+  createPost(post: any) {
     return this.http
-      .post(URI, {
-        teacherId: post.teacher._id,
-        studentId: post.student._id,
-        tittle: post.title,
-        message: post.message,
-        creator: post.teacher.name,
+      .post(`${URI}/save`, {
+        teacherId: post.teacher,
+        studentId: post.students[0],
+        title: post.title,
+        description: post.message,
+        file: post.file,
       })
       .subscribe((res: any) => console.log(res));
   }

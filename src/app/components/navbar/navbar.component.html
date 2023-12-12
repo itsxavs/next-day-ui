@@ -1,5 +1,5 @@
 <div *ngIf="!disabled" class="p-3">
-  <ng-container #studentPage *ngIf="role === 'ROLE_STUDENT'; else teacherPage">
+  <ng-container #studentPage *ngIf="role === 'STUDENT'; else teacherPage">
     <ul class="nav justify-content-center">
       <li class="nav-item">
         <a class="nav-link" aria-current="page" (click)="goHome()">HOME</a>

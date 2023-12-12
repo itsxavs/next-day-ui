@@ -1,4 +1,4 @@
-import { Classroom } from "src/app/core/models";
+import { Classroom } from "src/app/models";
 
 export interface Filter<T> {
   value: T;

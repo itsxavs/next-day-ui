@@ -1,4 +1,4 @@
-import { Post } from "src/app/core/models/post.interface";
+import { Post } from "src/app/models/post.interface";
 import { Component, Input } from "@angular/core";
 
 @Component({

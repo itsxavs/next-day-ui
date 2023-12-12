@@ -1,7 +1,7 @@
 import { classroomsMock } from "./classrooms";
-import { DetailsStudent, Student } from "../core/models/user.interface";
+import { DetailsStudent, Student } from "../models/user.interface";
 import { teacherMock } from "./teachers";
-import { subject } from "../core/models";
+import { subject } from "../models";
 
 export const detailsStudent: DetailsStudent = {
   pronouns: "he/him",

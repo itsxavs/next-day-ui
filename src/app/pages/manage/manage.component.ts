@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ProfileFormComponent } from "src/app/components/profile-form/profile-form.component";
-import { Student } from "src/app/core/models";
+import { Student } from "src/app/models";
 import { studentsMock } from "src/app/mocks";
 import { DialogReviewComponent } from "./dialog-review/dialog-review.component";
 

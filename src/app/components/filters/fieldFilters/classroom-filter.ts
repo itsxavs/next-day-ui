@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BaseFilter } from "../baseFilter/base-filter";
 import { Observable, of } from "rxjs";
-import { Classroom } from "src/app/core/models";
+import { Classroom } from "src/app/models";
 import { Filter } from "../baseFilter/filter.interface";
 import { HttpClient } from "@angular/common/http";
 

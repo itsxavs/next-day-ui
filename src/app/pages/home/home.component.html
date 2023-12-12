@@ -2,7 +2,7 @@
 <div class="container">
   <app-filters
     class="d-flex justify-content-center"
-    [role]="role"
+    [role]="role | async"
   ></app-filters>
   <div style="max-height: 600px; overflow-y: auto">
     <ul class="list-group">

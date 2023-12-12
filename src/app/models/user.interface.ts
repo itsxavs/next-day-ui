@@ -6,6 +6,7 @@ export interface User {
   name: String;
   firstName: String;
   lastName: String;
+  role?: string;
 }
 
 export interface Teacher extends User {
@@ -15,8 +16,8 @@ export interface Teacher extends User {
 
 export interface Student extends User {
   classroom: Classroom;
-  teacher: Teacher;
-  words: Map<String, Number>;
+  teacher?: Teacher;
+  words?: Map<String, Number>;
   subject?: subject[];
   details?: DetailsStudent;
 }
@@ -27,6 +28,7 @@ export interface UserChat {
 }
 
 export interface DetailsStudent {
+  _id?: string;
   pronouns: string;
   nameParents: string;
   surnameParents: string;

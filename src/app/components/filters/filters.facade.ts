@@ -6,7 +6,7 @@ import { ClassroomFilter } from "./fieldFilters/classroom-filter";
 import { StatusFilter } from "./fieldFilters/status-filter";
 import { DateFilter } from "./fieldFilters/date-filter";
 import { SearchFilter } from "./fieldFilters/search-filter";
-import { Classroom, statusPost, subject } from "src/app/core/models";
+import { Classroom, statusPost, subject } from "src/app/models";
 import { Filter, selectedFilter } from "./baseFilter/filter.interface";
 import { SubjectFilter } from "./fieldFilters/subject.filter";
 

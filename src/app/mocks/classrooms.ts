@@ -1,4 +1,4 @@
-import { Classroom } from "../core/models/classroom.interface";
+import { Classroom } from "../models/classroom.interface";
 
 export const classroomsMock: Classroom[] = [
   {

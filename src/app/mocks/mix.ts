@@ -1,8 +1,8 @@
-import { MessageChat } from "../core/models/message.interface";
-import { Post, statusPost, subject } from "../core/models/post.interface";
-import { Teacher, UserChat } from "../core/models/user.interface";
-import { Classroom } from "../core/models/classroom.interface";
-import { Student } from "../core/models/user.interface";
+import { MessageChat } from "../models/message.interface";
+import { Post, statusPost, subject } from "../models/post.interface";
+import { Teacher, UserChat } from "../models/user.interface";
+import { Classroom } from "../models/classroom.interface";
+import { Student } from "../models/user.interface";
 
 const classroomMock: Classroom = {
   letter: "A",

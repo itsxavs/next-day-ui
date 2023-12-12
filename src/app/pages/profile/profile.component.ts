@@ -1,9 +1,12 @@
+import { tap } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { PostService } from "../../services/post.service";
-import { Post } from "../../core/models/post.interface";
+import { Post } from "../../models/post.interface";
 import { noticesMock } from "src/app/mocks/mix";
 import { Component, OnInit } from "@angular/core";
-import { tabs } from "src/app/core/models/tabs.constant";
+import { tabs } from "src/app/models/tabs.constant";
+import { StudentsFacade } from "../facade/students.facade";
+import { StudentService } from "src/app/services/students.service";
 
 const tags = [tabs.do, tabs.correct, tabs.create, tabs.review];
 
@@ -17,11 +20,20 @@ export class ProfileComponent implements OnInit {
   tags = tags;
   posts: Observable<Post[]>;
   roleStudent = true;
+  student = this.studentService.student$;
+  studentDetails: string;
 
-  constructor(private readonly postService: PostService) {}
+  constructor(
+    private readonly postService: PostService,
+    private facade: StudentsFacade,
+    private studentService: StudentService
+  ) {}
 
   ngOnInit(): void {
     this.posts = this.postService.getPostsByUser("mek");
+    // this.facade.getDetails(`${this.student.details}`).pipe(tap(() => {
+    //
+    // })).subscribe();
   }
 
   // Esto no lo borro porque en el manage como tiene dos tab puede que lo use

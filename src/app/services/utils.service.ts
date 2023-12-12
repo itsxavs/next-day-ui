@@ -1,5 +1,5 @@
 import { classroomsMock } from "./../mocks/classrooms";
-import { Classroom } from "../core/models/classroom.interface";
+import { Classroom } from "../models/classroom.interface";
 import { map, mapTo, tap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -8,7 +8,7 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class UtilsService {
-  private uri = "http://localhost:5000/";
+  private uri = "http://localhost:3000/";
 
   constructor(private httpClient: HttpClient) {}
 

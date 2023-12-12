@@ -1,6 +1,6 @@
-import { AuthService } from "./../../services/auth.service";
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { TokenStorageService } from "src/app/services/token-storage.service";
 
 @Component({
   selector: "app-navbar",
@@ -11,7 +11,10 @@ export class NavbarComponent implements OnInit {
   @Input() disabled: boolean;
   @Input() role: string;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private tokenStorage: TokenStorageService
+  ) {}
 
   ngOnInit() {}
 
@@ -32,6 +35,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut() {
+    this.tokenStorage.signOut();
     this.router.navigate(["login"]);
   }
 

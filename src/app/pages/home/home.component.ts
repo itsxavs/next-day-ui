@@ -1,12 +1,14 @@
+import { StudentsFacade } from "./../facade/students.facade";
+import { TokenStorageService } from "src/app/services/token-storage.service";
 import { tap } from "rxjs/operators";
-import { TokenStorageService } from "./../../services/token-storage.service";
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Post } from "src/app/core/models/post.interface";
+import { Post } from "src/app/models/post.interface";
 import { noticesMock } from "src/app/mocks/mix";
 import { FilterFacade } from "src/app/components/filters/filters.facade";
 import { BehaviorSubject, Observable } from "rxjs";
-import { Classroom } from "src/app/core/models";
+import { Classroom } from "src/app/models";
+import { TeacherFacade } from "../facade/teacher.facade";
 
 @Component({
   selector: "app-home",
@@ -18,18 +20,19 @@ export class HomeComponent implements OnInit {
   newPost: Post;
   allNotices: Post[] = noticesMock;
   notices: Post[];
-  role = "ROLE_TEACHER";
+  role: Observable<string> = this.tokenStorageService.role$;
   private _post$: BehaviorSubject<Post[]> = new BehaviorSubject(null);
   post$: Observable<Post[]> = this._post$.asObservable();
 
   constructor(
     public dialog: MatDialog,
-    private tokeStorageService: TokenStorageService,
-    private readonly facade: FilterFacade
+    private tokenStorageService: TokenStorageService,
+    private readonly facade: FilterFacade,
+    private facadeStudent: StudentsFacade,
+    private facadeTeacher: TeacherFacade
   ) {}
 
   ngOnInit() {
-    this.role = this.tokeStorageService.getUser().roles;
     this.facade.filterSelected
       .pipe(
         tap((value) => {
@@ -45,6 +48,11 @@ export class HomeComponent implements OnInit {
         })
       )
       .subscribe();
+    this.facadeStudent
+      .getStudent(this.tokenStorageService.getUser()._id)
+      .subscribe(() => {
+        debugger;
+      });
   }
 
   filterArray(value: string[], field: string): Post[] {

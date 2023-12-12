@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, tap } from "rxjs/operators";
-import { Teacher } from "../core/models/user.interface";
+import { Teacher } from "../models/user.interface";
 import { teacherMock } from "../mocks/teachers";
 
 @Injectable({
@@ -13,7 +13,7 @@ export class TeacherService {
   constructor(private httpClient: HttpClient) {}
 
   getTeachers() {
-    return this.httpClient.get("http://localhost:5000/teachers").pipe(
+    return this.httpClient.get("http://localhost:3000/teachers").pipe(
       map((teachers: any) => {
         return teachers
           .map((teacher) => {

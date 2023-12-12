@@ -1,11 +1,11 @@
-import { catchError } from "rxjs/operators";
+import { catchError, switchMap, tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, of } from "rxjs";
-import { Student, Teacher } from "../core/models/user.interface";
+import { Student, Teacher, User } from "../models/user.interface";
+import { PATH_API } from "../models/path-api.constant";
 
-const AUTH_API = "http://localhost:8080/api/auth/";
+const AUTH_API = "http://localhost:3000/auth/";
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" }),
 };
@@ -25,18 +25,23 @@ const teacher = {
   providedIn: "root",
 })
 export class AuthService {
-  private uri = "http://localhost:5000/";
+  private uri = "http://localhost:3000/";
+
   private _userSelection = new BehaviorSubject<any>(null);
+  private _studentUser = new BehaviorSubject<Student>(null);
+  private _teacherUser = new BehaviorSubject<Teacher>(null);
+
+  userSelection$: Observable<any> = this._userSelection.asObservable();
 
   teacher: Teacher;
   student: Student;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {
     return this.http
       .post(
-        AUTH_API + "signin",
+        AUTH_API + "signIn",
         {
           username,
           password,
@@ -44,20 +49,14 @@ export class AuthService {
         httpOptions
       )
       .pipe(
-        catchError(() => {
-          let user;
-          if (username === "student_1") {
-            user = of(student);
-            // this._loggedIn.next(true);
-          } else if (username === "teacher_1") {
-            user = of(teacher);
-            // this._loggedIn.next(true);
+        switchMap(({ token, user }: { token: string; user: User }) => {
+          if (user.role === "ROLE_STUDENT") {
+            return this.http.get(`${AUTH_API}students${user._id}`);
           } else {
-            user = of("prueba otra vez");
-            // this._loggedIn.next(false);
+            return this.http.get(`${AUTH_API}teacher${user._id}`);
           }
-          return user;
-        })
+        }),
+        tap((user) => this._userSelection.next(user?.user))
       );
   }
 
@@ -71,6 +70,13 @@ export class AuthService {
       },
       httpOptions
     );
+  }
+
+  editUser(userId, user) {
+    return this.http.post(`${AUTH_API}modify`, {
+      userId,
+      user,
+    });
   }
   // get isLoggedIn() {
   //   return this.LoggedIn.asObservable();
@@ -137,10 +143,5 @@ export class AuthService {
   //       this.LoggedIn.next(true);
   //       this._userSelection.next(res.userRole);
   //     });
-  // }
-
-  // logout() {
-  //   localStorage.removeItem("auth_token");
-  //   this.router.navigate(["login"]);
   // }
 }

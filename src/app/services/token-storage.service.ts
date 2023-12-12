@@ -13,12 +13,14 @@ export class TokenStorageService {
   loggedIn$ = this._loggedIn$.asObservable();
   role$: Observable<string> = this._role$.asObservable();
   constructor() {
-    this._role$.next(this.getUser().roles);
+    this._role$.next(this.getUser().role);
     this._loggedIn$.next(!!this.getUser());
   }
 
   signOut(): void {
     window.sessionStorage.clear();
+    this._role$.next(null);
+    this._loggedIn$.next(false);
   }
 
   public saveToken(token: string): void {
@@ -33,7 +35,7 @@ export class TokenStorageService {
   public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-    this._role$.next(user.roles);
+    this._role$.next(user.role);
     this._loggedIn$.next(true);
   }
 

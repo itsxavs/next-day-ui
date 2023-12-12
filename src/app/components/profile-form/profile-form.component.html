@@ -131,13 +131,13 @@
       <input
         type="text"
         class="form-control"
-        [formControl]="this.form.get('subject')"
+        [formControl]="this.form.get('subjects')"
       />
       <br />
       <label class="form-label"></label>
       <textarea
         class="w-100"
-        [formControl]="this.form.get('subject')"
+        [formControl]="this.form.get('subjects')"
         id=""
         cols="25"
         rows="5"
@@ -165,6 +165,7 @@
     <button
       *ngIf="!isReview"
       type="submit"
+      (click)="save()"
       [disabled]="this.form.disabled"
       class="btn btn-primary"
     >

@@ -13,14 +13,5 @@ export class AppComponent {
   isLogged$: Observable<boolean> = this.tokenStorageService.loggedIn$;
   role$: Observable<string> = this.tokenStorageService.role$;
 
-  constructor(
-    private tokenStorageService: TokenStorageService,
-    private router: Router
-  ) {
-    this.isLogged$.subscribe((isLogged) => {
-      // isLogged
-      //   ? this.router.navigate(["manage"])
-      //   : this.router.navigate(["login"]);
-    });
-  }
+  constructor(private tokenStorageService: TokenStorageService) {}
 }
