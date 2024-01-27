@@ -4,9 +4,11 @@ import { StudentService } from "./../../services/students.service";
 import { Observable } from "rxjs";
 import { FormControl } from "@angular/forms";
 import { FormGroup } from "@angular/forms";
-import { Component, OnInit } from "@angular/core";
-import { Student } from "src/app/models/user.interface";
+import { Component, Input, OnInit } from "@angular/core";
+import { Student, Teacher } from "src/app/models/user.interface";
 import { subject } from "src/app/models";
+import { Classroom } from "../../models/classroom.interface";
+import { CLASSROOMS } from "src/app/models/classroom.constant";
 
 @Component({
   selector: "app-create-post",
@@ -14,6 +16,8 @@ import { subject } from "src/app/models";
   styleUrls: ["./create-post.component.scss"],
 })
 export class CreatePostComponent implements OnInit {
+  @Input() teacher: Teacher;
+  classrooms: Classroom[] = CLASSROOMS;
   subjects = [
     subject.Geography,
     subject.Language,
@@ -29,7 +33,7 @@ export class CreatePostComponent implements OnInit {
     file: new FormControl(),
   });
 
-  students: Observable<Student[]>;
+  students: Student[];
 
   constructor(
     private readonly studentService: StudentService,
@@ -37,9 +41,19 @@ export class CreatePostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.students = this.studentService.getStudentsByTeacher();
+    this.students = this.teacher.students;
   }
   create() {
-    this.postService.createPost(this.form.value);
+    const file = this.form.get("file").value;
+    const reader = new FileReader();
+
+    reader.readAsArrayBuffer(file);
+    reader.onload = () => {
+      const buffer = reader.result as ArrayBuffer;
+      this.postService.createPost(this.form.value, buffer);
+    };
+    reader.onerror = (error) => {
+      console.log("Error reading file:", error);
+    };
   }
 }

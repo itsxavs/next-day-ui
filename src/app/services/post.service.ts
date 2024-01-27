@@ -19,20 +19,21 @@ export class PostService {
       catchError((err) => of(PostsMock_1_2))
     );
   }
-  createPost(post: any) {
+  createPost(post: any, nodeBuffer: any) {
     return this.http
       .post(`${URI}/save`, {
-        teacherId: post.teacher,
-        studentId: post.students[0],
-        title: post.title,
-        description: post.message,
-        file: post.file,
+        post: {
+          teacher: post.teacher,
+          students: post.students,
+          title: post.title,
+          message: post.message,
+        },
+        bufferFile: nodeBuffer,
       })
       .subscribe((res: any) => console.log(res));
   }
 
   getPostsByStatus(status: string, id: string) {
-    debugger;
     switch (status) {
       case statusPost.Correct: {
         return this.http

@@ -1,9 +1,10 @@
+import { AuthService } from "src/app/services/auth.service";
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { ProfileFormComponent } from "src/app/components/profile-form/profile-form.component";
-import { Student } from "src/app/models";
+import { Student, Teacher } from "src/app/models";
 import { studentsMock } from "src/app/mocks";
 import { DialogReviewComponent } from "./dialog-review/dialog-review.component";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-manage",
@@ -15,10 +16,20 @@ export class ManageComponent implements OnInit {
 
   postExpanded: boolean = false;
   validationExpaded: boolean = false;
+  teacher$: Observable<Teacher> = this.authService._teacherUser;
+  students: Student[];
+  user$: Observable<any> = this.authService._userSelection;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private readonly authService: AuthService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user$.subscribe((user) => {
+      console.log(user);
+    });
+  }
 
   changePostExpanded() {
     this.postExpanded = !this.postExpanded;

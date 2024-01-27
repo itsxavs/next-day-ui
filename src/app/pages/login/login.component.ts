@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(this.form.get("username").value, this.form.get("password").value)
       .pipe(
-        tap(({ user, token }) => {
+        tap(({ user, student, token }) => {
           this.tokenStorage.saveToken(token);
           this.tokenStorage.saveUser(user);
         }),
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
           return err;
         })
       )
-      .subscribe();
+      .subscribe(() => {});
   }
   goToHome(): void {
     this.router.navigate(["home"]);

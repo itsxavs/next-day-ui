@@ -3,7 +3,7 @@ import { studentsMock } from "./../mocks/students";
 import { teacherMock } from "./../mocks/teachers";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, mapTo, switchMap, tap } from "rxjs/operators";
+import { filter, map, mapTo, switchMap, tap } from "rxjs/operators";
 import { Teacher } from "../models/user.interface";
 import { BehaviorSubject, of, Observable } from "rxjs";
 import { PATH_API } from "../models/path-api.constant";
@@ -28,11 +28,9 @@ export class StudentService {
      */
     this.authService.userSelection$
       .pipe(
-        switchMap((user) => {
-          return user.role === "ROLE_STUDENT"
-            ? this.getStudent(user._id)
-            : null;
-        }),
+        filter((user) => !!user),
+        filter((user) => user?.role === "STUDENT"),
+        switchMap((user) => this.getStudent(user._id)),
         tap((user) => this._student.next(user))
       )
       .subscribe();
@@ -58,13 +56,14 @@ export class StudentService {
   }
 
   getStudent(userId: string) {
+    //userId = `65454eb0d1a5cf4a4c5f07c2`;
     return this.httpClient
-      .get(`${PATH_API.NEXT_DAY_API}student/${userId}`)
+      .get(`${PATH_API.NEXT_DAY_API}students/${userId}`)
       .pipe(tap((student) => this._student.next(student)));
   }
 
   editStudent(studentId: string, student) {
-    return this.httpClient.post(`${PATH_API.NEXT_DAY_API}student/modify`, {
+    return this.httpClient.post(`${PATH_API.NEXT_DAY_API}students/modify`, {
       studentId,
       student,
     });

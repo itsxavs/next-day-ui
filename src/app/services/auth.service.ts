@@ -1,4 +1,4 @@
-import { catchError, switchMap, tap } from "rxjs/operators";
+import { catchError, concatMap, switchMap, tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, Observable, of } from "rxjs";
@@ -27,9 +27,9 @@ const teacher = {
 export class AuthService {
   private uri = "http://localhost:3000/";
 
-  private _userSelection = new BehaviorSubject<any>(null);
-  private _studentUser = new BehaviorSubject<Student>(null);
-  private _teacherUser = new BehaviorSubject<Teacher>(null);
+  _userSelection = new BehaviorSubject<any>(null);
+  _studentUser = new BehaviorSubject<Student>(null);
+  _teacherUser = new BehaviorSubject<Teacher>(null);
 
   userSelection$: Observable<any> = this._userSelection.asObservable();
 
@@ -49,14 +49,18 @@ export class AuthService {
         httpOptions
       )
       .pipe(
-        switchMap(({ token, user }: { token: string; user: User }) => {
-          if (user.role === "ROLE_STUDENT") {
-            return this.http.get(`${AUTH_API}students${user._id}`);
-          } else {
-            return this.http.get(`${AUTH_API}teacher${user._id}`);
-          }
-        }),
-        tap((user) => this._userSelection.next(user?.user))
+        // concatMap(({ token, user }: { token: string; user: User }) => {
+        // if (user.role === "STUDENT") {
+        // return this.http.get(`${this.uri}students/${user._id}`);
+        // } else {
+        // return this.http.get(`${this.uri}teacher/${user._id}`);
+        // }
+        // }),
+        tap(({ user, student, token, teacher }) => {
+          if (student) this._studentUser.next(student);
+          if (user) this._userSelection.next(user);
+          if (teacher) this._teacherUser.next(teacher);
+        })
       );
   }
 

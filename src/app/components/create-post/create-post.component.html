@@ -39,22 +39,17 @@
       class="form-select"
       multiple
     >
-      <option
-        *ngFor="let student of students | async"
-        [value]="student._id"
-        selected
-      >
-        {{ student.user.name }} {{ student.user.firstName }}
-        {{ student.user.lastName }}
+      <option *ngFor="let student of students" [value]="student._id" selected>
+        {{ student.name }} {{ student.firstname }} {{ student.lastname }}
       </option>
     </select>
   </div>
   <div class="col-md-3">
     <label for="inputZip" class="form-label">Clase</label>
     <select id="inputState" class="form-select">
-      <option selected *ngFor="let student of students | async">
-        {{ student.name }} {{ student.firstName }}
-      </option>
+      <option  *ngFor="let classroom of classrooms">
+        {{ classroom.number }} {{ classroom.letter }}
+       </option>
     </select>
   </div>
 

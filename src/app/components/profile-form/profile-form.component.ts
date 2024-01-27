@@ -5,6 +5,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { StudentService } from "src/app/services/students.service";
 import { AuthService } from "src/app/services/auth.service";
+import { DetailsStudent, Student, User } from "src/app/models";
 
 const pronouns = ["he/him", "she/her", "they/them"];
 
@@ -15,7 +16,7 @@ const pronouns = ["he/him", "she/her", "they/them"];
 })
 export class ProfileFormComponent implements OnInit {
   @Input() isReview: boolean = false;
-  @Input() details: string = "";
+  @Input() details: DetailsStudent;
   @Output() acceptEvent: EventEmitter<any> = new EventEmitter();
   students = this.studentService.getStudentsByTeacher();
   pronouns = pronouns;
@@ -35,15 +36,14 @@ export class ProfileFormComponent implements OnInit {
 
   ngOnInit(): void {
     combineLatest([
-      this.studentService.getDetailsStudent(this.details),
-      this.authService.userSelection$,
-      this.studentService.student$,
+      this.authService._userSelection,
+      this.authService._studentUser,
     ])
       .pipe(
-        tap(([details, user, student]) => {
+        tap(([user, student]) => {
           this.userId = user._id;
           this.studentId = student._id;
-          this.buildForm(details, user, student);
+          this.buildForm(student.details, user, student);
         })
       )
       .subscribe();
@@ -88,6 +88,7 @@ export class ProfileFormComponent implements OnInit {
     this.form.get("nameParents").setValue(details?.nameParents);
     this.form.get("surnameParents").setValue(details?.surnameParents);
     this.form.get("pronounsParents").setValue(details?.pronounsParents);
+    this.form.get("emailParents").setValue(details?.emailParents);
     this.form.get("address").setValue(details?.address);
     this.form.get("phone").setValue(details?.phone);
     this.form.get("province").setValue(details?.province);
@@ -156,12 +157,18 @@ export class ProfileFormComponent implements OnInit {
       email: this.form.get("email").value,
     };
     combineLatest([
-      this.studentService.editDetailsStudent(this.details, this.form.value),
+      //el primero son los datos iniciales y el otro los valores de form
+      this.studentService.editDetailsStudent(this.details._id, this.form.value),
       this.studentService.editStudent(this.studentId, {
         subjects: this.form.get("subjects").value,
       }),
       this.authService.editUser(this.userId, user),
-    ]).subscribe();
+    ]).subscribe(
+      (mek: [details: DetailsStudent, student: Student, user: User]) => {
+        this.authService._studentUser.next(mek[1]);
+        this.authService._userSelection.next(mek[2]);
+      }
+    );
     this.form.disable();
   }
   accept() {

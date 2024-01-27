@@ -48,11 +48,14 @@ export class HomeComponent implements OnInit {
         })
       )
       .subscribe();
-    this.facadeStudent
-      .getStudent(this.tokenStorageService.getUser()._id)
-      .subscribe(() => {
-        debugger;
-      });
+    this.tokenStorageService.role$.subscribe((role) => {
+      if (role === "STUDENT") {
+        this.facadeStudent
+          .getStudent(this.tokenStorageService.getUser()._id)
+          .subscribe(() => {});
+      } else {
+      }
+    });
   }
 
   filterArray(value: string[], field: string): Post[] {
