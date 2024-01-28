@@ -27,7 +27,7 @@ const studentMock: Student = {
   lastName: "mek",
   classroom: classroomMock,
   teacher: teacherMock1,
-  words: new Map<String, Number>(),
+  words: new Map<string, Number>(),
 };
 const noticesMock: Post[] = [
   {

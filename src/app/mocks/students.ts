@@ -25,7 +25,7 @@ export const studentsMock: Student[] = [
     lastName: "Muñoz",
     classroom: classroomsMock[0],
     teacher: teacherMock,
-    words: new Map<String, Number>(),
+    words: new Map<string, Number>(),
     subject: [
       subject.Geography,
       subject.Mathematics,
@@ -42,7 +42,7 @@ export const studentsMock: Student[] = [
     lastName: "Trascastro",
     classroom: classroomsMock[0],
     teacher: teacherMock,
-    words: new Map<String, Number>(),
+    words: new Map<string, Number>(),
     subject: [
       subject.Geography,
       subject.Mathematics,
@@ -59,7 +59,7 @@ export const studentsMock: Student[] = [
     lastName: "Hoyos",
     classroom: classroomsMock[0],
     teacher: teacherMock,
-    words: new Map<String, Number>(),
+    words: new Map<string, Number>(),
     subject: [
       subject.Geography,
       subject.Mathematics,
@@ -76,7 +76,7 @@ export const studentsMock: Student[] = [
     lastName: "Garcia",
     classroom: classroomsMock[0],
     teacher: teacherMock,
-    words: new Map<String, Number>(),
+    words: new Map<string, Number>(),
     subject: [
       subject.Geography,
       subject.Mathematics,

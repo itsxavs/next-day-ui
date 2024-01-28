@@ -87,14 +87,14 @@ export class AuthService {
   // }
 
   // register(
-  //   name: String,
-  //   email: String,
-  //   password: String,
-  //   firstName: String,
-  //   lastName: String,
+  //   name: string,
+  //   email: string,
+  //   password: string,
+  //   firstName: string,
+  //   lastName: string,
   //   teacher: boolean,
-  //   classrooms: String[],
-  //   teachers?: String
+  //   classrooms: string[],
+  //   teachers?: string
   // ) {
   //   this.http
   //     .post(this.uri + "users/signup", {
@@ -129,7 +129,7 @@ export class AuthService {
   //           lastName: res.userRole.lastName,
   //           classroom: res.userRole.classrooms,
   //           teacher: res.userRole.teacher,
-  //           words: new Map<String, Number>(),
+  //           words: new Map<string, Number>(),
   //         } as Student;
   //       }
   //       localStorage.setItem("auth_token", res.token);
@@ -138,7 +138,7 @@ export class AuthService {
   //     });
   // }
 
-  // login(email: String, password: String) {
+  // login(email: string, password: string) {
   //   this.http
   //     .post(this.uri + "users/signin", { email: email, password: password })
   //     .subscribe((res: any) => {

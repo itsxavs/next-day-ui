@@ -19,17 +19,22 @@ export class PostService {
       catchError((err) => of(PostsMock_1_2))
     );
   }
-  createPost(post: any, nodeBuffer: any) {
-    return this.http
-      .post(`${URI}/save`, {
-        post: {
-          teacher: post.teacher,
-          students: post.students,
-          title: post.title,
-          message: post.message,
-        },
-        bufferFile: nodeBuffer,
+  createPost(post: any, nodeBuffer: any, teacherId: string) {
+    const formData = new FormData();
+    formData.append(
+      "post",
+      JSON.stringify({
+        teacher: teacherId,
+        students: post.students,
+        title: post.title,
+        message: post.message,
+        classroom: post.classroom,
       })
+    );
+    formData.append("bufferFile", nodeBuffer);
+
+    return this.http
+      .post(`${URI}/save`, formData)
       .subscribe((res: any) => console.log(res));
   }
 

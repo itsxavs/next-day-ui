@@ -28,7 +28,13 @@
     ></textarea>
   </div>
   <div class="d-flex align-items-center col-4">
-    <input formControlName="file" type="file" name="fileToUpload" multiple />
+    <input
+      formControlName="file"
+      type="file"
+      name="fileToUpload"
+      (change)="onFileSelected($event)"
+      multiple
+    />
   </div>
 
   <div class="col-md-5">
@@ -46,10 +52,10 @@
   </div>
   <div class="col-md-3">
     <label for="inputZip" class="form-label">Clase</label>
-    <select id="inputState" class="form-select">
-      <option  *ngFor="let classroom of classrooms">
+    <select formControlName="classroom" id="inputState" class="form-select">
+      <option *ngFor="let classroom of classrooms">
         {{ classroom.number }} {{ classroom.letter }}
-       </option>
+      </option>
     </select>
   </div>
 

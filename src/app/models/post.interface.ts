@@ -17,8 +17,8 @@ export enum subject {
 export interface Post {
   teacher: Teacher;
   student: Student;
-  title: String;
-  message: String;
+  title: string;
+  message: string;
   createAt: Date;
   status: statusPost;
   subject: subject | string;

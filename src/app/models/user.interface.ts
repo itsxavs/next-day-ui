@@ -1,11 +1,11 @@
 import { Classroom } from "./classroom.interface";
 import { subject } from "./post.interface";
 export interface User {
-  readonly _id: String;
-  email: String;
-  name: String;
-  firstName: String;
-  lastName: String;
+  readonly _id: string;
+  email: string;
+  name: string;
+  firstName: string;
+  lastName: string;
   role?: string;
 }
 
@@ -17,14 +17,14 @@ export interface Teacher extends User {
 export interface Student extends User {
   classroom: Classroom;
   teacher?: Teacher;
-  words?: Map<String, Number>;
+  words?: Map<string, Number>;
   subject?: subject[];
   details?: DetailsStudent;
 }
 
 export interface UserChat {
-  fullName: String;
-  image?: String;
+  fullName: string;
+  image?: string;
 }
 
 export interface DetailsStudent {

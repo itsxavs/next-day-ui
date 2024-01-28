@@ -1,11 +1,11 @@
 export interface Message {
-  sender: String;
-  receiver: String;
-  text: String;
+  sender: string;
+  receiver: string;
+  text: string;
   createAt: Date;
 }
 
 export interface MessageChat {
-  message: String;
+  message: string;
   right: boolean;
 }
