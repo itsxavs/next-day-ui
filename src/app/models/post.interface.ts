@@ -15,6 +15,7 @@ export enum subject {
 }
 
 export interface Post {
+  _id?: string;
   teacher: Teacher;
   student: Student;
   title: string;
@@ -23,5 +24,5 @@ export interface Post {
   status: statusPost;
   subject: subject | string;
   classroom?: Classroom;
-  file?: File;
+  file?: string;
 }

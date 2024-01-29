@@ -9,6 +9,8 @@ import { FilterFacade } from "src/app/components/filters/filters.facade";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Classroom } from "src/app/models";
 import { TeacherFacade } from "../facade/teacher.facade";
+import { PostService } from "src/app/services/post.service";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: "app-home",
@@ -22,17 +24,22 @@ export class HomeComponent implements OnInit {
   notices: Post[];
   role: Observable<string> = this.tokenStorageService.role$;
   private _post$: BehaviorSubject<Post[]> = new BehaviorSubject(null);
-  post$: Observable<Post[]> = this._post$.asObservable();
+  post$: Observable<Post[]>;
 
   constructor(
     public dialog: MatDialog,
     private tokenStorageService: TokenStorageService,
     private readonly facade: FilterFacade,
     private facadeStudent: StudentsFacade,
-    private facadeTeacher: TeacherFacade
+    private facadeTeacher: TeacherFacade,
+    private postService: PostService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
+    this.authService._teacherUser.subscribe((teacher) => {
+      this.post$ = this.postService.getPostsByTeacher(teacher._id);
+    });
     this.facade.filterSelected
       .pipe(
         tap((value) => {

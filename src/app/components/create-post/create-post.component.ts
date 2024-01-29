@@ -52,18 +52,22 @@ export class CreatePostComponent implements OnInit {
   }
 
   create() {
-    const reader = new FileReader();
+    // const reader = new FileReader();
+    this.postService.createPost(
+      this.form.value,
+      this.files[0],
+      this.teacher._id
+    );
 
-    reader.readAsArrayBuffer(this.files[0]);
-    reader.onload = () => {
-      const buffer = reader.result as ArrayBuffer;
-      const blob = new Blob([buffer], { type: this.files[0].type });
-      const formData = new FormData();
-      formData.append("file", blob, this.files[0].name);
-      this.postService.createPost(this.form.value, blob, this.teacher._id);
-    };
-    reader.onerror = (error) => {
-      console.log("Error reading file:", error);
-    };
+    // reader.readAsArrayBuffer(this.files[0]);
+    // reader.onload = () => {
+    //   const buffer = reader.result as ArrayBuffer;
+    //   const blob = new Blob([buffer], { type: this.files[0].type });
+    //   const formData = new FormData();
+    //   formData.append("file", blob, this.files[0].name);
+    // };
+    // reader.onerror = (error) => {
+    //   console.log("Error reading file:", error);
+    // };
   }
 }

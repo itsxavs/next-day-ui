@@ -1,9 +1,10 @@
-import { of } from "rxjs";
+import { Observable, of } from "rxjs";
 import { PostsMockDO, PostsMockReview, PostsMock_1_2 } from "./../mocks/post";
 import { mapTo, catchError } from "rxjs/operators";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Post, statusPost } from "../models/post.interface";
+import { saveAs } from "file-saver";
 
 const URI = "http://localhost:3000/post";
 @Injectable({
@@ -31,7 +32,7 @@ export class PostService {
         classroom: post.classroom,
       })
     );
-    formData.append("bufferFile", nodeBuffer);
+    formData.append("bufferFile", nodeBuffer, nodeBuffer.name);
 
     return this.http
       .post(`${URI}/save`, formData)
@@ -71,5 +72,23 @@ export class PostService {
           );
       }
     }
+  }
+
+  getPostsByTeacher(teacherId: string): Observable<Post[]> {
+    let params = new HttpParams().append("teacherId", teacherId);
+    return this.http.get<Post[]>(`${URI}`, { params });
+  }
+  getPostsByStudent(studentId: string): Observable<Post[]> {
+    let params = new HttpParams().append("studentId", studentId);
+    return this.http.get<Post[]>(`${URI}`, { params });
+  }
+  downloadFile(postId: string, filename: string) {
+    let params = new HttpParams().append("postId", postId);
+
+    this.http
+      .get(`${URI}/file`, { params, responseType: "blob" })
+      .subscribe((blob) => {
+        saveAs(blob, filename);
+      });
   }
 }
