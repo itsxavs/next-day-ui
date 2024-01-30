@@ -8,13 +8,22 @@
       id="inputEmail4"
     />
   </div>
-  <div class="col-md-4">
+  <div class="col-md-2">
     <label for="inputPassword4" class="form-label">Subject</label>
     <select formControlName="subject" id="inputState" class="form-select">
       <option selected *ngFor="let subject of subjects">
         {{ subject }}
       </option>
     </select>
+  </div>
+  <div class="col-md-2">
+    <label for="dueDate" class="form-label">Due Date</label>
+    <input
+      formControlName="endDate"
+      type="date"
+      id="dueDate"
+      class="form-control"
+    />
   </div>
   <div class="row pt-2 m-md-1">
     <label for="inputAddress" class="form-label">Description</label>

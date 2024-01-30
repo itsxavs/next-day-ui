@@ -18,6 +18,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { ReactiveFormsModule } from "@angular/forms";
 import { SubjectFilter } from "./fieldFilters/subject.filter";
+import { StudentFilter } from "./fieldFilters/students.filter";
 
 @NgModule({
   declarations: [FiltersComponent],
@@ -42,6 +43,7 @@ import { SubjectFilter } from "./fieldFilters/subject.filter";
     DateFilter,
     SearchFilter,
     SubjectFilter,
+    StudentFilter,
   ],
 })
 export class FiltersModule {}

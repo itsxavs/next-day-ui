@@ -13,11 +13,11 @@
 
           <div class="col-9 pt-1">
             <h5 class="text-primary text-uppercase">
-              {{ post.title }} - {{ post.subject }}
+              {{ post.title }} - {{ post.subject }} - {{ post.classroom }}
+              <p class="text-danger">{{ post.dateEnd | date : "short" }}</p>
             </h5>
             <p class="text-truncate">
-              {{ post.message }} // {{ post.classroom.number }} °
-              {{ post.classroom.letter }}
+              {{ post.message }} // {{ post.classroom }}
             </p>
           </div>
 
@@ -66,10 +66,11 @@
 
           <div class="col-9 pt-1">
             <h5 class="text-primary text-uppercase">
-              {{ post.title }} - {{ post.subject }}
+              {{ post.title }} - {{ post.subject }} - {{ post.classroom }}
+              <p class="text-danger">{{ post.dateEnd | date : "short" }}</p>
             </h5>
             <p class="text-truncate">
-              {{ post.message }} // {{ post.classroom }}
+              {{ post.message }}
             </p>
           </div>
 

@@ -5,7 +5,7 @@ import { Observable, Subject } from "rxjs";
 export abstract class BaseFilter<T> {
   private values$: Subject<T>;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(readonly http: HttpClient) {}
   getvalues(url: string): Observable<T> {
     return this.http.get<T>(url);
   }

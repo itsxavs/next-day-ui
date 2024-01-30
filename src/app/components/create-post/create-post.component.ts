@@ -32,6 +32,7 @@ export class CreatePostComponent implements OnInit {
     message: new FormControl(),
     classroom: new FormControl(),
     file: new FormControl(),
+    endDate: new FormControl(),
   });
 
   students: Student[];

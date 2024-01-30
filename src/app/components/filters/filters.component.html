@@ -1,63 +1,55 @@
-<ng-container *ngIf="role === 'STUDENT'; else teacherFilter">
-  <mat-form-field appearance="fill">
-    <mat-label>Enter a date range</mat-label>
-    <mat-date-range-input
-      [rangePicker]="picker"
-      [formGroup]="formFilters.get('date')"
+<mat-form-field appearance="fill">
+  <mat-label>Status</mat-label>
+  <mat-select [formControl]="formFilters.get('status')" multiple>
+    <mat-option *ngFor="let status of status$ | async" [value]="status.value">{{
+      status.value
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Subject</mat-label>
+  <mat-select [formControl]="formFilters.get('subject')" multiple>
+    <mat-option
+      *ngFor="let subject of subject$ | async"
+      [value]="subject.value"
+      >{{ subject.value }}</mat-option
     >
-      <input
-        matStartDate
-        [formControl]="formFilters.get('date').get('from')"
-        placeholder="Start date"
-      />
-      <input
-        matEndDate
-        [formControl]="formFilters.get('date').get('to')"
-        placeholder="End date"
-      />
-    </mat-date-range-input>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker #picker></mat-date-range-picker>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Status</mat-label>
-    <mat-select [formControl]="formFilters.get('status')" multiple>
-      <mat-option
-        *ngFor="let status of status$ | async"
-        [value]="status.value"
-        >{{ status.value }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Classroom</mat-label>
-    <mat-select [formControl]="formFilters.get('classroom')" multiple>
-      <mat-option
-        *ngFor="let classroom of classroom$ | async"
-        [value]="classroom.value"
-        >{{ classroom.value.number }} {{ classroom.value.letter }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Subject</mat-label>
-    <mat-select [formControl]="formFilters.get('subject')" multiple>
-      <mat-option
-        *ngFor="let subject of subject$ | async"
-        [value]="subject.value"
-        >{{ subject.value }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <!-- <mat-icon>search</mat-icon> -->
+  </mat-select>
+</mat-form-field>
+<mat-form-field *ngIf="role === 'TEACHER'" appearance="fill">
+  <mat-label>Classroom</mat-label>
+  <mat-select [formControl]="formFilters.get('classroom')" multiple>
+    <mat-option
+      *ngFor="let classroom of classroom$ | async"
+      [value]="classroom.value"
+      >{{ classroom.value.number }} {{ classroom.value.letter }}</mat-option
+    >
+  </mat-select>
+</mat-form-field>
 
-    <input
-      [formControl]="formFilters.get('search')"
-      matInput
-      placeholder="Introduce"
-    />
-  </mat-form-field>
-</ng-container>
+<mat-form-field *ngIf="role === 'TEACHER'" appearance="fill">
+  <mat-label>Students</mat-label>
+  <mat-select [formControl]="formFilters.get('students')" multiple>
+    <mat-option
+      *ngFor="let student of students$ | async"
+      [value]="student.value"
+      >{{ student.value.name }} {{ student.value.firstname }}
+      {{ student.value.lastname }}</mat-option
+    >
+  </mat-select>
+</mat-form-field>
 
-<ng-template #teacherFilter>teacher filter </ng-template>
+<mat-form-field class="example-full-width" appearance="fill">
+  <input
+    [formControl]="formFilters.get('search')"
+    matInput
+    placeholder="Introduce"
+  />
+</mat-form-field>
+
+<button mat-icon-button (click)="toggleSort()">
+  <label>Order By date</label>
+  <i *ngIf="sortOrder" class="bi bi-arrow-bar-up"></i>
+  <i *ngIf="!sortOrder" class="bi bi-arrow-bar-down"></i>
+</button>
+<button mat-icon-button (click)="clearFilters()">clear</button>

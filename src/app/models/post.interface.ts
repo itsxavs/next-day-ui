@@ -25,4 +25,6 @@ export interface Post {
   subject: subject | string;
   classroom?: Classroom;
   file?: string;
+  dateStart?: Date;
+  dateEnd?: Date;
 }

@@ -1,4 +1,5 @@
 import { Classroom } from "src/app/models";
+import { Student } from "../../../models/user.interface";
 
 export interface Filter<T> {
   value: T;
@@ -6,12 +7,10 @@ export interface Filter<T> {
 }
 
 export interface selectedFilter {
-  date: {
-    from: string;
-    to: string;
-  };
+  date: boolean;
   status: string[];
   classrooms: Classroom[];
   subject: string[];
   search: string;
+  students: Student[];
 }

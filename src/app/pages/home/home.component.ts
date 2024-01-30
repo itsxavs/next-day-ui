@@ -1,16 +1,14 @@
-import { StudentsFacade } from "./../facade/students.facade";
 import { TokenStorageService } from "src/app/services/token-storage.service";
-import { filter, tap } from "rxjs/operators";
+import { filter, map, switchMap } from "rxjs/operators";
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Post } from "src/app/models/post.interface";
-import { noticesMock } from "src/app/mocks/mix";
 import { FilterFacade } from "src/app/components/filters/filters.facade";
-import { BehaviorSubject, Observable } from "rxjs";
-import { Classroom } from "src/app/models";
-import { TeacherFacade } from "../facade/teacher.facade";
+import { Observable } from "rxjs";
+import { Classroom, Student } from "src/app/models";
 import { PostService } from "src/app/services/post.service";
 import { AuthService } from "../../services/auth.service";
+import { subject } from "../../models/post.interface";
 
 @Component({
   selector: "app-home",
@@ -18,86 +16,130 @@ import { AuthService } from "../../services/auth.service";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-  isTeacher: boolean;
-  newPost: Post;
-  allNotices: Post[] = noticesMock;
-  notices: Post[];
+  // isTeacher: boolean;
+  // newPost: Post;
+  // allNotices: Post[] = noticesMock;
+  // notices: Post[];
+
   role: Observable<string> = this.tokenStorageService.role$;
-  private _post$: BehaviorSubject<Post[]> = new BehaviorSubject(null);
   post$: Observable<Post[]>;
+  filteredPosts$: Observable<Post[]>;
 
   constructor(
     public dialog: MatDialog,
     private tokenStorageService: TokenStorageService,
     private readonly facade: FilterFacade,
-    private facadeStudent: StudentsFacade,
-    private facadeTeacher: TeacherFacade,
     private postService: PostService,
     private authService: AuthService
   ) {}
 
   ngOnInit() {
-    this.authService._teacherUser
-      .pipe(filter((teacher) => !!teacher))
-      .subscribe((teacher) => {
-        this.post$ = this.postService.getPostsByTeacher(teacher._id);
-      });
-    this.authService._studentUser
-      .pipe(filter((student) => !!student))
-      .subscribe((student) => {
-        this.post$ = this.postService.getPostsByStudent(student._id);
-      });
-    this.facade.filterSelected
-      .pipe(
-        tap((value) => {
-          this.notices = this.allNotices;
-          this.notices =
-            this.filterArray(value.status, "status") || this.notices;
-          this.notices = this.filterClassroom(value.classrooms) || this.notices;
-          this.notices =
-            this.filterArray(value.subject, "subject") || this.notices;
-          this.notices = this.filterDate(value.date) || this.notices;
-          this.notices = this.filterSearch(value.search) || this.notices;
-          this._post$.next(this.notices);
-        })
+    this.post$ =
+      this.tokenStorageService.getUser().role === "TEACHER"
+        ? this.authService._teacherUser.pipe(
+            filter((teacher) => !!teacher),
+            switchMap((teacher) =>
+              this.postService.getPostsByTeacher(teacher._id)
+            )
+          )
+        : this.authService._studentUser.pipe(
+            filter((student) => !!student),
+            switchMap((student) =>
+              this.postService.getPostsByStudent(student._id)
+            )
+          );
+    this.filteredPosts$ = this.facade.filterSelected.pipe(
+      switchMap((filter) =>
+        this.post$.pipe(map((posts) => this.filterPosts(posts, filter)))
       )
-      .subscribe();
-    this.tokenStorageService.role$.subscribe((role) => {
-      if (role === "STUDENT") {
-        this.facadeStudent
-          .getStudent(this.tokenStorageService.getUser()._id)
-          .subscribe(() => {});
-      } else {
-      }
-    });
+    );
+    // this.facade.filterSelected
+    //   .pipe(
+    //     tap((value) => {
+    //       this.notices = this.allNotices;
+    //       this.notices =
+    //         this.filterArray(value.status, "status") || this.notices;
+    //       this.notices = this.filterClassroom(value.classrooms) || this.notices;
+    //       this.notices =
+    //         this.filterArray(value.subject, "subject") || this.notices;
+    //       this.notices = this.filterDate(value.date) || this.notices;
+    //       this.notices = this.filterSearch(value.search) || this.notices;
+    //       this._post$.next(this.notices);
+    //     })
+    //   )
+    //   .subscribe();
+    // this.tokenStorageService.role$.subscribe((role) => {
+    //   if (role === "STUDENT") {
+    //     this.facadeStudent
+    //       .getStudent(this.tokenStorageService.getUser()._id)
+    //       .subscribe(() => {});
+    //   } else {
+    //   }
+    // });
   }
 
-  filterArray(value: string[], field: string): Post[] {
+  private filterPosts(posts: Post[], filter: any): Post[] {
+    let filteredPosts = posts;
+
+    filteredPosts =
+      this.filterArray(filter.status, "status", filteredPosts) || filteredPosts;
+    filteredPosts =
+      this.filterClassroom(filter.classrooms, filteredPosts) || filteredPosts;
+    filteredPosts =
+      this.filterArray(filter.subject, "subject", filteredPosts) ||
+      filteredPosts;
+    filteredPosts =
+      this.filterSearch(filter.search, filteredPosts) || filteredPosts;
+    filteredPosts =
+      this.filterStudent(filter.students, filteredPosts) || filteredPosts;
+    filteredPosts =
+      this.filterDate(filter.date, filteredPosts) || filteredPosts;
+
+    return filteredPosts;
+  }
+
+  private filterArray(value: string[], field: string, filterPost): Post[] {
     if (value.length === 0) return;
-    const mek = this.notices.filter((post) => value.includes(post[field]));
+    const mek = filterPost.filter((post) => value.includes(post[field]));
     return mek;
   }
-  filterDate(value: { from: string; to: string }): Post[] {
-    if (!value.from && !value.to) return;
-    return this.notices.filter(
-      (post) =>
-        new Date(value.from) <= post.createAt &&
-        post.createAt <= new Date(value.to)
-    );
+  private filterDate(value: boolean, filterPost): Post[] {
+    return value
+      ? filterPost.sort(
+          (a, b) =>
+            new Date(a.dateEnd).getTime() - new Date(b.dateEnd).getTime()
+        )
+      : filterPost.sort(
+          (a, b) =>
+            new Date(b.dateEnd).getTime() - new Date(a.dateEnd).getTime()
+        );
   }
-  filterSearch(value: string): Post[] {
+  private filterSearch(value: string, filterPost): Post[] {
     if (!value) return;
-    return this.notices.filter(
-      (post) => post.message.includes(value) || post.title.includes(value)
-    );
-  }
-  filterClassroom(value: Classroom[]): Post[] {
-    if (value.length === 0) return;
-    const mek = this.notices.filter((post) =>
-      value.some(
-        ({ letter, number }) =>
-          post.classroom.letter === letter && post.classroom.number === number
+    return filterPost.filter((post) => {
+      const upperValue = value.toUpperCase();
+      if (
+        post.message.toUpperCase().includes(upperValue) ||
+        post.title.toUpperCase().includes(upperValue) ||
+        post?.subject.toUpperCase().includes(upperValue)
       )
+        return post;
+    });
+  }
+  private filterClassroom(value: Classroom[], filterPost): Post[] {
+    if (value.length === 0) return;
+    const mek = filterPost.filter((post) =>
+      value.some(
+        ({ letter, number }) => post.classroom === `${number} ${letter}`
+      )
+    );
+    return mek;
+  }
+
+  private filterStudent(value: Student[], filterPost): Post[] {
+    if (value.length === 0) return;
+    const mek = filterPost.filter((post) =>
+      value.some(({ _id }) => post.student._id === _id)
     );
     return mek;
   }

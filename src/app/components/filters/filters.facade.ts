@@ -6,9 +6,10 @@ import { ClassroomFilter } from "./fieldFilters/classroom-filter";
 import { StatusFilter } from "./fieldFilters/status-filter";
 import { DateFilter } from "./fieldFilters/date-filter";
 import { SearchFilter } from "./fieldFilters/search-filter";
-import { Classroom, statusPost, subject } from "src/app/models";
+import { Classroom, Student, statusPost, subject } from "src/app/models";
 import { Filter, selectedFilter } from "./baseFilter/filter.interface";
 import { SubjectFilter } from "./fieldFilters/subject.filter";
+import { StudentFilter } from "./fieldFilters/students.filter";
 
 @Injectable({
   providedIn: "root",
@@ -19,15 +20,17 @@ export class FilterFacade {
     this.classroom.classrooms$;
   statusContent$: Observable<Filter<statusPost>[]> = this.status.status$;
   subjectContent$: Observable<Filter<subject>[]> = this.subject.subject$;
+  studentContent$: Observable<Filter<Student>[]> = this.student.students$;
 
   // FilterSelected
   private _filtersSelected: BehaviorSubject<selectedFilter> =
     new BehaviorSubject({
-      date: { from: "", to: "" },
+      date: false,
       status: [],
       classrooms: [],
       subject: [],
       search: "",
+      students: [],
     });
   filterSelected: Observable<selectedFilter> =
     this._filtersSelected.asObservable();
@@ -39,7 +42,8 @@ export class FilterFacade {
     private readonly status: StatusFilter,
     private readonly date: DateFilter,
     private readonly search: SearchFilter,
-    private readonly subject: SubjectFilter
+    private readonly subject: SubjectFilter,
+    private readonly student: StudentFilter
   ) {
     this.formFilters = this.buildFiltersForm();
 
@@ -50,20 +54,22 @@ export class FilterFacade {
     //   console.log("echar un ojo");
     // });
     combineLatest([
-      this.getFilterDate().pipe(startWith([])),
+      this.getFilterDate(),
       this.getFilterStatus(),
       this.getFilterClassrooms(),
       this.getFilterSubject(),
       this.getFilterSearch(),
+      this.getFilterStudent(),
     ])
       .pipe(
-        map(([date, status, classrooms, subject, search]) =>
+        map(([date, status, classrooms, subject, search, students]) =>
           this._filtersSelected.next({
-            date: { from: date[0], to: date[1] },
+            date: date,
             status,
             classrooms,
             subject,
             search,
+            students: students,
           })
         )
       )
@@ -72,27 +78,28 @@ export class FilterFacade {
 
   buildFiltersForm() {
     return this.fb.group({
-      date: this.fb.group({
-        from: new FormControl(),
-        to: new FormControl(),
-      }),
+      date: new FormControl(),
       status: new FormControl(),
       classroom: new FormControl(),
       subject: new FormControl(),
       search: new FormControl(),
+      students: new FormControl(),
     });
   }
-
-  getFilterDate(): Observable<any> {
-    return combineLatest([
-      this.formFilters.get("date").get("from").valueChanges,
-      this.formFilters.get("date").get("to").valueChanges,
-    ]).pipe(
-      debounceTime(300),
-      filter(([from, to]) => !!from && !!to),
-      tap((value) => console.log)
-    );
+  getFilterDate(): Observable<boolean> {
+    return this.formFilters.get("date").valueChanges.pipe(startWith(false));
   }
+
+  // getFilterDate(): Observable<any> {
+  //   return combineLatest([
+  //     this.formFilters.get("date").get("from").valueChanges,
+  //     this.formFilters.get("date").get("to").valueChanges,
+  //   ]).pipe(
+  //     debounceTime(300),
+  //     filter(([from, to]) => !!from && !!to),
+  //     tap((value) => console.log)
+  //   );
+  // }
   getFilterStatus(): Observable<string[]> {
     return this.formFilters.get("status").valueChanges.pipe(startWith([]));
   }
@@ -104,5 +111,17 @@ export class FilterFacade {
   }
   getFilterSearch(): Observable<string> {
     return this.formFilters.get("search").valueChanges.pipe(startWith(""));
+  }
+  getFilterStudent(): Observable<Student[]> {
+    return this.formFilters.get("students").valueChanges.pipe(startWith([]));
+  }
+
+  clearFilters() {
+    this.formFilters.get("date").setValue(false);
+    this.formFilters.get("status").setValue([]);
+    this.formFilters.get("classroom").setValue([]);
+    this.formFilters.get("subject").setValue([]);
+    this.formFilters.get("search").setValue("");
+    this.formFilters.get("students").setValue([]);
   }
 }

@@ -31,6 +31,7 @@ export class PostService {
         message: post.message,
         classroom: post.classroom,
         subject: post.subject,
+        dateEnd: post.endDate,
       })
     );
     formData.append("bufferFile", nodeBuffer, nodeBuffer.name);

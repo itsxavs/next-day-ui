@@ -6,7 +6,7 @@
   ></app-filters>
   <div style="max-height: 600px; overflow-y: auto">
     <ul class="list-group">
-      <li class="list-group-item" *ngFor="let post of post$ | async">
+      <li class="list-group-item" *ngFor="let post of filteredPosts$ | async">
         <app-post [role]="role" [post]="post"></app-post>
       </li>
     </ul>

@@ -22,8 +22,9 @@ export class FiltersComponent implements OnInit {
   classroom$: Observable<Filter<Classroom>[]> = this.facade.classroomContent$;
   status$: Observable<Filter<statusPost>[]> = this.facade.statusContent$;
   subject$: Observable<Filter<subject>[]> = this.facade.subjectContent$;
+  students$: Observable<Filter<Student>[]> = this.facade.studentContent$;
   // -----------------------------
-
+  sortOrder: boolean = false;
   private _filters$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   filters$ = this._filters$.asObservable();
 
@@ -64,5 +65,12 @@ export class FiltersComponent implements OnInit {
     // ).subscribe(([classroom, datePicker, statusForm, searchForm]) => {
     //   debugger;
     // });
+  }
+  toggleSort() {
+    this.formFilters.get("date").setValue(!this.sortOrder);
+    this.sortOrder = !this.sortOrder;
+  }
+  clearFilters() {
+    this.facade.clearFilters();
   }
 }
