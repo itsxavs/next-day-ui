@@ -37,7 +37,7 @@ const noticesMock: Post[] = [
     teacher: teacherMock1,
     student: studentMock,
     createAt: new Date(),
-    status: statusPost.Correct,
+    status: statusPost.Done,
     classroom: { letter: "B", number: 1 },
   } as Post,
   {
@@ -68,7 +68,7 @@ const noticesMock: Post[] = [
     teacher: teacherMock1,
     student: studentMock,
     createAt: new Date(),
-    status: statusPost.Correct,
+    status: statusPost.Done,
     classroom: { letter: "A", number: 1 },
   } as Post,
   {
@@ -98,7 +98,7 @@ const noticesMock: Post[] = [
     teacher: teacherMock1,
     student: studentMock,
     createAt: new Date(),
-    status: statusPost.Correct,
+    status: statusPost.Done,
     classroom: { letter: "A", number: 1 },
   } as Post,
   {
@@ -108,7 +108,7 @@ const noticesMock: Post[] = [
     teacher: teacherMock1,
     student: studentMock,
     createAt: new Date(),
-    status: statusPost.Correct,
+    status: statusPost.Done,
     classroom: { letter: "A", number: 1 },
   } as Post,
 ];

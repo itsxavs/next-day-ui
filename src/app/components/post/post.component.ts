@@ -2,6 +2,7 @@ import { Post } from "src/app/models/post.interface";
 import { Component, Input, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { PostService } from "src/app/services/post.service";
+import { tap } from "rxjs/operators";
 
 @Component({
   selector: "app-post",
@@ -11,9 +12,11 @@ import { PostService } from "src/app/services/post.service";
 export class PostComponent implements OnInit {
   @Input() post: Post;
   @Input() role: string;
-  workStudentFile: File;
-  workTeacherFile: File;
+  fileToReview: File;
+  fileToDone: File;
   file: FormControl = new FormControl();
+  fileToReviewForm: FormControl = new FormControl();
+  fileToDoneForm: FormControl = new FormControl();
 
   constructor(private postService: PostService) {}
   ngOnInit(): void {
@@ -21,11 +24,13 @@ export class PostComponent implements OnInit {
     this.file.setValue(this.post.file);
   }
 
-  onTeacherFileSelected(event) {
-    this.workTeacherFile = event.target.files[0];
+  addFileToReview(event) {
+    this.postService.addFileToReview(this.post._id, event.target.files[0]);
+    this.fileToReview = event.target.files[0];
   }
-  onStudentFileSelected(event) {
-    this.workStudentFile = event.target.files[0];
+  addFileToDone(event) {
+    this.postService.addFileToDone(this.post._id, event.target.files[0]);
+    this.fileToDone = event.target.files[0];
   }
 
   downloadFile() {

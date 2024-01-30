@@ -1,9 +1,10 @@
 import { catchError, concatMap, switchMap, tap } from "rxjs/operators";
-import { Injectable } from "@angular/core";
+import { HostListener, Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, Observable, of } from "rxjs";
 import { Student, Teacher, User } from "../models/user.interface";
 import { PATH_API } from "../models/path-api.constant";
+import { TokenStorageService } from "./token-storage.service";
 
 const AUTH_API = "http://localhost:3000/auth/";
 const httpOptions = {
@@ -36,7 +37,22 @@ export class AuthService {
   teacher: Teacher;
   student: Student;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private tokenStorageService: TokenStorageService
+  ) {
+    if (this.tokenStorageService.getUser()) {
+      this._userSelection.next(this.tokenStorageService.getUser());
+      this.tokenStorageService.getUser().role === "TEACHER"
+        ? this._teacherUser.next(this.tokenStorageService.getTeacher())
+        : this._studentUser.next(this.tokenStorageService.getStudent());
+    }
+    this.tokenStorageService.sessionCleared$.subscribe(() => {
+      this._userSelection.next(null);
+      this._studentUser.next(null);
+      this._teacherUser.next(null);
+    });
+  }
 
   login(username: string, password: string): Observable<any> {
     return this.http

@@ -10,7 +10,7 @@ export const PostsMock_1_2: Post[] = [
     teacher: teacherMock,
     student: studentsMock[0],
     createAt: new Date(),
-    status: statusPost.Correct,
+    status: statusPost.Done,
     classroom: { letter: "A", number: 1 },
   },
   {
@@ -20,7 +20,7 @@ export const PostsMock_1_2: Post[] = [
     teacher: teacherMock,
     student: studentsMock[0],
     createAt: new Date(),
-    status: statusPost.Correct,
+    status: statusPost.Done,
     classroom: { letter: "A", number: 1 },
   },
   {
@@ -31,7 +31,7 @@ export const PostsMock_1_2: Post[] = [
     teacher: teacherMock,
     student: studentsMock[0],
     createAt: new Date(),
-    status: statusPost.Correct,
+    status: statusPost.Done,
     classroom: { letter: "A", number: 1 },
   },
   {
@@ -41,7 +41,7 @@ export const PostsMock_1_2: Post[] = [
     teacher: teacherMock,
     student: studentsMock[0],
     createAt: new Date(),
-    status: statusPost.Correct,
+    status: statusPost.Done,
     classroom: { letter: "A", number: 1 },
   },
   {
@@ -51,7 +51,7 @@ export const PostsMock_1_2: Post[] = [
     teacher: teacherMock,
     student: studentsMock[0],
     createAt: new Date(),
-    status: statusPost.Correct,
+    status: statusPost.Done,
     classroom: { letter: "A", number: 1 },
   },
 ];

@@ -34,7 +34,7 @@
             #fileStudent
             type="file"
             class="text-success"
-            (change)="onStudentFileSelected($event)"
+            (change)="addFileToReview($event)"
           />
         </div>
         <div class="p-2 bg-danger bg-opacity-50">
@@ -43,7 +43,7 @@
             #fileTeacher
             type="file"
             class="text-danger"
-            (change)="onTeacherFileSelected($event)"
+            (change)="addFileToDone($event)"
           />
         </div>
       </div>
@@ -69,8 +69,7 @@
               {{ post.title }} - {{ post.subject }}
             </h5>
             <p class="text-truncate">
-              {{ post.message }} // {{ post.classroom.number }} °
-              {{ post.classroom.letter }}
+              {{ post.message }} // {{ post.classroom }}
             </p>
           </div>
 
@@ -81,13 +80,21 @@
       </mat-expansion-panel-header>
 
       <div class="container bg-light w-100 text-black">
-        <div class="bg-success bg-opacity-50">
+        <div class="bg-danger bg-opacity-50">
           <label class="p-2">Homework:</label>
-          <input type="file" class="text-success" />
+          <input
+            type="file"
+            class="text-danger"
+            (change)="addFileToReview($event)"
+          />
         </div>
         <div class="p-2 bg-danger bg-opacity-50">
           <label class="p-2">Corretion:</label>
-          <input type="file" class="text-danger" />
+          <input
+            type="file"
+            class="text-danger"
+            (change)="addFileToDone($event)"
+          />
         </div>
       </div>
     </mat-expansion-panel>

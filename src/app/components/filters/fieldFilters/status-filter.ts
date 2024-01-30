@@ -9,7 +9,7 @@ const URL = "https:/localhost:8080/";
 export class StatusFilter extends BaseFilter<Filter<statusPost>[]> {
   // status$: Observable<Filter<statusPost>[]> = this.getvalues(URL);
   status$: Observable<Filter<statusPost>[]> = of([
-    { value: statusPost.Correct, selected: false },
+    { value: statusPost.Done, selected: false },
     { value: statusPost.Review, selected: false },
     { value: statusPost.Do, selected: false },
   ]);

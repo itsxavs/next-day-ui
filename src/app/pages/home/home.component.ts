@@ -1,6 +1,6 @@
 import { StudentsFacade } from "./../facade/students.facade";
 import { TokenStorageService } from "src/app/services/token-storage.service";
-import { tap } from "rxjs/operators";
+import { filter, tap } from "rxjs/operators";
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Post } from "src/app/models/post.interface";
@@ -37,9 +37,16 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService._teacherUser.subscribe((teacher) => {
-      this.post$ = this.postService.getPostsByTeacher(teacher._id);
-    });
+    this.authService._teacherUser
+      .pipe(filter((teacher) => !!teacher))
+      .subscribe((teacher) => {
+        this.post$ = this.postService.getPostsByTeacher(teacher._id);
+      });
+    this.authService._studentUser
+      .pipe(filter((student) => !!student))
+      .subscribe((student) => {
+        this.post$ = this.postService.getPostsByStudent(student._id);
+      });
     this.facade.filterSelected
       .pipe(
         tap((value) => {

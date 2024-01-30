@@ -30,6 +30,7 @@ export class PostService {
         title: post.title,
         message: post.message,
         classroom: post.classroom,
+        subject: post.subject,
       })
     );
     formData.append("bufferFile", nodeBuffer, nodeBuffer.name);
@@ -41,7 +42,7 @@ export class PostService {
 
   getPostsByStatus(status: string, id: string) {
     switch (status) {
-      case statusPost.Correct: {
+      case statusPost.Done: {
         return this.http
           .get(URI, {
             params: this.mek.append("_id", id).append("status", status),
@@ -80,7 +81,7 @@ export class PostService {
   }
   getPostsByStudent(studentId: string): Observable<Post[]> {
     let params = new HttpParams().append("studentId", studentId);
-    return this.http.get<Post[]>(`${URI}`, { params });
+    return this.http.get<Post[]>(`${URI}/student`, { params });
   }
   downloadFile(postId: string, filename: string) {
     let params = new HttpParams().append("postId", postId);
@@ -90,5 +91,22 @@ export class PostService {
       .subscribe((blob) => {
         saveAs(blob, filename);
       });
+  }
+  addFileToReview(postId: string, file: File) {
+    const formData = new FormData();
+    formData.append("bufferFile", file);
+    formData.append("postId", postId);
+    this.http
+      .post(`${URI}/addFiletoReview`, formData)
+      .subscribe((res) => console.log(res));
+  }
+  addFileToDone(postId: string, file: File) {
+    const formData = new FormData();
+    formData.append("bufferFile", file);
+    formData.append("postId", postId);
+
+    this.http
+      .post(`${URI}/addFiletoDone`, formData)
+      .subscribe((res) => console.log(res));
   }
 }

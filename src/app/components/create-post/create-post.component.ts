@@ -9,7 +9,7 @@ import { Student, Teacher } from "src/app/models/user.interface";
 import { subject } from "src/app/models";
 import { Classroom } from "../../models/classroom.interface";
 import { CLASSROOMS } from "src/app/models/classroom.constant";
-import { HostListener } from "@angular/core";
+
 @Component({
   selector: "app-create-post",
   templateUrl: "./create-post.component.html",

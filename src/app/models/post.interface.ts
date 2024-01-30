@@ -3,7 +3,7 @@ import { Student, Teacher } from "./user.interface";
 
 export enum statusPost {
   Do = "DO",
-  Correct = "CORRECT",
+  Done = "DONE",
   Review = "REVIEW",
 }
 

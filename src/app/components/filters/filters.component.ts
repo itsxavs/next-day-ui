@@ -5,7 +5,7 @@ import { DateFilter } from "./fieldFilters/date-filter";
 import { SearchFilter } from "./fieldFilters/search-filter";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { Filter } from "./baseFilter/filter.interface";
-import { Classroom, statusPost, subject } from "src/app/models";
+import { Classroom, Student, statusPost, subject } from "src/app/models";
 import { BehaviorSubject, Observable, combineLatest, merge } from "rxjs";
 import { filter, distinctUntilChanged } from "rxjs/operators";
 import { FilterFacade } from "./filters.facade";
@@ -17,7 +17,7 @@ import { FilterFacade } from "./filters.facade";
 })
 export class FiltersComponent implements OnInit {
   @Input() role: string;
-
+  @Input() students: Student[];
   // Load content filters
   classroom$: Observable<Filter<Classroom>[]> = this.facade.classroomContent$;
   status$: Observable<Filter<statusPost>[]> = this.facade.statusContent$;

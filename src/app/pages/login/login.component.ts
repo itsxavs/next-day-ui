@@ -1,11 +1,8 @@
 import { Classroom } from "../../models/classroom.interface";
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Observable } from "rxjs";
+import { FormControl, FormGroup } from "@angular/forms";
 import { tap, finalize, catchError } from "rxjs/operators";
-import { Teacher, User } from "src/app/models/user.interface";
-import { TeacherService } from "src/app/services/teacher.service";
-import { UtilsService } from "src/app/services/utils.service";
+import { Teacher } from "src/app/models/user.interface";
 import { AuthService } from "../../services/auth.service";
 import { TokenStorageService } from "../../services/token-storage.service";
 import { Router } from "@angular/router";
@@ -37,16 +34,20 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (!!this.tokenStorage.getUser()) this.goToHome();
+    if (!!this.tokenStorage.getUser()) {
+      this.goToHome();
+    }
   }
 
   onSubmit(): void {
     this.authService
       .login(this.form.get("username").value, this.form.get("password").value)
       .pipe(
-        tap(({ user, student, token }) => {
+        tap(({ user, student, teacher, token }) => {
           this.tokenStorage.saveToken(token);
           this.tokenStorage.saveUser(user);
+          if (student) this.tokenStorage.saveStudent(student);
+          if (teacher) this.tokenStorage.saveTeacher(teacher);
         }),
         finalize(() => this.goToHome()),
         catchError((err) => {
@@ -56,6 +57,7 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(() => {});
   }
+
   goToHome(): void {
     this.router.navigate(["home"]);
   }
