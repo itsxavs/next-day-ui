@@ -7,6 +7,8 @@ import { Component, OnInit } from "@angular/core";
 import { tabs } from "src/app/models/tabs.constant";
 import { StudentsFacade } from "../facade/students.facade";
 import { StudentService } from "src/app/services/students.service";
+import { AuthService } from "../../services/auth.service";
+import { TeacherService } from "../../services/teacher.service";
 
 const tags = [tabs.do, tabs.correct, tabs.create, tabs.review];
 
@@ -20,13 +22,14 @@ export class ProfileComponent implements OnInit {
   tags = tags;
   posts: Observable<Post[]>;
   roleStudent = true;
-  student = this.studentService.student$;
+  student = this.authService._studentUser;
   studentDetails: string;
 
   constructor(
     private readonly postService: PostService,
     private facade: StudentsFacade,
-    private studentService: StudentService
+    private authService: AuthService,
+    private teacherService: TeacherService
   ) {}
 
   ngOnInit(): void {

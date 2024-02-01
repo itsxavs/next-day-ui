@@ -16,13 +16,14 @@ const pronouns = ["he/him", "she/her", "they/them"];
 })
 export class ProfileFormComponent implements OnInit {
   @Input() isReview: boolean = false;
-  @Input() details: DetailsStudent;
+  @Input() student: Student;
   @Output() acceptEvent: EventEmitter<any> = new EventEmitter();
   students = this.studentService.getStudentsByTeacher();
   pronouns = pronouns;
 
   studentId;
   userId;
+  // student;
 
   form: FormGroup = new FormGroup({});
 
@@ -35,18 +36,22 @@ export class ProfileFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    combineLatest([
-      this.authService._userSelection,
-      this.authService._studentUser,
-    ])
-      .pipe(
-        tap(([user, student]) => {
-          this.userId = user._id;
-          this.studentId = student._id;
-          this.buildForm(student.details, user, student);
-        })
-      )
-      .subscribe();
+    if (this.isReview) this.buildForm(this.student.reviewDetails, this.student);
+    if (!this.isReview) this.buildForm(this.student.details, this.student);
+
+    // combineLatest([
+    //   this.authService._userSelection,
+    //   this.authService._studentUser,
+    //   this.authService._teacherUser,
+    // ])
+    //   .pipe(
+    //     tap(([user, student, teacher]) => {
+    //       this.userId = user._id;
+    //       this.studentId = student._id;
+    //       this.student = student;
+    //     })
+    //   )
+    //   .subscribe();
   }
 
   buildFormInizialize() {
@@ -71,11 +76,13 @@ export class ProfileFormComponent implements OnInit {
     this.form.disable();
   }
 
-  buildForm(details, user, student) {
+  buildForm(details, student) {
     //user
-    this.form.get("name").setValue(user?.name);
-    this.form.get("surname").setValue(`${user?.firstName} ${user?.lastName}`);
-    this.form.get("email").setValue(user?.email);
+    this.form.get("name").setValue(student?.name);
+    this.form
+      .get("surname")
+      .setValue(`${student?.firstname} ${student?.lastname}`);
+    this.form.get("email").setValue(student?.email);
 
     //student
     const subjects = student?.subjects.reduce((subjects, subject) => {
@@ -156,22 +163,35 @@ export class ProfileFormComponent implements OnInit {
       lastName: this.form.get("surname").value.split(" ")[0],
       email: this.form.get("email").value,
     };
+    this.student.name = this.form.get("name").value;
+    this.student.firstname = this.form.get("surname").value.split(" ")[0];
+    this.student.lastname = this.form.get("surname").value.split(" ")[1];
+    this.student.email = this.form.get("email").value;
     combineLatest([
       //el primero son los datos iniciales y el otro los valores de form
-      this.studentService.editDetailsStudent(this.details._id, this.form.value),
-      this.studentService.editStudent(this.studentId, {
-        subjects: this.form.get("subjects").value,
-      }),
-      this.authService.editUser(this.userId, user),
-    ]).subscribe(
-      (mek: [details: DetailsStudent, student: Student, user: User]) => {
-        this.authService._studentUser.next(mek[1]);
-        this.authService._userSelection.next(mek[2]);
-      }
-    );
+      this.studentService.createReviewDetails(this.form.value, this.student),
+      // this.studentService.editStudent(this.studentId, {
+      //   subjects: this.form.get("subjects").value,
+      // }),
+      // this.authService.editUser(this.userId, user),
+    ])
+      .subscribe
+      // (mek: [details: DetailsStudent, student: Student, user: User]) => {
+      //   this.authService._studentUser.next(mek[1]);
+      //   this.authService._userSelection.next(mek[2]);
+      // }
+      ();
     this.form.disable();
   }
   accept() {
-    this.acceptEvent.emit();
+    this.student.name = this.form.get("name").value;
+    this.student.firstname = this.form.get("surname").value.split(" ")[0];
+    this.student.lastname = this.form.get("surname").value.split(" ")[1];
+    this.student.email = this.form.get("email").value;
+    this.studentService
+      .editDetailsStudent(this.form.value, this.student)
+      .subscribe(() => {
+        this.acceptEvent.emit();
+      });
   }
 }

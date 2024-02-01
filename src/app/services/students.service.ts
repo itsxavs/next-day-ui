@@ -44,8 +44,8 @@ export class StudentService {
             _id: teacher?.idUser._id,
             email: teacher.idUser.email,
             name: teacher.idUser.name,
-            firstName: teacher.idUser.firstName,
-            lastName: teacher.idUser.lastName,
+            firstname: teacher.idUser.firstName,
+            lastname: teacher.idUser.lastName,
             students: teacher.students,
             classrooms: teacher.classrooms,
           } as Teacher;
@@ -75,11 +75,24 @@ export class StudentService {
     );
   }
 
-  editDetailsStudent(detailsId, details) {
-    return this.httpClient.post(`${PATH_API.NEXT_DAY_API}details-user/`, {
-      details,
-      detailsId,
-    });
+  editDetailsStudent(details, student) {
+    details = { ...details, _id: student.reviewDetails._id };
+    return this.httpClient.post(
+      `${PATH_API.NEXT_DAY_API}students/acceptReviewDetails`,
+      {
+        details,
+        student,
+      }
+    );
+  }
+  createReviewDetails(details, student) {
+    return this.httpClient.post(
+      `${PATH_API.NEXT_DAY_API}students/createReviewDetails`,
+      {
+        details,
+        student,
+      }
+    );
   }
 
   getStudentsByTeacher(): any {

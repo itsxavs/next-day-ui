@@ -20,11 +20,11 @@
         <mat-icon *ngIf="validationExpaded">keyboard_arrow_up</mat-icon>
       </div>
     </mat-expansion-panel-header>
-    <ul class="list-group" *ngFor="let student of listReview">
-      <li class="list-group-item m-1">
+    <ul class="list-group" *ngFor="let student of (teacher$ | async).students">
+      <li *ngIf="student.reviewDetails" class="list-group-item m-1">
         <div class="d-flex justify-content-between align-items-center">
           <p>
-            {{ student.name }} {{ student.firstName }} {{ student.lastName }}
+            {{ student.name }} {{ student.firstname }} {{ student.lastname }}
           </p>
           <button (click)="openDialog(student)">review</button>
         </div>

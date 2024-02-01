@@ -4,8 +4,8 @@ export interface User {
   readonly _id: string;
   email: string;
   name: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   role?: string;
 }
 
@@ -20,6 +20,7 @@ export interface Student extends User {
   words?: Map<string, Number>;
   subject?: subject[];
   details?: DetailsStudent;
+  reviewDetails?: DetailsStudent;
 }
 
 export interface UserChat {

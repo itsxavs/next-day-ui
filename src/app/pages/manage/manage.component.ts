@@ -5,6 +5,7 @@ import { Student, Teacher } from "src/app/models";
 import { studentsMock } from "src/app/mocks";
 import { DialogReviewComponent } from "./dialog-review/dialog-review.component";
 import { Observable } from "rxjs";
+import { TeacherService } from "../../services/teacher.service";
 
 @Component({
   selector: "app-manage",
@@ -22,12 +23,13 @@ export class ManageComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private teacherService: TeacherService
   ) {}
 
   ngOnInit(): void {
-    this.user$.subscribe((user) => {
-      console.log(user);
+    this.teacher$.subscribe((teacher) => {
+      this.students = teacher.students;
     });
   }
 
@@ -39,9 +41,14 @@ export class ManageComponent implements OnInit {
   }
 
   openDialog(student: Student) {
-    const dialogRef = this.dialog.open(DialogReviewComponent, {
-      data: student,
-      width: "1200px",
-    });
+    const dialogRef = this.dialog
+      .open(DialogReviewComponent, {
+        data: student,
+        width: "1200px",
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.teacherService.getTeacher(this.authService._teacherUser.value._id);
+      });
   }
 }

@@ -6,7 +6,7 @@
     *ngIf="roleStudent; else manage"
     class="container d-flex align-items-end flex-column"
   >
-    <app-profile-form [details]="(student | async)?.details"></app-profile-form>
+    <app-profile-form [student]="student | async"></app-profile-form>
   </div>
 
   <ng-template #manage>
