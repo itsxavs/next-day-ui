@@ -9,25 +9,42 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 @import "font-awesome/scss/font-awesome";
 // Variable overrides first
-$primary: rgb(48, 168, 255);
+$primary: #008000;
 $enable-shadows: true;
 $prefix: "";
 
 .mat-expansion-indicator {
   display: none;
 }
+/* Cambia el color de fondo del navbar a un verde más claro */
+.nav {
+  background-color: #66cc66;
+}
+
+/* Cambia el color del texto de los enlaces del navbar a blanco */
 .nav-link {
-  color: rgb(155, 175, 189) !important;
-  background-color: rgb(62, 35, 136);
-
-  cursor: pointer;
+  color: #ffffff;
+  width: 100%; /* Hace que el nav-link ocupe todo el ancho del nav-item */
+  height: 100%;
+  text-align: center; /* Centra el texto dentro del nav-link */
 }
+.nav-item {
+  width: 100%;
+}
+
+/* Cambia el color de fondo de los enlaces del navbar cuando se pasa el cursor sobre ellos a un verde más oscuro */
 .nav-link:hover {
-  background-color: rgb(199, 207, 125);
+  background-color: #008000;
 }
 
+/* Cambia el color de fondo de los enlaces del navbar cuando están activos a un verde más claro */
+.nav-link.active {
+  background-color: #99ff99;
+}
 // Then import Bootstrap
 @import "../node_modules/bootstrap/scss/bootstrap";
 
@@ -39,4 +56,30 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: $primary;
   overflow: auto;
+}
+body {
+  background-color: #008000;
+}
+
+/* Cambia el color del texto a blanco para que contraste con el fondo verde */
+.card {
+  background-color: #ffffff;
+  color: #006600;
+}
+
+/* Cambia el color de fondo del encabezado de la tarjeta a un verde más oscuro */
+.card-header {
+  background-color: #006600;
+  color: #ffffff;
+}
+
+/* Cambia el color de fondo del botón a un verde más claro y el color del texto a blanco */
+.btn-primary {
+  background-color: #99ff99;
+  color: #ffffff;
+}
+
+/* Cambia el color de fondo del botón cuando se pasa el cursor sobre él a un verde más oscuro */
+.btn-primary:hover {
+  background-color: #006600;
 }

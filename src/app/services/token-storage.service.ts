@@ -11,7 +11,7 @@ const STUDENT_KEY = "auth-student";
   providedIn: "root",
 })
 export class TokenStorageService {
-  private _role$: BehaviorSubject<string> = new BehaviorSubject(null);
+  _role$: BehaviorSubject<string> = new BehaviorSubject(null);
   private _loggedIn$ = new BehaviorSubject<boolean>(false);
   loggedIn$ = this._loggedIn$.asObservable();
   role$: Observable<string> = this._role$.asObservable();

@@ -11,10 +11,12 @@ import { AuthService } from "../../services/auth.service";
 export class NavbarComponent implements OnInit {
   @Input() disabled: boolean;
   @Input() role: string;
+  user$ = this.user._userSelection;
 
   constructor(
     private router: Router,
-    private tokenStorage: TokenStorageService
+    private tokenStorage: TokenStorageService,
+    private user: AuthService
   ) {}
 
   ngOnInit() {}
@@ -36,8 +38,8 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut() {
-    this.tokenStorage.signOut();
     this.router.navigate(["login"]);
+    this.tokenStorage.signOut();
   }
 
   /* 

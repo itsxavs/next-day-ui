@@ -1,10 +1,8 @@
-import { messageChatMock } from "src/app/mocks/mix";
-import { studentsMock } from "./../mocks/students";
-import { teacherMock } from "./../mocks/teachers";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, mapTo, tap } from "rxjs/operators";
-import { Student, Teacher } from "../models/user.interface";
+import { Teacher } from "../models/user.interface";
+import { BehaviorSubject, Observable } from "rxjs";
+import { filter, map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -12,11 +10,44 @@ import { Student, Teacher } from "../models/user.interface";
 export class MessageService {
   teacher: Teacher;
 
-  constructor(private httpClient: HttpClient) {}
+  // recogera todos los mensajes que el profesor tenga de sus estudiantes
+  mensajesPendientesTeacher: BehaviorSubject<any[]> = new BehaviorSubject<
+    any[]
+  >([]);
 
-  getMessages(teacher: Teacher, student: Student) {
-    return this.httpClient
-      .get("http://localhost:3000/messages")
-      .pipe(mapTo(messageChatMock));
+  // recogera todos los mensajes que el estudiante tenga de sus profesores
+  mensajesPendientesStudent: BehaviorSubject<any[]> = new BehaviorSubject<
+    any[]
+  >([]);
+
+  mensajesPendientesTeacher$: Observable<any[]> = this.mensajesPendientesTeacher
+    .asObservable()
+    .pipe(map((mensajes) => mensajes.filter((m) => !m.leidoTeacher)));
+  mensajesPendientesStudent$: Observable<any[]> = this.mensajesPendientesStudent
+    .asObservable()
+    .pipe(map((mensajes) => mensajes.filter((m) => !m.leidoStudent)));
+
+  constructor(private httpClient: HttpClient) {
+    this.mensajesPendientesStudent.subscribe((mensajes) => {
+      console.log("mensajes pendientes student", mensajes);
+    });
+    this.mensajesPendientesTeacher.subscribe((mensajes) => {
+      console.log("mensajes pendientes teacher", mensajes);
+    });
+  }
+
+  getMessages(studentId: string, teacherId: string): Observable<any[]> {
+    const params = new HttpParams();
+    params.set("studentId", studentId);
+    params.set("teacherId", teacherId);
+    return this.httpClient.get<any[]>(`http://localhost:3000/messages`, {
+      params: {
+        teacherId,
+        studentId,
+      },
+    });
+  }
+  enviarMensaje(mensaje: any) {
+    return this.httpClient.post("http://localhost:3000/messages", { mensaje });
   }
 }

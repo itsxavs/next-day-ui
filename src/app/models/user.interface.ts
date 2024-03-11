@@ -16,7 +16,7 @@ export interface Teacher extends User {
 
 export interface Student extends User {
   classroom: Classroom;
-  teacher?: Teacher;
+  teachers?: Teacher[];
   words?: Map<string, Number>;
   subject?: subject[];
   details?: DetailsStudent;

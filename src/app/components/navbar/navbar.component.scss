@@ -1,2 +1,15 @@
-.navbar {
+.navbar-logo {
+  height: 50px; /* Ajusta esto según el tamaño que quieras para la imagen */
+  margin-right: 10px; /* Añade un poco de espacio a la derecha de la imagen */
+}
+.flex-container {
+  display: flex; /* Hace que el nav-item sea un contenedor flex */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  width: 100%; /* Hace que el nav-item ocupe todo el ancho disponible */
+}
+
+.nav-link {
+  width: 100%; /* Hace que el nav-link ocupe todo el ancho del nav-item */
+  text-align: center; /* Centra el texto dentro del nav-link */
 }

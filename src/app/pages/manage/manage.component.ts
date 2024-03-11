@@ -1,10 +1,10 @@
 import { AuthService } from "src/app/services/auth.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Student, Teacher } from "src/app/models";
 import { studentsMock } from "src/app/mocks";
 import { DialogReviewComponent } from "./dialog-review/dialog-review.component";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { TeacherService } from "../../services/teacher.service";
 
 @Component({
@@ -12,7 +12,7 @@ import { TeacherService } from "../../services/teacher.service";
   templateUrl: "./manage.component.html",
   styleUrls: ["./manage.component.scss"],
 })
-export class ManageComponent implements OnInit {
+export class ManageComponent implements OnInit, OnDestroy {
   listReview: Student[] = studentsMock;
 
   postExpanded: boolean = false;
@@ -20,6 +20,8 @@ export class ManageComponent implements OnInit {
   teacher$: Observable<Teacher> = this.authService._teacherUser;
   students: Student[];
   user$: Observable<any> = this.authService._userSelection;
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dialog: MatDialog,
@@ -31,6 +33,11 @@ export class ManageComponent implements OnInit {
     this.teacher$.subscribe((teacher) => {
       this.students = teacher.students;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
   changePostExpanded() {
