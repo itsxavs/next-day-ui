@@ -67,12 +67,10 @@ body {
 }
 
 .people-list .chat-list li:hover {
-  background: #efefef;
   cursor: pointer;
 }
 
 .people-list .chat-list li.active {
-  background: #efefef;
 }
 
 .people-list .chat-list li .name {
@@ -151,7 +149,7 @@ body {
   color: #444;
   padding: 18px 20px;
   line-height: 26px;
-  font-size: 16px;
+  font-size: 12px;
   border-radius: 7px;
   display: inline-block;
   position: relative;
@@ -316,4 +314,77 @@ body {
 }
 .notificacion-activa {
   font-weight: bold;
+}
+
+body {
+  background-color: #008000;
+}
+
+.card {
+  box-shadow: 0 1px 2px 0 rgb(0 128 0 / 10%);
+}
+
+.chat-app .chat {
+  border-left: 1px solid #008000;
+}
+
+.people-list .chat-list li:hover {
+  background: #99ff99;
+  color: #008000;
+  cursor: pointer;
+}
+.people-list {
+  background-color: #66cc66 !important;
+}
+
+.people-list .chat-list li.active {
+  color: #ffffff;
+  background-color: #008000 !important;
+}
+
+.chat {
+  border-bottom: 2px solid #66cc66;
+}
+
+.chat .chat-history {
+  border-bottom: 2px solid #66cc66;
+}
+
+.chat .chat-history .my-message {
+  color: #ffffff;
+  background: #008000;
+}
+
+.chat .chat-history .my-message:after {
+  border-bottom-color: #008000;
+}
+
+.chat .chat-history .other-message:after {
+  border-bottom-color: #008000;
+}
+
+.online {
+  color: #008000;
+}
+
+.chat-about {
+  color: #ffffff;
+  background-color: #86c541;
+
+  justify-content: center !important;
+}
+
+.fa-send {
+  color: white !important;
+}
+.button-c:hover {
+  background-color: #008000;
+}
+.button-c {
+  background-color: #66cc66;
+  border: 1px solid #008000;
+}
+
+.chat-m {
+  background-color: #66cc66 !important;
 }

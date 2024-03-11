@@ -18,8 +18,10 @@ export class ProfileFormComponent implements OnInit {
   @Input() isReview: boolean = false;
   @Input() student: Student;
   @Output() acceptEvent: EventEmitter<any> = new EventEmitter();
+  @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   students = this.studentService.getStudentsByTeacher();
   pronouns = pronouns;
+  button: string = "Editar";
 
   studentId;
   userId;
@@ -36,6 +38,7 @@ export class ProfileFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.isReview) this.button = "Aceptar";
     if (this.isReview) this.buildForm(this.student.reviewDetails, this.student);
     if (!this.isReview) this.buildForm(this.student.details, this.student);
 
@@ -52,6 +55,10 @@ export class ProfileFormComponent implements OnInit {
     //     })
     //   )
     //   .subscribe();
+  }
+  cancelar() {
+    this.form.disable();
+    this.button = "Editar";
   }
 
   buildFormInizialize() {
@@ -153,6 +160,7 @@ export class ProfileFormComponent implements OnInit {
   // }
 
   edit() {
+    this.button = "Guardar";
     this.form.enable();
   }
 
@@ -181,6 +189,7 @@ export class ProfileFormComponent implements OnInit {
       //   this.authService._userSelection.next(mek[2]);
       // }
       ();
+    this.button = "Editar";
     this.form.disable();
   }
   accept() {
@@ -191,7 +200,17 @@ export class ProfileFormComponent implements OnInit {
     this.studentService
       .editDetailsStudent(this.form.value, this.student)
       .subscribe(() => {
+        this.button = "Editar";
         this.acceptEvent.emit();
+      });
+  }
+
+  deleteD() {
+    this.studentService
+      .deleteReview(this.form.value, this.student)
+      .subscribe(() => {
+        this.button = "Editar";
+        this.deleteEvent.emit();
       });
   }
 }

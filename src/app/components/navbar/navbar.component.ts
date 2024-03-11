@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { TokenStorageService } from "src/app/services/token-storage.service";
 import { AuthService } from "../../services/auth.service";
 
@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
   @Input() disabled: boolean;
   @Input() role: string;
   user$ = this.user._userSelection;
+  active: string = "home";
 
   constructor(
     private router: Router,
@@ -19,25 +20,34 @@ export class NavbarComponent implements OnInit {
     private user: AuthService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const fullUrl = window.location.href;
+    if (fullUrl.includes("home")) this.active = "home";
+    if (fullUrl.includes("profile")) this.active = "profile";
+    if (fullUrl.includes("manage")) this.active = "manage";
+    if (fullUrl.includes("chat")) this.active = "chat";
+  }
 
   goHome() {
+    this.active = "home";
     this.router.navigate(["home"]);
   }
   goProfile() {
+    this.active = "profile";
     this.router.navigate(["profile"]);
   }
   goManage() {
+    this.active = "manage";
     this.router.navigate(["manage"]);
   }
-  goSettings() {
-    this.router.navigate(["settings"]);
-  }
+
   goChat() {
+    this.active = "chat";
     this.router.navigate(["chat"]);
   }
 
   logOut() {
+    this.active = "home";
     this.router.navigate(["login"]);
     this.tokenStorage.signOut();
   }

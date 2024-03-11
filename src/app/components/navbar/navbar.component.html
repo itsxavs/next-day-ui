@@ -1,7 +1,7 @@
 <div *ngIf="!disabled" class="p-3 justify-content-between container">
   <ng-container #studentPage *ngIf="role === 'STUDENT'; else teacherPage">
     <ul class="nav justify-content-between align-items-center">
-      <li class="nav-item col-2 px-1">
+      <li class="nav-item col-2 px-1 justify-content-end">
         <img
           src="../../../assets/img/github-logo.png"
           alt="Logo"
@@ -9,18 +9,34 @@
         />
       </li>
       <li class="nav-item col-2">
-        <a class="nav-link active" aria-current="page" (click)="goHome()"
+        <a
+          [ngClass]="{ active: active === 'home' }"
+          class="nav-link active"
+          aria-current="page"
+          (click)="goHome()"
           >HOME</a
         >
       </li>
       <li class="nav-item col-2">
-        <a class="nav-link" (click)="goProfile()">PROFILE</a>
+        <a
+          [ngClass]="{ active: active === 'profile' }"
+          class="nav-link"
+          (click)="goProfile()"
+          >PROFILE</a
+        >
       </li>
       <li class="nav-item col-2">
-        <a class="nav-link" (click)="goChat()">CHAT</a>
+        <a
+          [ngClass]="{ active: active === 'chat' }"
+          class="nav-link"
+          (click)="goChat()"
+          >CHAT</a
+        >
       </li>
       <li class="nav-item col-2">
-        <span *ngIf="user$ | async as user" class="navbar-text mr-3"
+        <span
+          *ngIf="user$ | async as user"
+          class="mr-3 font-weight-bold text-white py-1"
           >{{ user.name }} {{ user.firstName }} {{ user.lastName }}</span
         >
         <a class="nav-link" (click)="logOut()"
@@ -40,18 +56,34 @@
         />
       </li>
       <li class="nav-item col-2">
-        <a class="nav-link active" aria-current="page" (click)="goHome()"
+        <a
+          [ngClass]="{ active: active === 'home' }"
+          class="nav-link active"
+          aria-current="page"
+          (click)="goHome()"
           >HOME</a
         >
       </li>
       <li class="nav-item col-2">
-        <a class="nav-link" (click)="goManage()">MANAGE</a>
+        <a
+          [ngClass]="{ active: active === 'manage' }"
+          class="nav-link"
+          (click)="goManage()"
+          >MANAGE</a
+        >
       </li>
       <li class="nav-item col-2">
-        <a class="nav-link" (click)="goChat()">CHAT</a>
+        <a
+          [ngClass]="{ active: active === 'chat' }"
+          class="nav-link"
+          (click)="goChat()"
+          >CHAT</a
+        >
       </li>
       <li class="nav-item col-2">
-        <span *ngIf="user$ | async as user" class="navbar-text mr-3"
+        <span
+          *ngIf="user$ | async as user"
+          class="font-weight-bold text-white py-1"
           >{{ user.name }} {{ user.firstName }} {{ user.lastName }}</span
         >
         <a class="nav-link" (click)="logOut()"

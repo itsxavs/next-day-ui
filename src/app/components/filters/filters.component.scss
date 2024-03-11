@@ -1,0 +1,32 @@
+.container.filter-container {
+  background-color: #4caf50; /* Un tono de verde, puedes cambiarlo a tu gusto */
+  padding: 20px; /* Espacio alrededor de los filtros */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px; /* Espacio alrededor de los botones */
+  background-color: #8bc34a; /* Otro tono de verde, puedes cambiarlo a tu gusto */
+  color: white; /* Color del texto en los botones */
+  border-radius: 5px; /* Bordes redondeados para los botones */
+  height: 50%;
+  margin-inline-start: 2%;
+  border: 1px solid #008000;
+}
+.justify-content-end {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.justify-content-lg-start {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

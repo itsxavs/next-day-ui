@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { PostService } from "src/app/services/post.service";
 import { tap } from "rxjs/operators";
+import { TokenStorageService } from "../../services/token-storage.service";
 
 @Component({
   selector: "app-post",
@@ -12,16 +13,34 @@ import { tap } from "rxjs/operators";
 export class PostComponent implements OnInit {
   @Input() post: Post;
   @Input() role: string;
+  isExpadido: boolean = false;
   fileToReview: File;
   fileToDone: File;
   file: FormControl = new FormControl();
-  fileToReviewForm: FormControl = new FormControl();
-  fileToDoneForm: FormControl = new FormControl();
+  exerciceReviewName: FormControl = new FormControl();
+  exerciceDoneName: FormControl = new FormControl();
 
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private tokenStorageService: TokenStorageService
+  ) {}
   ngOnInit(): void {
     console.log(this.post);
     this.file.setValue(this.post.file);
+    // if (this.post["exerciceDoneName"])
+    //   this.exerciceDoneName.setValue(this.post["exerciceDoneName"]);
+    // if (this.post["exerciceReviewName"])
+    //   this.exerciceDoneName.setValue(this.post["exerciceReviewName"]);
+    // if (this.exerciceDoneName?.value)
+    //   this.fileToDone = this.bufferToFile(
+    //     this.post["exerciceDone"],
+    //     this.exerciceDoneName?.value
+    //   );
+    // if (this.exerciceReviewName?.value)
+    //   this.fileToReview = this.bufferToFile(
+    //     this.post["exerciceReview"],
+    //     this.exerciceReviewName?.value
+    //   );
   }
 
   addFileToReview(event) {
@@ -35,5 +54,17 @@ export class PostComponent implements OnInit {
 
   downloadFile() {
     this.postService.downloadFile(this.post._id, `${this.post.title}.pdf`);
+  }
+  bufferToFile(buffer: ArrayBuffer, fileName: string): File {
+    let blob = new Blob([buffer], { type: "application/octet-stream" });
+    return new File([blob], fileName, { type: "application/octet-stream" });
+  }
+  handleOpened() {
+    this.isExpadido = !this.isExpadido;
+  }
+
+  verificar(date: any): boolean {
+    date = new Date(date);
+    return date > new Date();
   }
 }

@@ -12,6 +12,7 @@ body {
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import "font-awesome/scss/font-awesome";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 // Variable overrides first
 $primary: #008000;
 $enable-shadows: true;
@@ -34,16 +35,22 @@ $prefix: "";
 }
 .nav-item {
   width: 100%;
+  cursor: default !important;
 }
 
 /* Cambia el color de fondo de los enlaces del navbar cuando se pasa el cursor sobre ellos a un verde más oscuro */
 .nav-link:hover {
-  background-color: #008000;
+  background-color: #99ff99;
 }
 
 /* Cambia el color de fondo de los enlaces del navbar cuando están activos a un verde más claro */
 .nav-link.active {
-  background-color: #99ff99;
+  background-color: #008000;
+  color: #ffffff;
+}
+.nav-link.active:hover {
+  background-color: #008000;
+  color: #ffffff;
 }
 // Then import Bootstrap
 @import "../node_modules/bootstrap/scss/bootstrap";
@@ -76,10 +83,99 @@ body {
 /* Cambia el color de fondo del botón a un verde más claro y el color del texto a blanco */
 .btn-primary {
   background-color: #99ff99;
+  color: #006600;
+}
+
+btn-primary:hover {
+  background-color: #006600;
+  color: #ffffff;
+}
+.btn-secondary {
+  background-color: #99ff99;
+  color: #006600;
+}
+
+.btn-secondary:hover {
+  background-color: #006600;
   color: #ffffff;
 }
 
 /* Cambia el color de fondo del botón cuando se pasa el cursor sobre él a un verde más oscuro */
 .btn-primary:hover {
   background-color: #006600;
+}
+/* Cambia el color de fondo del panel desplegable */
+.mat-select-panel {
+  background-color: #66cc66; /* Un tono de verde, puedes cambiarlo a tu gusto */
+  min-width: 50% !important; /* Ajusta el ancho mínimo del panel */
+  max-height: 200px !important; /* Ajusta la altura máxima del panel */
+  margin-top: 40px !important; /* Añade un margen superior*/
+  margin-left: 40px;
+}
+
+/* Cambia el color del texto de las opciones */
+.mat-option-text {
+  color: #ffffff !important;
+}
+
+/* Cambia el color de fondo de las opciones cuando se pasa el cursor sobre ellas */
+.mat-option:hover {
+  background-color: #006600; /* Un tono de verde oscuro, puedes cambiarlo a tu gusto */
+}
+
+.mat-option.mat-selected {
+  background-color: #008000 !important; /* Un tono de verde fuerte, puedes cambiarlo a tu gusto */
+  color: #008000;
+}
+
+/* Cambia el color del checkbox cuando está marcado */
+.mat-option.mat-selected .mat-pseudo-checkbox {
+  background-color: #008000; /* Un tono de verde fuerte, puedes cambiarlo a tu gusto */
+  color: #ffffff !important;
+}
+
+/* Cambia el color del borde del checkbox */
+.mat-option .mat-pseudo-checkbox {
+  border-color: #008000; /* Un tono de verde fuerte, puedes cambiarlo a tu gusto */
+  color: #ffffff !important;
+}
+
+.mat-form-field .mat-input-element {
+  color: #ffffff !important;
+}
+
+/* Cambia el color del texto de los elementos seleccionados en el mat-form-field a blanco */
+.mat-form-field .mat-select-value-text {
+  color: #ffffff !important;
+}
+.mat-form-field.mat-focused {
+  color: #ffffff !important;
+}
+/* Cambia el color del texto del mat-expansion-panel a rojo */
+.mat-expansion-panel .mat-expansion-panel-body {
+  color: #006600;
+}
+.mat-expansion-panel .mat-expansion-panel-header {
+  color: #006600;
+}
+
+.form-control {
+  color: #083f08;
+  margin-bottom: 2px;
+}
+.form-control:disabled {
+  background-color: #66cc66;
+}
+.form-select:disabled {
+  background-color: #66cc66;
+}
+.form-label {
+  color: #083f08;
+  margin: 0 !important;
+}
+
+/* Cambia el color de la selección de texto en toda la aplicación a verde */
+::selection {
+  background: #008000; /* Cambia el color de fondo a verde */
+  color: #ffffff; /* Cambia el color del texto a blanco */
 }

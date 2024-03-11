@@ -54,11 +54,11 @@ export class CreatePostComponent implements OnInit {
 
   create() {
     // const reader = new FileReader();
-    this.postService.createPost(
-      this.form.value,
-      this.files[0],
-      this.teacher._id
-    );
+    this.postService
+      .createPost(this.form.value, this.files[0], this.teacher._id)
+      .subscribe((res) => {
+        this.form.reset();
+      });
 
     // reader.readAsArrayBuffer(this.files[0]);
     // reader.onload = () => {

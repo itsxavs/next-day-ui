@@ -1,55 +1,69 @@
-<mat-form-field appearance="fill">
-  <mat-label>Status</mat-label>
-  <mat-select [formControl]="formFilters.get('status')" multiple>
-    <mat-option *ngFor="let status of status$ | async" [value]="status.value">{{
-      status.value
-    }}</mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>Subject</mat-label>
-  <mat-select [formControl]="formFilters.get('subject')" multiple>
-    <mat-option
-      *ngFor="let subject of subject$ | async"
-      [value]="subject.value"
-      >{{ subject.value }}</mat-option
-    >
-  </mat-select>
-</mat-form-field>
-<mat-form-field *ngIf="role === 'TEACHER'" appearance="fill">
-  <mat-label>Classroom</mat-label>
-  <mat-select [formControl]="formFilters.get('classroom')" multiple>
-    <mat-option
-      *ngFor="let classroom of classroom$ | async"
-      [value]="classroom.value"
-      >{{ classroom.value.number }} {{ classroom.value.letter }}</mat-option
-    >
-  </mat-select>
-</mat-form-field>
+<div class="container filter-container">
+  <div class="justify-content-lg-start col-8">
+    <mat-form-field appearance="fill">
+      <mat-label>Status</mat-label>
+      <mat-select [formControl]="formFilters.get('status')" multiple>
+        <mat-option
+          *ngFor="let status of status$ | async"
+          [value]="status.value"
+          >{{ status.value }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Subject</mat-label>
+      <mat-select [formControl]="formFilters.get('subject')" multiple>
+        <mat-option
+          *ngFor="let subject of subject$ | async"
+          [value]="subject.value"
+          >{{ subject.value }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="role === 'TEACHER'" appearance="fill">
+      <mat-label>Classroom</mat-label>
+      <mat-select [formControl]="formFilters.get('classroom')" multiple>
+        <mat-option
+          *ngFor="let classroom of classroom$ | async"
+          [value]="classroom.value"
+          >{{ classroom.value.number }} {{ classroom.value.letter }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
 
-<mat-form-field *ngIf="role === 'TEACHER'" appearance="fill">
-  <mat-label>Students</mat-label>
-  <mat-select [formControl]="formFilters.get('students')" multiple>
-    <mat-option
-      *ngFor="let student of students$ | async"
-      [value]="student.value"
-      >{{ student.value.name }} {{ student.value.firstname }}
-      {{ student.value.lastname }}</mat-option
-    >
-  </mat-select>
-</mat-form-field>
+    <mat-form-field *ngIf="role === 'TEACHER'" appearance="fill">
+      <mat-label>Students</mat-label>
+      <mat-select
+        matNativeControl
+        [formControl]="formFilters.get('students')"
+        multiple
+      >
+        <mat-option
+          *ngFor="let student of students$ | async"
+          [value]="student.value"
+          >{{ student.value.name }} {{ student.value.firstname }}
+          {{ student.value.lastname }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
 
-<mat-form-field class="example-full-width" appearance="fill">
-  <input
-    [formControl]="formFilters.get('search')"
-    matInput
-    placeholder="Introduce"
-  />
-</mat-form-field>
+    <button mat-icon-button (click)="toggleSort()" class="custom-button mb-3">
+      <i *ngIf="sortOrder" class="bi bi-arrow-bar-up"></i>
+      <i *ngIf="!sortOrder" class="bi bi-arrow-bar-down"></i>
+      <label *ngIf="sortOrder" class="px-1">By ASC</label>
+      <label *ngIf="!sortOrder" class="px-1">By DES</label>
+    </button>
+  </div>
 
-<button mat-icon-button (click)="toggleSort()">
-  <label>Order By date</label>
-  <i *ngIf="sortOrder" class="bi bi-arrow-bar-up"></i>
-  <i *ngIf="!sortOrder" class="bi bi-arrow-bar-down"></i>
-</button>
-<button mat-icon-button (click)="clearFilters()">clear</button>
+  <div class="justify-content-end">
+    <input
+      [formControl]="formFilters.get('search')"
+      class="form-control"
+      placeholder="Introduce"
+    />
+    <button mat-icon-button (click)="clearFilters()" class="custom-button">
+      <i class="bi bi-trash"></i>
+      <label class="px-1">Clear</label>
+    </button>
+  </div>
+</div>

@@ -36,9 +36,7 @@ export class PostService {
     );
     formData.append("bufferFile", nodeBuffer, nodeBuffer.name);
 
-    return this.http
-      .post(`${URI}/save`, formData)
-      .subscribe((res: any) => console.log(res));
+    return this.http.post(`${URI}/save`, formData);
   }
 
   getPostsByStatus(status: string, id: string) {

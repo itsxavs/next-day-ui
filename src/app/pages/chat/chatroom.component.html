@@ -20,13 +20,8 @@
   <div class="row clearfix">
     <div class="col-lg-12">
       <div class="card chat-app">
-        <div id="plist" class="people-list">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fa fa-search"></i></span>
-            </div>
-            <input type="text" class="form-control" placeholder="Search..." />
-          </div>
+        <div id="plist" class="people-list h-100">
+          <div class="input-group"></div>
           <ul
             *ngIf="role === 'TEACHER'"
             class="list-unstyled chat-list mt-2 mb-0"
@@ -49,9 +44,6 @@
                   {{ student.name }} {{ student.firstname }}
                   {{ student.lastname }}
                 </div>
-                <div class="status">
-                  <i class="fa fa-circle offline"></i> left 7 mins ago
-                </div>
               </div>
             </li>
           </ul>
@@ -69,16 +61,13 @@
                 src="https://bootdey.com/img/Content/avatar/avatar1.png"
                 alt="avatar"
               />
-              <div class="about">
+              <div class="about d-flex align-items-center">
                 <div
-                  class="name d-inline-block text-truncate"
+                  class="name text-center d-inline-block text-truncate"
                   style="max-width: 150px"
                 >
                   {{ teacher.name }} {{ teacher.firstname }}
                   {{ teacher.lastname }}
-                </div>
-                <div class="status">
-                  <i class="fa fa-circle offline"></i> left 7 mins ago
                 </div>
               </div>
             </li>
@@ -87,7 +76,7 @@
         <div class="chat">
           <div class="chat-header clearfix">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="chat-m d-flex justify-content-end align-items-center">
                 <a
                   href="javascript:void(0);"
                   data-toggle="modal"
@@ -98,19 +87,20 @@
                     alt="avatar"
                   />
                 </a>
-                <div class="chat-about">
-                  <h6 *ngIf="role === 'TEACHER'" class="m-b-0">
+                <div
+                  class="chat-about d-flex justify-content-end align-items-center"
+                >
+                  <h3 *ngIf="role === 'TEACHER'">
                     {{ selectedStudent.name }} {{ selectedStudent.firstname }}
                     {{ selectedStudent.lastname }}
-                  </h6>
-                  <h6 *ngIf="role === 'STUDENT'" class="m-b-0">
+                  </h3>
+                  <h3 *ngIf="role === 'STUDENT'">
                     {{ selectedTeacher.name }} {{ selectedTeacher.firstname }}
                     {{ selectedTeacher.lastname }}
-                  </h6>
-                  <small>Last seen: 2 hours ago</small>
+                  </h3>
                 </div>
               </div>
-              <div class="col-lg-6 hidden-sm text-right">
+              <!-- <div class="col-lg-6 hidden-sm text-right">
                 <a href="javascript:void(0);" class="btn btn-outline-secondary"
                   ><i class="fa fa-camera"></i
                 ></a>
@@ -123,7 +113,7 @@
                 <a href="javascript:void(0);" class="btn btn-outline-warning"
                   ><i class="fa fa-question"></i
                 ></a>
-              </div>
+              </div> -->
             </div>
           </div>
           <div #chatHistory class="chat-history">
@@ -166,9 +156,6 @@
           </div>
           <div class="chat-message clearfix">
             <div class="input-group mb-0">
-              <div (click)="enviar()" class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-send"></i></span>
-              </div>
               <input
                 type="text"
                 (keydown.enter)="enviar()"
@@ -176,6 +163,11 @@
                 [formControl]="newMensajeForm"
                 placeholder="Enter text here..."
               />
+              <div (click)="enviar()" class="input-group-prepend mx-2">
+                <span class="input-group-text button-c h-100"
+                  ><i class="fa fa-send"></i
+                ></span>
+              </div>
             </div>
           </div>
         </div>

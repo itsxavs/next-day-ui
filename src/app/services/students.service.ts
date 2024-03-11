@@ -85,6 +85,16 @@ export class StudentService {
       }
     );
   }
+  deleteReview(details, student): Observable<string> {
+    details = { ...details, _id: student.reviewDetails._id };
+    return this.httpClient.post<string>(
+      `${PATH_API.NEXT_DAY_API}students/deleteReviewDetails`,
+      {
+        details,
+        student,
+      }
+    );
+  }
   createReviewDetails(details, student) {
     return this.httpClient.post(
       `${PATH_API.NEXT_DAY_API}students/createReviewDetails`,

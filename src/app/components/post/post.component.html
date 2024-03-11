@@ -14,7 +14,14 @@
           <div class="col-9 pt-1">
             <h5 class="text-primary text-uppercase">
               {{ post.title }} - {{ post.subject }} - {{ post.classroom }}
-              <p class="text-danger">{{ post.dateEnd | date : "short" }}</p>
+              <p
+                [ngClass]="{
+                  'text-success': verificar(post.dateEnd),
+                  'text-danger': !verificar(post.dateEnd)
+                }"
+              >
+                {{ post.dateEnd | date : "short" }}
+              </p>
             </h5>
             <p class="text-truncate">
               {{ post.message }} // {{ post.classroom }}
@@ -55,45 +62,70 @@
 
 <ng-template #teacherPost>
   <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel class="post">
-      <mat-expansion-panel-header class="d-flex justify-content-between">
-        <div class="d-flex justify-content-between w-100 p-4">
-          <img
-            src="../../../assets/img/profile.jpg"
-            class="img"
-            [alt]="post.teacher.name"
-          />
-
-          <div class="col-9 pt-1">
-            <h5 class="text-primary text-uppercase">
-              {{ post.title }} - {{ post.subject }} - {{ post.classroom }}
-              <p class="text-danger">{{ post.dateEnd | date : "short" }}</p>
-            </h5>
-            <p class="text-truncate">
-              {{ post.message }}
-            </p>
+    <mat-expansion-panel
+      class="post"
+      (afterExpand)="handleOpened()"
+      (afterCollapse)="handleOpened()"
+    >
+      <mat-expansion-panel-header class="container">
+        <div class="row w-100 p-4">
+          <div class="col-2 justify-content-center align-items-center">
+            <img
+              src="../../../assets/img/profile.jpg"
+              class="img"
+              [alt]="post.teacher.name"
+            />
           </div>
 
-          <button class="btn btn-primary" (click)="downloadFile()">
-            {{ post.status }}
-          </button>
+          <div class="col-6 pt-1">
+            <h5 class="text-primary text-uppercase">
+              {{ post.title }} - {{ post.subject }} - {{ post.classroom }}
+              <p
+                [ngClass]="{
+                  'text-success': verificar(post.dateEnd),
+                  'text-danger': !verificar(post.dateEnd)
+                }"
+              >
+                {{ post.dateEnd | date : "short" }}
+              </p>
+            </h5>
+            <div class="text-wrap">
+              <p *ngIf="!isExpadido" class="text-truncate" style="width: 200px">
+                {{ post.message }}
+              </p>
+            </div>
+          </div>
+          <div class="col-4 d-flex justify-content-end align-items-center">
+            <button
+              class="btn btn-primary button-custom"
+              (click)="downloadFile()"
+              [disabled]="post.status === 'DONE'"
+            >
+              {{ post.status }}
+            </button>
+          </div>
         </div>
       </mat-expansion-panel-header>
 
       <div class="container bg-light w-100 text-black">
+        <p *ngIf="isExpadido">
+          {{ post.message }}
+        </p>
         <div class="bg-danger bg-opacity-50">
-          <label class="p-2">Homework:</label>
+          <label class="fomr-label p-2">Homework</label>
           <input
+            class="form-control"
             type="file"
-            class="text-danger"
+            [formControl]="exerciceDoneName"
             (change)="addFileToReview($event)"
           />
         </div>
         <div class="p-2 bg-danger bg-opacity-50">
-          <label class="p-2">Corretion:</label>
+          <label class="p-2 form-label">Corretion</label>
           <input
+            class="form-control"
             type="file"
-            class="text-danger"
+            [formControl]="exerciceReviewName"
             (change)="addFileToDone($event)"
           />
         </div>

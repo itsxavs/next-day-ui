@@ -47,6 +47,16 @@ export class ManageComponent implements OnInit, OnDestroy {
     this.validationExpaded = !this.validationExpaded;
   }
 
+  noReview() {
+    return (
+      this.authService._teacherUser.value.students.filter(
+        (student) =>
+          student?.reviewDetails !== null &&
+          student?.reviewDetails !== undefined
+      ).length === 0
+    );
+  }
+
   openDialog(student: Student) {
     const dialogRef = this.dialog
       .open(DialogReviewComponent, {
