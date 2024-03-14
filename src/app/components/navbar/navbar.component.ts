@@ -52,6 +52,10 @@ export class NavbarComponent implements OnInit {
     this.tokenStorage.signOut();
   }
 
+  getPhotoPerfil(name: string) {
+    return `../../../assets/img/${name}.jpg`;
+  }
+
   /* 
   Esto es para cerrar session
   this.authService.logout();

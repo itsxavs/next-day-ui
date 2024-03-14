@@ -262,4 +262,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       //   });
     }
   }
+
+  getPhotoPerfil(name: string) {
+    return `../../../assets/img/${name}.jpg`;
+  }
 }

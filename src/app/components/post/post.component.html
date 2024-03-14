@@ -1,7 +1,7 @@
 <!-- Student  -->
 
-<ng-container *ngIf="role === 'ROLE_STUDENT'; else teacherPost">
-  <mat-accordion class="example-headers-align" multi>
+<ng-container *ngIf="role === 'STUDENT'; else teacherPost">
+  <!-- <mat-accordion class="example-headers-align" multi>
     <mat-expansion-panel class="post">
       <mat-expansion-panel-header class="d-flex justify-content-between">
         <div class="d-flex justify-content-between w-100 p-4">
@@ -28,9 +28,27 @@
             </p>
           </div>
 
-          <button class="btn btn-primary">
-            {{ post.status }}
-          </button>
+          <div class="col-4 d-flex justify-content-end align-items-center">
+            <button
+              *ngIf="!(loading | async)"
+              class="btn btn-primary button-custom"
+              (click)="downloadFile(); $event.stopPropagation()"
+              [disabled]="post.status === 'DONE'"
+            >
+              {{ status }}
+            </button>
+
+            <button
+              *ngIf="loading | async"
+              class="btn button-custom spinner-custom"
+              (click)="downloadFile(); $event.stopPropagation()"
+              [disabled]="true"
+            >
+              <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </button>
+          </div>
         </div>
       </mat-expansion-panel-header>
 
@@ -55,6 +73,115 @@
         </div>
       </div>
     </mat-expansion-panel>
+  </mat-accordion> -->
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel
+      class="post"
+      (afterExpand)="handleOpened()"
+      (afterCollapse)="handleOpened()"
+    >
+      <mat-expansion-panel-header class="container">
+        <div class="row w-100 p-4">
+          <div class="col-2 justify-content-center align-items-center">
+            <img [src]="urlPhoto" class="img" [alt]="post.teacher.name" />
+          </div>
+
+          <div class="col-6 pt-1">
+            <h5 class="text-primary text-uppercase">
+              {{ post.title }} - {{ post.subject }} - {{ post.classroom }}
+
+              <p
+                [ngClass]="{
+                  'text-success': verificar(post.dateEnd),
+                  'text-danger': !verificar(post.dateEnd)
+                }"
+              >
+                {{ post.dateEnd | date : "short" }}
+              </p>
+            </h5>
+
+            <div class="text-wrap">
+              <p *ngIf="!isExpadido" class="text-truncate" style="width: 200px">
+                {{ post.message }}
+              </p>
+            </div>
+          </div>
+          <div class="col-4 d-flex justify-content-end align-items-center">
+            <button
+              *ngIf="!(loading | async)"
+              class="btn btn-primary button-custom"
+              (click)="downloadFile(); $event.stopPropagation()"
+              [disabled]="post.status === 'DONE'"
+            >
+              {{ status }}
+            </button>
+
+            <button
+              *ngIf="loading | async"
+              class="btn button-custom spinner-custom"
+              (click)="downloadFile(); $event.stopPropagation()"
+              [disabled]="true"
+            >
+              <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </mat-expansion-panel-header>
+
+      <div class="container bg-light w-100 text-black">
+        <p *ngIf="isExpadido">
+          {{ post.message }}
+        </p>
+        <div *ngIf="!(post.status === 'REVIEW')" class="color-custom">
+          <div *ngIf="post.status === 'DO'" class="bg-opacity-50">
+            <label class="form-label">Homework</label>
+            <input
+              class="form-control"
+              type="file"
+              (change)="addFileToReview($event)"
+            />
+          </div>
+          <!-- <div *ngIf="!(post.status === 'DO')" class="bg-opacity-50">
+            <label class="form-label">Corretion</label>
+            <input
+              class="form-control"
+              type="file"
+              (change)="addFileToDone($event)"
+            />
+          </div> -->
+        </div>
+        <div
+          *ngIf="post.status === 'REVIEW' || post.status === 'DONE'"
+          class="color-custom"
+        >
+          <div
+            (click)="downloadFileReview()"
+            class="bg-opacity-50 download-container"
+          >
+            <label class="form-label px-4"
+              >Homework: {{ exerciceReviewName }}</label
+            >
+            <p class="btn btn-primary h-100 text-center mt-2">
+              <i class="bi bi-download"></i>
+            </p>
+          </div>
+          <div
+            (click)="downloadFileDone()"
+            class="bg-opacity-50 download-container"
+            *ngIf="post.status === 'DONE'"
+          >
+            <label class="form-label px-4"
+              >Correct: {{ exerciceDoneName }}</label
+            >
+            <p class="btn btn-primary h-100 text-center mt-2">
+              <i class="bi bi-download"></i>
+            </p>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
   </mat-accordion>
 </ng-container>
 
@@ -70,16 +197,16 @@
       <mat-expansion-panel-header class="container">
         <div class="row w-100 p-4">
           <div class="col-2 justify-content-center align-items-center">
-            <img
-              src="../../../assets/img/profile.jpg"
-              class="img"
-              [alt]="post.teacher.name"
-            />
+            <img [src]="urlPhoto" class="img" [alt]="post.teacher.name" />
           </div>
 
           <div class="col-6 pt-1">
             <h5 class="text-primary text-uppercase">
-              {{ post.title }} - {{ post.subject }} - {{ post.classroom }}
+              {{ post.title }} - {{ post.subject }} - {{ post.classroom }} //
+              <i class="text-secondary">
+                {{ post.student.name }} {{ post.student.firstname }}
+                {{ post.student.lastname }}
+              </i>
               <p
                 [ngClass]="{
                   'text-success': verificar(post.dateEnd),
@@ -89,6 +216,7 @@
                 {{ post.dateEnd | date : "short" }}
               </p>
             </h5>
+
             <div class="text-wrap">
               <p *ngIf="!isExpadido" class="text-truncate" style="width: 200px">
                 {{ post.message }}
@@ -97,11 +225,23 @@
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
             <button
+              *ngIf="!(loading | async)"
               class="btn btn-primary button-custom"
-              (click)="downloadFile()"
+              (click)="downloadFile(); $event.stopPropagation()"
               [disabled]="post.status === 'DONE'"
             >
-              {{ post.status }}
+              {{ status }}
+            </button>
+
+            <button
+              *ngIf="loading | async"
+              class="btn button-custom spinner-custom"
+              (click)="downloadFile(); $event.stopPropagation()"
+              [disabled]="true"
+            >
+              <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
             </button>
           </div>
         </div>
@@ -111,23 +251,50 @@
         <p *ngIf="isExpadido">
           {{ post.message }}
         </p>
-        <div class="bg-danger bg-opacity-50">
-          <label class="fomr-label p-2">Homework</label>
-          <input
-            class="form-control"
-            type="file"
-            [formControl]="exerciceDoneName"
-            (change)="addFileToReview($event)"
-          />
+
+        <div class="color-custom">
+          <div
+            (click)="downloadFileReview()"
+            class="bg-opacity-50 download-container"
+            *ngIf="post.status === 'REVIEW' || post.status === 'DONE'"
+          >
+            <label class="form-label px-4"
+              >Homework: {{ exerciceReviewName }}</label
+            >
+            <p class="btn btn-primary h-100 text-center mt-2">
+              <i class="bi bi-download"></i>
+            </p>
+          </div>
+          <div
+            (click)="downloadFileDone()"
+            class="bg-opacity-50 download-container"
+            *ngIf="post.status === 'DONE'"
+          >
+            <label class="form-label px-4"
+              >Correct: {{ exerciceDoneName }}</label
+            >
+            <p class="btn btn-primary h-100 text-center mt-2">
+              <i class="bi bi-download"></i>
+            </p>
+          </div>
         </div>
-        <div class="p-2 bg-danger bg-opacity-50">
-          <label class="p-2 form-label">Corretion</label>
-          <input
-            class="form-control"
-            type="file"
-            [formControl]="exerciceReviewName"
-            (change)="addFileToDone($event)"
-          />
+        <div *ngIf="!(post.status === 'DO')" class="color-custom d-flex">
+          <!-- <div class="bg-opacity-50">
+            <label class="form-label">Homework</label>
+            <input
+              class="form-control"
+              type="file"
+              (change)="addFileToReview($event)"
+            />
+          </div> -->
+          <div *ngIf="post.status === 'REVIEW'" class="bg-opacity-50 container">
+            <label class="form-label">Corretion</label>
+            <input
+              class="form-control"
+              type="file"
+              (change)="addFileToDone($event)"
+            />
+          </div>
         </div>
       </div>
     </mat-expansion-panel>

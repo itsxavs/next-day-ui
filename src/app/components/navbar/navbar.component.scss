@@ -1,6 +1,7 @@
 .navbar-logo {
   height: 50px; /* Ajusta esto según el tamaño que quieras para la imagen */
   margin-right: 10px; /* Añade un poco de espacio a la derecha de la imagen */
+  border-radius: 50%;
 }
 .flex-container {
   display: flex; /* Hace que el nav-item sea un contenedor flex */
@@ -12,4 +13,12 @@
 .nav-link {
   width: 100%; /* Hace que el nav-link ocupe todo el ancho del nav-item */
   text-align: center; /* Centra el texto dentro del nav-link */
+}
+
+.navbar-logo-2 {
+  max-width: 100%;
+  height: 16px;
+  margin-right: 4px;
+  object-fit: cover;
+  border-radius: 50%;
 }

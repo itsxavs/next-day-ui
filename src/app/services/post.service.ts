@@ -85,11 +85,17 @@ export class PostService {
   downloadFile(postId: string, filename: string) {
     let params = new HttpParams().append("postId", postId);
 
-    this.http
-      .get(`${URI}/file`, { params, responseType: "blob" })
-      .subscribe((blob) => {
-        saveAs(blob, filename);
-      });
+    return this.http.get(`${URI}/file`, { params, responseType: "blob" });
+  }
+  downloadFileReview(postId: string, filename: string) {
+    let params = new HttpParams().append("postId", postId);
+
+    return this.http.get(`${URI}/fileReview`, { params, responseType: "blob" });
+  }
+  downloadFileDone(postId: string, filename: string) {
+    let params = new HttpParams().append("postId", postId);
+
+    return this.http.get(`${URI}/fileDone`, { params, responseType: "blob" });
   }
   addFileToReview(postId: string, file: File) {
     const formData = new FormData();

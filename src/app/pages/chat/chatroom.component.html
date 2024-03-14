@@ -33,8 +33,9 @@
               (click)="selectStudent(student)"
             >
               <img
-                src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                alt="avatar"
+                [src]="getPhotoPerfil(student.name)"
+                alt="Logo"
+                class="navbar-logo"
               />
               <div class="about">
                 <div
@@ -58,9 +59,11 @@
               (click)="selectTeacher(teacher)"
             >
               <img
-                src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                alt="avatar"
+                [src]="getPhotoPerfil(teacher.name)"
+                alt="Logo"
+                class="navbar-logo"
               />
+
               <div class="about d-flex align-items-center">
                 <div
                   class="name text-center d-inline-block text-truncate"
@@ -83,8 +86,16 @@
                   data-target="#view_info"
                 >
                   <img
-                    src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                    alt="avatar"
+                    *ngIf="role === 'TEACHER'"
+                    [src]="getPhotoPerfil(selectedStudent.name)"
+                    alt="Logo"
+                    class="navbar-logo"
+                  />
+                  <img
+                    *ngIf="role === 'STUDENT'"
+                    [src]="getPhotoPerfil(selectedTeacher.name)"
+                    alt="Logo"
+                    class="navbar-logo"
                   />
                 </a>
                 <div
@@ -123,7 +134,8 @@
                   <span class="message-data-time">10:10 AM, Today</span>
                   <img
                     src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                    alt="avatar"
+                    alt="Logo"
+          class="navbar-logo"
                   />
                 </div> -->
                 <div class="message-data">
