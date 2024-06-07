@@ -1,0 +1,10 @@
+<span *ngFor="let star of stars">
+  <i
+    class="fas"
+    [ngClass]="{
+      'fa-star': star === 'full',
+      'fa-star-half-alt': star === 'half',
+      'fa-star-o': star === 'empty'
+    }"
+  ></i>
+</span>

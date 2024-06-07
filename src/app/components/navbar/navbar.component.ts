@@ -51,6 +51,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(["login"]);
     this.tokenStorage.signOut();
   }
+  ranking() {
+    this.active = "ranking";
+    this.router.navigate(["ranking"]);
+  }
 
   getPhotoPerfil(name: string) {
     return `../../../assets/img/${name}.jpg`;

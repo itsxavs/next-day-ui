@@ -16,9 +16,17 @@ import { ProfileModule } from "./pages/profile/profile.module";
 import { MatIconModule } from "@angular/material/icon";
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { ManageModule } from "./pages/manage/manage.module";
+import { RankingComponent } from "./pages/ranking/ranking.component";
+import { PuntuacionComponent } from "./pages/ranking/puntuacion/puntuacion.component";
+import { GraficoComponent } from "./pages/ranking/grafico/grafico.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    RankingComponent,
+    PuntuacionComponent,
+    GraficoComponent,
+  ],
   imports: [
     BrowserModule,
     LoginModule,
@@ -37,6 +45,7 @@ import { ManageModule } from "./pages/manage/manage.module";
         { path: "profile", component: ProfileComponent },
         { path: "chat", component: ChatRoomComponent },
         { path: "manage", component: ManageComponent },
+        { path: "ranking", component: RankingComponent },
       ],
       { relativeLinkResolution: "legacy" }
     ),

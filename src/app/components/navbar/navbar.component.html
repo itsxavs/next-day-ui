@@ -1,14 +1,14 @@
 <div *ngIf="!disabled" class="p-3 justify-content-between container">
   <ng-container #studentPage *ngIf="role === 'STUDENT'; else teacherPage">
-    <ul class="nav justify-content-between align-items-center">
-      <li class="nav-item col-2 mx-4 justify-content-end">
+    <ul class="nav justify-content-between align-items-center mx-2">
+      <li class="nav-item col mx-4 justify-content-end">
         <img
           src="../../../assets/img/logo.png"
           alt="Logo"
           class="navbar-logo"
         />
       </li>
-      <li class="nav-item col-2">
+      <li class="nav-item col">
         <a
           [ngClass]="{ active: active === 'home' }"
           class="nav-link active"
@@ -17,7 +17,7 @@
           >HOME</a
         >
       </li>
-      <li class="nav-item col-2">
+      <li class="nav-item col">
         <a
           [ngClass]="{ active: active === 'profile' }"
           class="nav-link"
@@ -25,7 +25,7 @@
           >PROFILE</a
         >
       </li>
-      <li class="nav-item col-2">
+      <li class="nav-item col">
         <a
           [ngClass]="{ active: active === 'chat' }"
           class="nav-link"
@@ -33,7 +33,15 @@
           >CHAT</a
         >
       </li>
-      <li *ngIf="user$ | async as user" class="nav-item col-2">
+      <li class="nav-item col">
+        <a
+          [ngClass]="{ active: active === 'ranking' }"
+          class="nav-link"
+          (click)="ranking()"
+          >RANKING</a
+        >
+      </li>
+      <li *ngIf="user$ | async as user" class="nav-item col">
         <img
           [src]="getPhotoPerfil(user.name)"
           alt="Logo"
@@ -50,15 +58,15 @@
   </ng-container>
 
   <ng-template #teacherPage>
-    <ul class="nav justify-content-between align-items-center">
-      <li class="nav-item col-2 mx-4">
+    <ul class="nav justify-content-between align-items-center mx-2">
+      <li class="nav-item col mx-4">
         <img
           src="../../../assets/img/logo.png"
           alt="Logo"
           class="navbar-logo"
         />
       </li>
-      <li class="nav-item col-2">
+      <li class="nav-item col">
         <a
           [ngClass]="{ active: active === 'home' }"
           class="nav-link active"
@@ -67,7 +75,7 @@
           >HOME</a
         >
       </li>
-      <li class="nav-item col-2">
+      <li class="nav-item col">
         <a
           [ngClass]="{ active: active === 'manage' }"
           class="nav-link"
@@ -75,7 +83,7 @@
           >MANAGE</a
         >
       </li>
-      <li class="nav-item col-2">
+      <li class="nav-item col">
         <a
           [ngClass]="{ active: active === 'chat' }"
           class="nav-link"
@@ -83,7 +91,15 @@
           >CHAT</a
         >
       </li>
-      <li *ngIf="user$ | async as user" class="nav-item col-2">
+      <li class="nav-item col">
+        <a
+          [ngClass]="{ active: active === 'ranking' }"
+          class="nav-link"
+          (click)="ranking()"
+          >RANKING</a
+        >
+      </li>
+      <li *ngIf="user$ | async as user" class="nav-item col">
         <img
           [src]="getPhotoPerfil(user.name)"
           alt="Logo"

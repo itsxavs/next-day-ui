@@ -22,6 +22,7 @@ export class ProfileFormComponent implements OnInit {
   students = this.studentService.getStudentsByTeacher();
   pronouns = pronouns;
   button: string = "Editar";
+  photo: string;
 
   studentId;
   userId;
@@ -38,6 +39,7 @@ export class ProfileFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.photo = this.getPhotoPerfil(this.student.name);
     if (this.isReview) this.button = "Aceptar";
     if (this.isReview) this.buildForm(this.student.reviewDetails, this.student);
     if (!this.isReview) this.buildForm(this.student.details, this.student);
@@ -212,5 +214,9 @@ export class ProfileFormComponent implements OnInit {
         this.button = "Editar";
         this.deleteEvent.emit();
       });
+  }
+
+  getPhotoPerfil(name: string) {
+    return `../../../assets/img/${name}.jpg`;
   }
 }

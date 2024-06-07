@@ -1,0 +1,45 @@
+<div class="container ranking">
+  <ng-container *ngIf="(role | async) === 'STUDENT'; else teacherPost">
+  </ng-container>
+  <ng-template #teacherPost>
+    <!-- <table>
+      <thead>
+        <tr>
+          <th>Estudiante</th>
+          <th>Presentación</th>
+          <th>Organización</th>
+          <th>Exactitud</th>
+          <th>General</th>
+          <th>Puntos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let resultado of resultadosGeneral$ | async; let i = index"
+          (click)="onRowSelected(resultado)"
+        >
+          <td>
+            {{ resultado.student.name }} {{ resultado.student.firstname }}
+            {{ resultado.student.lastname }}
+          </td>
+          <td>{{ resultado.resultado.calificacion.presentacion }}</td>
+          <td>{{ resultado.resultado.calificacion.organizacion }}</td>
+          <td>{{ resultado.resultado.calificacion.exactitud }}</td>
+          <td>{{ resultado.resultado.calificacion.general }}</td>
+          <td>{{ resultado.resultado.puntos }}</td>
+        </tr>
+      </tbody>
+    </table>
+-->
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+  </ng-template>
+  <div>
+    <app-puntuacion [rating]="4"></app-puntuacion>
+    <app-puntuacion [rating]="3.5"></app-puntuacion>
+    <app-puntuacion [rating]="0"></app-puntuacion>
+    <app-puntuacion [rating]="5"></app-puntuacion>
+  </div>
+  <!-- <app-grafico></app-grafico> -->
+</div>
