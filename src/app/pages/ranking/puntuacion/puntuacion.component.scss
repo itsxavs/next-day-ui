@@ -1,7 +1,23 @@
-.fas {
+.bi-star-fill {
   color: #006600;
 }
 
-.fa-star-o {
+.bi-star {
   color: gray;
+}
+.star {
+  position: relative;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+
+.star .bi {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.star.half .bi-star-fill {
+  clip: rect(0, 0.5em, 1em, 0);
 }

@@ -1,0 +1,53 @@
+.top-three {
+  display: flex;
+  flex-direction: column;
+
+  background-color: #f1f1f1;
+  border: 2px solid #008000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 128, 0, 0.5);
+  padding: 20px;
+}
+
+.rank {
+  display: flex;
+
+  margin-bottom: 10px;
+  color: #008000;
+  font-size: 1.5em;
+
+  .bi-trophy-fill {
+    margin-right: 10px;
+  }
+}
+
+.rank-1 .bi-trophy-fill {
+  color: gold;
+  margin-left: 4px;
+}
+
+.rank-2 .bi-trophy-fill {
+  color: silver;
+  margin-left: 24px;
+}
+
+.rank-3 .bi-trophy-fill {
+  color: #cd7f32;
+  margin-left: 44px;
+}
+
+.ranking-title {
+  padding-top: 16px;
+  color: #008000; // Establece el color del texto
+  font-size: 1.5em; // Aumenta el tamaño del texto
+  font-weight: bold; // Hace que el texto sea negrita
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // Añade una sombra al texto para darle un efecto 3D
+  font-family: "Press Start 2P", cursive; // Usa una fuente que recuerda a los juegos retro
+}
+
+.star {
+  font-size: 0.5rem;
+}
+.star-m {
+  font-size: 0.75rem;
+}

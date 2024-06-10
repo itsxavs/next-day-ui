@@ -1,0 +1,24 @@
+.ranking-title {
+  color: #008000; // Establece el color del texto
+  font-size: 2em; // Aumenta el tamaño del texto
+  font-weight: bold; // Hace que el texto sea negrita
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // Añade una sombra al texto para darle un efecto 3D
+  font-family: "Press Start 2P", cursive; // Usa una fuente que recuerda a los juegos retro
+  height: 140px;
+}
+
+.star {
+  font-size: 0.75rem;
+}
+.star-m {
+  font-size: 1rem;
+}
+
+.custom-grafico {
+  background-color: #f1f1f1;
+  border: 2px solid #008000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 128, 0, 0.5);
+  padding: 20px;
+  margin-left: 8px;
+}

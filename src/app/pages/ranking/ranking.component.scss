@@ -2,3 +2,106 @@
   background-color: white;
   height: 600px;
 }
+.table-container {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  height: 100%;
+  max-height: 300px; // Ajusta esto a la altura máxima que desees
+  overflow-y: auto;
+  border: 2px solid #008000; // Establece un borde verde alrededor de la tabla
+  box-shadow: 5px 5px 10px rgba(0, 128, 0, 0.5); // Añade una sombra verde alrededor de la tabla
+  border-radius: 10px; // Redondea las esquinas de la tabla
+  scrollbar-color: #008000 #f1f1f1;
+
+  ::-webkit-scrollbar {
+    width: 10px; // Cambia esto para ajustar el ancho del scrollbar
+    background: #f1f1f1; // Cambia esto para ajustar el color de la pista del scrollbar
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #008000; // Cambia el color del pulgar del scrollbar a verde
+    border-radius: 10px; // Redondea las esquinas del pulgar del scrollbar
+    border: 2px solid #f1f1f1; // Añade un borde alrededor del pulgar del scrollbar
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #004d00; // Cambia el color del pulgar del scrollbar a un verde más oscuro cuando se pasa el mouse por encima
+  }
+}
+.custom-table {
+  width: 100%;
+  max-height: 300px; // Ajusta esto a la altura máxima que desees
+  overflow-y: auto; // Esto permite el desplazamiento cuando el contenido excede la altura máxima
+  border-collapse: separate;
+  border-spacing: 0 15px;
+
+  padding: 4px;
+  overflow: auto;
+}
+
+.custom-table th {
+  color: #008000; /* Reemplaza con el color que quieras de tu paleta */
+  text-align: left;
+}
+
+.custom-table td {
+  padding: 10px;
+  /* Reemplaza con el color que quieras de tu paleta */
+}
+// .custom-table td::first-line:hover {
+//   background-color: #99ff99; /* Reemplaza con el color que quieras de tu paleta */
+// }
+
+.custom-table tr {
+  cursor: pointer;
+}
+
+.custom-table tbody tr:hover td {
+  background-color: #99ff99 !important;
+  font-weight: bold;
+}
+
+.selected-row {
+  background-color: #99ff99 !important;
+  font-weight: bold;
+}
+.ranking-title {
+  color: #008000; // Establece el color del texto
+  font-size: 2em; // Aumenta el tamaño del texto
+  font-weight: bold; // Hace que el texto sea negrita
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // Añade una sombra al texto para darle un efecto 3D
+  font-family: "Press Start 2P", cursive; // Usa una fuente que recuerda a los juegos retro
+}
+
+.star {
+  font-size: 0.75rem;
+}
+.star-m {
+  font-size: 1rem;
+}
+
+.student {
+  pointer-events: none;
+  cursor: default;
+  .custom-table tr:hover {
+    background-color: inherit;
+  }
+}
+
+.custom-table-student {
+  width: 100%;
+  max-height: 300px; // Ajusta esto a la altura máxima que desees
+  overflow-y: auto; // Esto permite el desplazamiento cuando el contenido excede la altura máxima
+  border-collapse: separate;
+  border-spacing: 0 15px;
+
+  padding: 4px;
+  overflow: auto;
+}
+
+.custom-table-students td {
+  padding: 10px;
+  /* Reemplaza con el color que quieras de tu paleta */
+}

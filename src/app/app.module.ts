@@ -18,14 +18,17 @@ import { ProfileComponent } from "./pages/profile/profile.component";
 import { ManageModule } from "./pages/manage/manage.module";
 import { RankingComponent } from "./pages/ranking/ranking.component";
 import { PuntuacionComponent } from "./pages/ranking/puntuacion/puntuacion.component";
-import { GraficoComponent } from "./pages/ranking/grafico/grafico.component";
+import { TopComponent } from "./pages/ranking/top/top.component";
+import { GraficoAlumnoComponent } from "./pages/ranking/grafico-alumno/grafico-alumno.component";
+import { ChartsModule } from "ng2-charts";
 
 @NgModule({
   declarations: [
     AppComponent,
     RankingComponent,
     PuntuacionComponent,
-    GraficoComponent,
+    TopComponent,
+    GraficoAlumnoComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,8 @@ import { GraficoComponent } from "./pages/ranking/grafico/grafico.component";
     ChatRoomModule,
     ComponentsModule,
     MatIconModule,
+    ChartsModule,
+
     RouterModule.forRoot(
       [
         { path: "", redirectTo: "login", pathMatch: "full" },

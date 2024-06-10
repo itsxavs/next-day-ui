@@ -11,6 +11,8 @@ import { PostService } from "src/app/services/post.service";
 import { TokenStorageService } from "../../services/token-storage.service";
 import { saveAs } from "file-saver";
 import { BehaviorSubject } from "rxjs";
+import { MatDialog } from "@angular/material/dialog";
+import { EvaluacionDialogComponent } from "../evaluacion-dialog/evaluacion-dialog.component";
 
 @Component({
   selector: "app-post",
@@ -35,7 +37,8 @@ export class PostComponent implements OnInit, OnChanges {
 
   constructor(
     private postService: PostService,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    public dialog: MatDialog
   ) {}
   ngOnInit(): void {
     console.log(this.post);
@@ -69,9 +72,20 @@ export class PostComponent implements OnInit, OnChanges {
     this.exerciceReviewName = event.target.files[0].name;
   }
   addFileToDone(event) {
-    this.postService.addFileToDone(this.post._id, event.target.files[0]);
-    this.fileToDone = event.target.files[0];
-    this.exerciceDoneName = event.target.files[0].name;
+    // this.postService.addFileToDone(this.post._id, event.target.files[0]);
+    // this.fileToDone = event.target.files[0];
+    // this.exerciceDoneName = event.target.files[0].name;
+    this.openAddFileDialog();
+  }
+  openAddFileDialog(): void {
+    const dialogRef = this.dialog.open(EvaluacionDialogComponent, {
+      width: "320px",
+      data: { postId: this.post._id },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   downloadFile() {

@@ -1,0 +1,21 @@
+<div class="container custom-grafico mx-1">
+  <div>
+    <h4 class="d-flex justify-content-center p-3 ranking-title">
+      <i class="bi bi-star star"></i><i class="bi bi-star star-m"></i
+      ><i class="bi bi-star"></i> {{ resultadoGeneral.student.name }}
+      {{ resultadoGeneral.student.firstname }}
+      {{ resultadoGeneral.student.lastname }} <i class="bi bi-star"></i
+      ><i class="bi bi-star star-m"></i><i class="bi bi-star star"></i>
+    </h4>
+  </div>
+  <div style="display: block">
+    <canvas
+      baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      chartType="bar"
+    >
+    </canvas>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<span *ngFor="let star of stars; let i = index">
+  <span
+    class="star"
+    [ngClass]="{ half: star === 'half' }"
+    (click)="setRating(i)"
+    (mouseover)="previewRating(i)"
+    (mouseout)="resetStars()"
+  >
+    <i class="bi bi-star" *ngIf="star === 'empty' || star === 'half'"></i>
+    <i class="bi bi-star-fill" *ngIf="star === 'full' || star === 'half'"></i>
+  </span>
+</span>

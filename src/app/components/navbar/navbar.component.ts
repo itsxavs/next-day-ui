@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
     if (fullUrl.includes("profile")) this.active = "profile";
     if (fullUrl.includes("manage")) this.active = "manage";
     if (fullUrl.includes("chat")) this.active = "chat";
+    if (fullUrl.includes("ranking")) this.active = "ranking";
   }
 
   goHome() {

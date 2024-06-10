@@ -14,6 +14,9 @@ import { FiltersModule } from "./filters/filters.module";
 import { FiltersComponent } from "./filters/filters.component";
 import { ProfileFormComponent } from "./profile-form/profile-form.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatDialogModule } from "@angular/material/dialog";
+import { EvaluacionDialogComponent } from "./evaluacion-dialog/evaluacion-dialog.component";
+import { GraficoComponent } from "./grafico/grafico.component";
 
 @NgModule({
   declarations: [
@@ -21,6 +24,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     NavbarComponent,
     CreatePostComponent,
     ProfileFormComponent,
+    EvaluacionDialogComponent,
+    GraficoComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +39,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
   ],
   exports: [
     PostComponent,
@@ -41,6 +47,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     CreatePostComponent,
     FiltersComponent,
     ProfileFormComponent,
+    GraficoComponent,
   ],
 })
 export class ComponentsModule {}

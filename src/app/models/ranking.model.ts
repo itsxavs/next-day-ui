@@ -12,6 +12,7 @@ export interface Resultado {
   post: Post[];
   calificacion: Calificaciones;
   puntos: number;
+  puntosPorAspecto: Calificaciones;
 }
 
 export interface ResultadoGeneral {

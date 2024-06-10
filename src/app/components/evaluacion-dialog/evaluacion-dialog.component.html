@@ -1,0 +1,29 @@
+<div class="container justify-content-center align-items-center">
+  <h2 class="d-flex justify-content-center">Evaluar</h2>
+  <div class="d-flex justify-content-between p-2">
+    <mat-label>Presentacion</mat-label>
+    <app-grafico (ratingEvent)="setPresentacion($event)"></app-grafico>
+  </div>
+
+  <div class="d-flex justify-content-between p-2 align-items-center">
+    <mat-label>Organizacion</mat-label>
+    <app-grafico (ratingEvent)="setOrganizacion($event)"></app-grafico>
+  </div>
+
+  <div class="d-flex justify-content-between p-2">
+    <mat-label>Exactitud</mat-label>
+    <app-grafico (ratingEvent)="setExactitud($event)"></app-grafico>
+  </div>
+
+  <div class="d-flex justify-content-between p-2">
+    <mat-label>General</mat-label>
+    <app-grafico (ratingEvent)="setGeneral($event)"></app-grafico>
+  </div>
+  <div
+    class="d-flex justify-content-center align-items-center m-4 button-custom"
+  >
+    <button [disabled]="!form.valid" mat-button (click)="save()">
+      Guardar
+    </button>
+  </div>
+</div>
