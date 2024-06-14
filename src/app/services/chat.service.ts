@@ -2,12 +2,13 @@ import { HttpParams } from "@angular/common/http";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Message } from "../models/message.interface";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class ChatService {
-  private URL = "http://localhost:3000/message";
+  private URL = environment.apiUrl + "chat";
 
   constructor(private http: HttpClient) {}
 

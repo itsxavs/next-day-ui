@@ -5,8 +5,9 @@ import { BehaviorSubject, Observable, of } from "rxjs";
 import { Student, Teacher, User } from "../models/user.interface";
 import { PATH_API } from "../models/path-api.constant";
 import { TokenStorageService } from "./token-storage.service";
+import { environment } from "src/environments/environment";
 
-const AUTH_API = "http://localhost:3000/auth/";
+const path = "http://localhost:3000/auth/";
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" }),
 };
@@ -27,7 +28,7 @@ const teacher = {
 })
 export class AuthService {
   private uri = "http://localhost:3000/";
-
+  private URL = `${environment.apiUrl}auth/`;
   _userSelection = new BehaviorSubject<any>(null);
   _studentUser = new BehaviorSubject<Student>(null);
   _teacherUser = new BehaviorSubject<Teacher>(null);
@@ -57,7 +58,7 @@ export class AuthService {
   login(username: string, password: string): Observable<any> {
     return this.http
       .post(
-        AUTH_API + "signIn",
+        this.URL + "signIn",
         {
           username,
           password,
@@ -82,7 +83,7 @@ export class AuthService {
 
   register(username: string, email: string, password: string): Observable<any> {
     return this.http.post(
-      AUTH_API + "signup",
+      this.URL + "signup",
       {
         username,
         email,
@@ -93,7 +94,7 @@ export class AuthService {
   }
 
   editUser(userId, user) {
-    return this.http.post(`${AUTH_API}modify`, {
+    return this.http.post(`${this.URL}modify`, {
       userId,
       user,
     });

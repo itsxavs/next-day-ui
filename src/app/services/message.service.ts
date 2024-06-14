@@ -3,13 +3,14 @@ import { Injectable } from "@angular/core";
 import { Teacher } from "../models/user.interface";
 import { BehaviorSubject, Observable } from "rxjs";
 import { filter, map } from "rxjs/operators";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class MessageService {
   teacher: Teacher;
-
+  private URL = environment.apiUrl + "messages";
   // recogera todos los mensajes que el profesor tenga de sus estudiantes
   mensajesPendientesTeacher: BehaviorSubject<any[]> = new BehaviorSubject<
     any[]
@@ -40,7 +41,7 @@ export class MessageService {
     const params = new HttpParams();
     params.set("studentId", studentId);
     params.set("teacherId", teacherId);
-    return this.httpClient.get<any[]>(`http://localhost:3000/messages`, {
+    return this.httpClient.get<any[]>(this.URL, {
       params: {
         teacherId,
         studentId,
@@ -48,6 +49,6 @@ export class MessageService {
     });
   }
   enviarMensaje(mensaje: any) {
-    return this.httpClient.post("http://localhost:3000/messages", { mensaje });
+    return this.httpClient.post(this.URL, { mensaje });
   }
 }

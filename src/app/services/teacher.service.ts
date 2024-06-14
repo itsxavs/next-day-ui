@@ -4,20 +4,21 @@ import { map, tap } from "rxjs/operators";
 import { Teacher } from "../models/user.interface";
 import { teacherMock } from "../mocks/teachers";
 import { AuthService } from "./auth.service";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class TeacherService {
   teacher: Teacher;
-
+  private URL = environment.apiUrl;
   constructor(
     private httpClient: HttpClient,
     private authService: AuthService
   ) {}
 
   getTeachers() {
-    return this.httpClient.get("http://localhost:3000/teachers").pipe(
+    return this.httpClient.get(`${this.URL}teachers`).pipe(
       map((teachers: any) => {
         return teachers
           .map((teacher) => {
@@ -39,7 +40,7 @@ export class TeacherService {
   getTeacher(teacherId: string) {
     const params = new HttpParams().set("teacherId", teacherId);
     return this.httpClient
-      .get(`http://localhost:3000/teacher`, { params })
+      .get(`${this.URL}teacher`, { params })
       .subscribe((teacher) => {
         this.authService._teacherUser.next(teacher as Teacher);
       });

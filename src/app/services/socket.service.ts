@@ -6,19 +6,20 @@ import { io } from "socket.io-client";
 import { AuthService } from "./auth.service";
 import { filter, switchMap, tap } from "rxjs/operators";
 import { MessageService } from "./message.service";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class SocketService {
   private socket;
-
+  private URL = `${environment.apiUrl}/chat`;
   //Puedde que pasar logica a app.componet
   constructor(
     private authService: AuthService,
     private mensajesService: MessageService
   ) {
-    this.socket = io("http://localhost:3000/chat");
+    this.socket = io(this.URL);
     this.authService._teacherUser
       .pipe(
         filter((user) => !!user),

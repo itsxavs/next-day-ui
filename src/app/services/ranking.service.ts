@@ -9,12 +9,14 @@ import {
 import { BehaviorSubject, Observable } from "rxjs";
 import { Student } from "../models";
 import { map, tap } from "rxjs/operators";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class RankingService {
-  private URL = "http://localhost:3000/post";
+  private URL = environment.apiUrl + "post";
+  private URLSTUDENTS = environment.apiUrl + "students";
   students: BehaviorSubject<Student[]> = new BehaviorSubject<Student[]>([]);
 
   constructor(private http: HttpClient) {}
@@ -53,6 +55,6 @@ export class RankingService {
   }
 
   getStudents(): Observable<Student[]> {
-    return this.http.get<Student[]>("http://localhost:3000/students");
+    return this.http.get<Student[]>(this.URLSTUDENTS);
   }
 }
