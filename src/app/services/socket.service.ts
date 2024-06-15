@@ -13,7 +13,7 @@ import { environment } from "src/environments/environment";
 })
 export class SocketService {
   private socket;
-  private URL = `${environment.apiUrl}/chat`;
+  private URL = `${environment.apiUrl}chat`;
   //Puedde que pasar logica a app.componet
   constructor(
     private authService: AuthService,
